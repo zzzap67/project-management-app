@@ -8,10 +8,26 @@
   width: 270px;
   background-color: #b2e944;
   border: 1px solid #b2e944;
-  box-shadow: 7px 5px 7px 5px rgb(200, 224, 168);;
+  box-shadow: 7px 5px 7px 5px rgb(200, 224, 168);
 }
 .welcome_button:hover {
-    color: white;
-    background-color: #bfff00cf;
-    border: 1px solid  #bfff00cf;
-  }
+  color: white;
+  background-color: #bfff00cf;
+  border: 1px solid #bfff00cf;
+}
+.link-to-main-page_button,
+.link-to-sign-up_button,
+.link-to-sign-in_button,
+.change_language_button {
+  font-size: 17px;
+  padding: 5px 15px;
+  border-radius: 15px;
+  color: white;
+  background-color: #b2e944;
+  border: 1px solid #b2e944;
+  box-shadow: 3px 1px 3px 1px rgb(200, 224, 168);
+}
+.change_language_button {
+  margin-block: auto;
+  padding: 5px 23px;
+}

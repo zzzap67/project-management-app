@@ -12,6 +12,9 @@
   padding-top: 20px;
   width: 100%;
 }
+.welcome_button__link {
+  align-self: center;
+}
 .welcome_image {
   width: 600px;
   overflow: hidden;

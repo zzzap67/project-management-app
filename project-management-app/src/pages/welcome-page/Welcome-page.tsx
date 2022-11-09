@@ -3,6 +3,7 @@ import './Welcome-page.css';
 import { ReactComponent as WelcomeImage } from '../../assets/image/image1.svg';
 import Button from 'components/ui/button/Button';
 import DeveloperCard from 'components/ui/developer-card/Developer-card';
+import { Link } from 'react-router-dom';
 
 const welcomeButtonName = 'Start doing';
 const projectTitle = 'Welcome to Project Management App';
@@ -20,7 +21,9 @@ export const WelcomePage: React.FunctionComponent = () => {
           </article>
           <WelcomeImage className="welcome_image" />
         </div>
-        <Button className="welcome_button" buttonName={welcomeButtonName} />
+        <Link className="welcome_button__link" to="/register">
+          <Button className="welcome_button" buttonName={welcomeButtonName} />
+        </Link>
       </section>
       <section className="developer_section">
         <DeveloperCard />
