@@ -1,0 +1,15 @@
+.welcome_button {
+  font-size: 50px;
+  font-weight: 500;
+  padding: 17px 30px;
+  border-radius: 23px;
+  color: white;
+  background-color: #b2e944;
+  border: 1px solid #b2e944;
+}
+.welcome_button:hover {
+   
+    color: white;
+    background-color: #bfff00cf;
+    border: 1px solid #b2e944;
+  }
