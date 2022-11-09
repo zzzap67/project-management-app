@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 20px;
   width: 100%;
 }
 .welcome_image {
@@ -47,5 +48,5 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
-  padding-top: 100px;
+  padding: 100px 0;
 }

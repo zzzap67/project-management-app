@@ -10,13 +10,13 @@ import Error404 from 'pages/error404';
 import RegistrationForm from 'pages/registrationForm';
 import SignIn from 'pages/signIn';
 import Header from './components/Header';
-import Footer from './components/Footer';
+import Footer from 'components/Footer/Footer';
 
 function Layout() {
   return (
-    <div>
+    <div className="layout">
       <Header />
-      <main>
+      <main className="layout_main">
         <Outlet />
       </main>
       <Footer />
