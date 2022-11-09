@@ -6,10 +6,6 @@ import DeveloperCard from 'components/ui/developer-card/Developer-card';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-const welcomeButtonName = 'Start doing';
-const projectTitle = 'Welcome to Project Management App';
-const aboutProject =
-  "Task management is the link between planning to do something and getting it done. This task management software allows you to centrally manage tasks and their timely completion and allow you to easily monitor all work processes and control the work of the team. Let's get organized together!";
 
 export const WelcomePage: React.FunctionComponent = () => {
   const { t } = useTranslation('translation');

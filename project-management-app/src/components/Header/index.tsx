@@ -1,12 +1,23 @@
 import Button from 'components/ui/button/Button';
 import i18n from 'i18n/i18n';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Routes } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
 import './styles.css';
 
 const Header: React.FunctionComponent = () => {
+  const [language, setLanguage] = useState('en');
+  const changeLanguage = (language: string) => {
+    if (language === 'en') {
+      setLanguage('ru');
+      i18n.changeLanguage(language);
+    } else if (language === 'ru') {
+      setLanguage('en');
+      i18n.changeLanguage(language);
+    }
+  };
+
   const { t } = useTranslation('translation');
   return (
     <header className="header">
@@ -28,8 +39,8 @@ const Header: React.FunctionComponent = () => {
         </Link>
         <Button
           className="change_language_button"
-          buttonName="EN"
-          eventHandler={() => i18n.changeLanguage('ru')}
+          buttonName={'EN/RU'}
+          eventHandler={() => changeLanguage(language)}
         />
       </div>
     </header>
