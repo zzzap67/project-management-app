@@ -3,6 +3,7 @@ import { MainState } from 'types';
 
 const MAIN_INITIAL_STATE: MainState = {
   isLoading: false,
+  boardsList: [],
 };
 
 export const mainSlice = createSlice({
@@ -15,8 +16,11 @@ export const mainSlice = createSlice({
     finishLoading(state) {
       state.isLoading = false;
     },
+    setBoards(state, action) {
+      state.boardsList = action.payload;
+    },
   },
 });
 
-export const { startLoading, finishLoading } = mainSlice.actions;
+export const { startLoading, finishLoading, setBoards } = mainSlice.actions;
 export default mainSlice.reducer;

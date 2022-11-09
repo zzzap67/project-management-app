@@ -1,7 +1,16 @@
 interface MainState {
   isLoading: boolean;
+  boardsList: IBoard[];
 };
 
-export {
-  MainState,
+interface IBoard {
+  id: string;
+  title: string;
+  description: string;
+}
+
+interface IBoardsList {
+  data: IBoard[];
 };
+
+export { MainState, IBoard, IBoardsList };
