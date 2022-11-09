@@ -1,11 +1,12 @@
-import WelcomePage from 'pages/welcome-page/Welcome-page';
 import React from 'react';
+import WelcomePage from 'pages/welcome-page/Welcome-page';
+import './Main.css';
 
 const Main = () => {
   return (
-    <>
+    <div className="main">
       <WelcomePage />
-    </>
+    </div>
   );
 };
 
