@@ -1,7 +1,9 @@
 interface MainState {
   isLoading: boolean;
-  boardsList: IBoard[];
-};
+  boards: Record<IBoard['id'], IBoard>;
+  board: IBoard | null;
+  error: string | null;
+}
 
 interface IBoard {
   id: string;
@@ -9,8 +11,4 @@ interface IBoard {
   description: string;
 }
 
-interface IBoardsList {
-  data: IBoard[];
-};
-
-export { MainState, IBoard, IBoardsList };
+export { MainState, IBoard };

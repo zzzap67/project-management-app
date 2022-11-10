@@ -1,28 +1,19 @@
 import React, { useEffect } from 'react';
 import BoardsList from 'components/BoardsList';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { getBoardsList } from 'api';
-import { setBoards } from 'store/mainSlice';
+import { useAppDispatch } from '../../store/hooks';
+import { getAllBoardsThunk } from '../../store/thunks';
 
 const Boards = () => {
-  const { boardsList } = useAppSelector((state) => state.mainReducer);
   const dispatch = useAppDispatch();
 
-  const getBoards = async () => {
-    const data = await getBoardsList();
-    if (data) {
-      dispatch(setBoards(data));
-    }
-  };
-
   useEffect(() => {
-    getBoards();
-  }, []);
+    dispatch(getAllBoardsThunk());
+  }, [dispatch]);
 
   return (
     <>
       <div> -- - - - - - --</div>
-      <BoardsList data={boardsList} />
+      <BoardsList />
     </>
   );
 };
