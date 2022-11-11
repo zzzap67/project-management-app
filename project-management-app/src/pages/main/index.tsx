@@ -1,10 +1,12 @@
 import React from 'react';
+import WelcomePage from 'pages/welcome-page';
+import './style.css';
 
 const Main = () => {
   return (
-    <>
-      <div> WELCOME TO PROJECT MANAGEMENT APP </div>
-    </>
+    <div className="main">
+      <WelcomePage />
+    </div>
   );
 };
 
