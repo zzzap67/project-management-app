@@ -2,7 +2,6 @@ import React from 'react';
 import './Developer-card.css';
 import data from './developers.json';
 import { ReactComponent as GitIcon } from '../../../assets/image/github.svg';
-import icon from '../../../assets/image/git-icon.svg';
 
 export const DeveloperCard: React.FunctionComponent = () => {
   return (
@@ -12,7 +11,9 @@ export const DeveloperCard: React.FunctionComponent = () => {
           <p className="developer_name">{item.name}</p>
           <div className="git_info">
             <GitIcon className="git_icon" />
-            <p className="developer_github">{item.github}</p>
+            <a href={item.href} className="developer_github">
+              {item.github}
+            </a>
           </div>
         </div>
       ))}
