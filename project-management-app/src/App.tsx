@@ -9,7 +9,7 @@ import Main from 'pages/main';
 import Error404 from 'pages/error404';
 import RegistrationForm from 'pages/registrationForm';
 import SignIn from 'pages/signIn';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import Footer from 'components/Footer/Footer';
 
 function Layout() {

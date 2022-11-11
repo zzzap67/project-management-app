@@ -2,11 +2,17 @@ import Button from 'components/ui/button/Button';
 import i18n from 'i18n/i18n';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
-import './styles.css';
+import './Header.css';
 
 const Header: React.FunctionComponent = () => {
+  const [scrollEvent, setScrollEvent] = useState(false);
+  const changeHeaderColor = () => {
+    window.scrollY > 60 ? setScrollEvent(true) : setScrollEvent(false);
+  };
+
+  window.addEventListener('scroll', () => changeHeaderColor());
   const [language, setLanguage] = useState('en');
   const changeLanguage = (language: string) => {
     if (language === 'en') {
@@ -20,7 +26,7 @@ const Header: React.FunctionComponent = () => {
 
   const { t } = useTranslation('translation');
   return (
-    <header className="header">
+    <header className={scrollEvent ? 'header_color' : 'header_white'}>
       <Link to="/" className="logo_link">
         <Logo className="logo" />
       </Link>

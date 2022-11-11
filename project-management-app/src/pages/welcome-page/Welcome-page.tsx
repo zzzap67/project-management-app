@@ -6,7 +6,6 @@ import DeveloperCard from 'components/ui/developer-card/Developer-card';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-
 export const WelcomePage: React.FunctionComponent = () => {
   const { t } = useTranslation('translation');
   return (
