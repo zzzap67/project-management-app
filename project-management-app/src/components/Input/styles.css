@@ -1,0 +1,27 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.input__label {
+  font-size: 10px;
+  line-height: 1.2;
+  color: #A0A0A0;
+}
+
+.input__field {
+  font-size: 13px;
+  line-height: 1.23;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #F9F9F9;
+}
+
+.input__error {
+  font-size: 10px;
+  line-height: 1.2;
+  margin: 0;
+  color: #EE3465;
+}
