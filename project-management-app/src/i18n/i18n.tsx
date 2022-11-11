@@ -24,6 +24,9 @@ i18n
               mainPage: 'Main Page',
               signUp: 'Sign Up',
               signIn: 'Sign In',
+              signOut: 'Sign Out',
+              editProfile: 'Edit Profile',
+              newBoard: 'New Board',
             },
             welcomePage: {
               welcomeButtonName: 'Start doing',
@@ -41,6 +44,9 @@ i18n
               mainPage: 'Главная страница',
               signUp: 'Регистрация',
               signIn: 'Войти',
+              signOut: 'Выйти',
+              editProfile: 'Редактировать профиль',
+              newBoard: 'Новая доска',
             },
             welcomePage: {
               welcomeButtonName: 'Начать',
