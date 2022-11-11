@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonProps } from './Button-interface';
-import './Button.css';
+import './style.css';
 
 export const Button: React.FunctionComponent<ButtonProps> = (props) => {
   return (

@@ -1,10 +1,10 @@
-import Button from 'components/ui/button/Button';
+import Button from 'components/ui/button';
 import i18n from 'i18n/i18n';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
-import './Header.css';
+import './style.css';
 
 const Header: React.FunctionComponent = () => {
   const [scrollEvent, setScrollEvent] = useState(false);

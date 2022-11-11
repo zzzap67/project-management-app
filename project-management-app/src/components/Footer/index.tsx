@@ -1,6 +1,6 @@
 import React from 'react';
-import './Footer.css';
 import data from '../ui/developer-card/developers.json';
+import './style.css';
 
 const Footer: React.FunctionComponent = () => {
   return (

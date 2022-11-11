@@ -1,7 +1,6 @@
 import React from 'react';
-import WelcomePage from 'pages/welcome-page/Welcome-page';
-import './Main.css';
-import { Routes } from 'react-router-dom';
+import WelcomePage from 'pages/welcome-page';
+import './style.css';
 
 const Main = () => {
   return (

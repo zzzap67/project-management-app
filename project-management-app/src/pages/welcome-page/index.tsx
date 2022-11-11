@@ -1,10 +1,10 @@
 import React from 'react';
-import './Welcome-page.css';
 import { ReactComponent as WelcomeImage } from '../../assets/image/image1.svg';
-import Button from 'components/ui/button/Button';
-import DeveloperCard from 'components/ui/developer-card/Developer-card';
+import Button from 'components/ui/button';
+import DeveloperCard from 'components/ui/developer-card';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import './style.css';
 
 export const WelcomePage: React.FunctionComponent = () => {
   const { t } = useTranslation('translation');

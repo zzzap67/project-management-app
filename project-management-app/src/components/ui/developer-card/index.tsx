@@ -1,5 +1,5 @@
 import React from 'react';
-import './Developer-card.css';
+import './style.css';
 import data from './developers.json';
 import { ReactComponent as GitIcon } from '../../../assets/image/github.svg';
 
