@@ -1,12 +1,13 @@
 import './styles.css';
 import { ChangeEvent } from 'react';
 
+export interface InputData {
+  id: string;
+  label: string;
+  type: string;
+}
 export interface InputProps {
-  inputData: {
-    id: string;
-    label: string;
-    type: string;
-  };
+  inputData: InputData;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   errors: Record<string, string>;
 }

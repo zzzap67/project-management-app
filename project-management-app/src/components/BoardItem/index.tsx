@@ -14,16 +14,14 @@ const BoardItem = (props: IBoard) => {
   };
   return (
     <div className="board_item">
-      <div className="change_board">
-        <Edit className="edit_board" onClick={deleteBoard} />
-        <Delete className="delete_board" onClick={editBoard} />
-      </div>
-      <div className="board_info">
-        <TaskBoard className="task-board" />
-        <div className="info">
-          <p className="info_title">{title}</p>
-          <p className="info_description">{description}</p>
+      <TaskBoard className="task-board" />
+      <div className="info">
+        <div className="change_board">
+          <Edit className="edit_board" onClick={deleteBoard} />
+          <Delete className="delete_board" onClick={editBoard} />
         </div>
+        <p className="info_title">{title}</p>
+        <p className="info_description">{description}</p>
       </div>
     </div>
   );

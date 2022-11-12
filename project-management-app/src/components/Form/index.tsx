@@ -1,6 +1,6 @@
 import { SyntheticEvent } from 'react';
 import { NavLink } from 'react-router-dom';
-import Input, { InputProps } from '../Input/';
+import Input, { InputData } from '../Input/';
 import './styles.css';
 import { useFormWithValidation } from '../../utils';
 import { ru } from '../locales/ru';
@@ -16,7 +16,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsData, title, buttonText, text, linkText, linkTo } = formData;
 
-  const renderInputs = (inputs: InputProps['inputData'][]) => {
+  const renderInputs = (inputs: InputData[]) => {
     return inputs.map((input) => (
       <Input inputData={input} key={input.id} onChange={handleChange} errors={errors} />
     ));
