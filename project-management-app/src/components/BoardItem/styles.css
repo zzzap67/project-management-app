@@ -1,0 +1,35 @@
+.board_item {
+  display: flex;
+  /* flex-direction: column; */
+  flex-direction: row-reverse;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 200px;
+  padding: 15px;
+  border: 2px solid rgb(212, 218, 200);
+  border-radius: 15px;
+  box-shadow: 5px 3px 10px 5px rgb(212, 218, 200);
+}
+.change_board {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.edit_board,
+.delete_board {
+  width: 20px;
+}
+.board_info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.task-board {
+  width: 50px;
+}
