@@ -4,7 +4,12 @@ import { SyntheticEvent } from 'react';
 import { useFormWithValidation } from 'utils';
 import './style.css';
 
-const CreateBoardForm = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
+const CreateNewBoardComponentForm = ({
+  formData,
+  errorMessage,
+  className,
+  onSubmit,
+}: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsBoardData, buttonBoardText, cancelButtonText } = formData;
   const handleSubmit = (e: SyntheticEvent) => {
@@ -27,4 +32,4 @@ const CreateBoardForm = ({ formData, errorMessage, className, onSubmit }: FormPr
     </form>
   );
 };
-export default CreateBoardForm;
+export default CreateNewBoardComponentForm;

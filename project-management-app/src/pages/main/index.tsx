@@ -1,4 +1,4 @@
-import CreateBoardForm from 'components/Board-create-form';
+import CreateNewBoardComponentForm from 'components/Create-new-board-component-form';
 import BoardItem from 'components/BoardItem';
 import { ru } from 'components/locales/ru';
 import WelcomePage from 'pages/welcome-page';
@@ -9,7 +9,7 @@ const Main = () => {
     <div className="main">
       {/* <WelcomePage /> */}
       <BoardItem id={'dfb'} title={'jjk'} description={'kll'} />
-      <CreateBoardForm
+      <CreateNewBoardComponentForm
         formData={ru.REGISTER_FORM}
         errorMessage={''}
         className={'board'}
