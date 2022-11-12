@@ -19,9 +19,9 @@ function Layout() {
   useError();
   useToken();
   return (
-    <div>
+    <div className="layout">
       <Header />
-      <main>
+      <main className="layout_main">
         <Outlet />
       </main>
       <Footer />

@@ -1,0 +1,55 @@
+.welcome_page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #86a257;
+  width: 100%;
+}
+.welcome_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 20px;
+  width: 100%;
+}
+.welcome_button__link {
+  align-self: center;
+}
+.welcome_image {
+  width: 600px;
+  overflow: hidden;
+}
+.welcome_info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 20px;
+}
+.project-description {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 450px;
+  grid-gap: 50px;
+}
+.description_title {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+}
+.description_info {
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+}
+.developer_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 100px 0;
+}

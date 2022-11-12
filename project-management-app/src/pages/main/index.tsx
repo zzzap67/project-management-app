@@ -1,11 +1,13 @@
 import BoardItem from 'components/BoardItem';
+import WelcomePage from 'pages/welcome-page';
+import './style.css';
 
 const Main = () => {
   return (
-    <>
-      <div> WELCOME TO PROJECT MANAGEMENT APP </div>
+    <div className="main">
+      <WelcomePage />
       <BoardItem id={'dfb'} title={'dfb'} description={'dfb'} />
-    </>
+    </div>
   );
 };
 

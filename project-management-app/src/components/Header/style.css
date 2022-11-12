@@ -1,0 +1,37 @@
+a {
+  padding: 10px;
+  position: relative;
+}
+.header_white {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  position: sticky;
+  top: 0;
+  min-height: 2em;
+  background-color: white;
+  z-index: 100;
+}
+.header_color {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  position: sticky;
+  top: 0;
+  min-height: 2em;
+  background-color: rgba(148, 249, 6, 0.342);
+  z-index: 100;
+}
+.logo {
+  width: 30px;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-self: flex-start;
+  gap: 15px;
+  padding: 5px;
+}
