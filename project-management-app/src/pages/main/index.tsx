@@ -8,13 +8,7 @@ const Main = () => {
   return (
     <div className="main">
       {/* <WelcomePage /> */}
-      <BoardItem
-        id={'dfb'}
-        title={'dflklkkkkkb'}
-        description={
-          'dfbdsljldvjlsdvldsjvdsvsvkjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk'
-        }
-      />
+      <BoardItem id={'dfb'} title={'jjk'} description={'kll'} />
       <CreateBoardForm
         formData={ru.REGISTER_FORM}
         errorMessage={''}

@@ -7,6 +7,7 @@ export const ru = {
     title: 'Добро пожаловать!',
     buttonText: 'Зарегистрироваться',
     buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
     text: 'Уже зарегистрированы?',
     linkText: 'Войти',
     linkTo: '/signin',

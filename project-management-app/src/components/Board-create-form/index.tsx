@@ -6,7 +6,7 @@ import './style.css';
 
 const CreateBoardForm = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  const { inputsBoardData, buttonBoardText } = formData;
+  const { inputsBoardData, buttonBoardText, cancelButtonText } = formData;
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     onSubmit(values);
@@ -19,10 +19,11 @@ const CreateBoardForm = ({ formData, errorMessage, className, onSubmit }: FormPr
   return (
     <form className={`form_${className}`} onSubmit={handleSubmit}>
       <div className="board__inputs-wrapper">{renderInputs(inputsBoardData)}</div>
-      <button className="board__button button" type="submit" disabled={!isValid}>
-        {errorMessage && <p className="form__error">{errorMessage}</p>}
+      {errorMessage && <p className="form__error">{errorMessage}</p>}
+      <button className="confirm__button button" type="submit" disabled={!isValid}>
         {buttonBoardText}
       </button>
+      <button className="cancel__button button">{cancelButtonText}</button>
     </form>
   );
 };
