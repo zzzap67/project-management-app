@@ -16,11 +16,11 @@ const Input = ({ inputData, onChange, errors }: InputProps) => {
 
   return (
     <div className="input">
-      <label htmlFor={id} className="input__label">
+      <label htmlFor={id} className={`input__label  ${id}_input__label`}>
         {label}
       </label>
       <input
-        className="input__field"
+        className={`input__field  ${id}_input`}
         required
         type={type}
         id={id}

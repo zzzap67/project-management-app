@@ -6,6 +6,7 @@ export const ru = {
   REGISTER_FORM: {
     title: 'Добро пожаловать!',
     buttonText: 'Зарегистрироваться',
+    buttonBoardText: 'Сохранить',
     text: 'Уже зарегистрированы?',
     linkText: 'Войти',
     linkTo: '/signin',
@@ -24,6 +25,18 @@ export const ru = {
         id: 'password',
         label: 'Пароль',
         type: 'password',
+      },
+    ],
+    inputsBoardData: [
+      {
+        id: 'title',
+        label: 'Заголовок',
+        type: 'text',
+      },
+      {
+        id: 'description',
+        label: 'Описание',
+        type: 'text',
       },
     ],
   },

@@ -5,7 +5,7 @@ import './styles.css';
 import { useFormWithValidation } from '../../utils';
 import { ru } from '../locales/ru';
 
-interface FormProps {
+export interface FormProps {
   formData: typeof ru.REGISTER_FORM;
   errorMessage: string;
   className: string;
