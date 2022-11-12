@@ -30,6 +30,7 @@ a {
 .nav {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-self: flex-start;
   gap: 15px;
   padding: 5px;
