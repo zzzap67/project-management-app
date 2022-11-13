@@ -58,7 +58,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
           </p>
         </>
       ) : null}
-      {className === 'form_board' || className === 'form_task' ? (
+      {className === 'form_board' || className === 'form_task' || className === 'form_column' ? (
         <>
           <button className="confirm__button button" type="submit" disabled={!isValid}>
             {t('description.forms.confirmButtonText')}
