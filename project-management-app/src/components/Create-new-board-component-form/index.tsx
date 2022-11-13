@@ -5,14 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { useFormWithValidation } from 'utils';
 import './style.css';
 
-const CreateNewBoardComponentForm = ({
-  formData,
-  errorMessage,
-  className,
-  onSubmit,
-}: FormProps) => {
+const CreateNewBoardComponentForm = ({ formData, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  const { inputsBoardData, buttonBoardText, cancelButtonText } = formData;
+  const { inputsBoardData } = formData;
   const { t } = useTranslation('translation');
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

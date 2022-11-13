@@ -15,7 +15,7 @@ export interface FormProps {
 
 const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  const { inputsData, title, buttonText, text, linkText, linkTo } = formData;
+  const { inputsData, linkTo } = formData;
   const { t } = useTranslation('translation');
 
   const renderInputs = (inputs: InputData[]) => {

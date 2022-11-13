@@ -14,7 +14,7 @@ export interface InputProps {
 }
 
 const Input = ({ inputData, onChange, errors }: InputProps) => {
-  const { id, label, type } = inputData;
+  const { id, type } = inputData;
   const { t } = useTranslation('translation');
 
   // const translationErrors = (id: string) => {

@@ -5,7 +5,7 @@ import { ReactComponent as TaskBoard } from '../../assets/icons/task-board.svg';
 import './styles.css';
 
 const BoardItem = (props: IBoard) => {
-  const { id, title, description } = props;
+  const { title, description } = props;
   const deleteBoard = () => {
     console.log('delete board');
   };
