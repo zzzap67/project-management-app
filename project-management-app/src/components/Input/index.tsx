@@ -42,7 +42,7 @@ const Input = ({ inputData, onChange, errors }: InputProps) => {
         type={type}
         id={id}
         name={id}
-        placeholder={t(`description.forms.inputs.${id}Label`)}
+        placeholder={t(`description.forms.inputs.${id}Placeholder`)}
         onChange={onChange}
       />
       {/* {errors[id] && <p className="input__error">{errors[id]}</p>} */}
