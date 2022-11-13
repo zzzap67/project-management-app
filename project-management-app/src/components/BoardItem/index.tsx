@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { IBoard } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
@@ -20,8 +21,10 @@ const BoardItem = (props: IBoard) => {
           <Edit className="edit_board" onClick={deleteBoard} />
           <Delete className="delete_board" onClick={editBoard} />
         </div>
-        <p className="info_title">{title}</p>
-        <p className="info_description">{description}</p>
+        <Link className="board_link" to="/board/:id">
+          <p className="info_title">{title}</p>
+          <p className="info_description">{description}</p>
+        </Link>
       </div>
     </div>
   );

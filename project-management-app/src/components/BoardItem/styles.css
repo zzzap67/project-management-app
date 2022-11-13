@@ -20,6 +20,13 @@
 .delete_board {
   width: 21px;
 }
+.board_link {
+  text-decoration: none;
+  color: #556737;
+}
+a {
+  text-decoration: none;
+}
 .info {
   display: flex;
   flex-direction: column;

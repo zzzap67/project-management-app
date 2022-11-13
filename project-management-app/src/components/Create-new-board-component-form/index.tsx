@@ -1,5 +1,6 @@
 import Form from 'components/Form';
 import { ru } from 'components/locales/ru';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 const CreateNewBoardComponentForm = () => {
