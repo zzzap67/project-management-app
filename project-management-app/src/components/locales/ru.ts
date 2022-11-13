@@ -70,4 +70,21 @@ export const ru = {
       },
     ],
   },
+  TASK_FORM: {
+    buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
+    title: 'createTask',
+    inputsData: [
+      {
+        id: 'title',
+        label: 'Заголовок',
+        type: 'text',
+      },
+      {
+        id: 'description',
+        label: 'Описание',
+        type: 'text',
+      },
+    ],
+  },
 };
