@@ -20,7 +20,7 @@ const CreateNewBoardComponentForm = ({ formData, className, onSubmit }: FormProp
   };
   return (
     <form className={`form_${className}`} onSubmit={handleSubmit}>
-      <div className="board__inputs-wrapper">{renderInputs(inputsBoardData)}</div>
+      <div className={`${className}__inputs-wrapper`}>{renderInputs(inputsBoardData)}</div>
       <button className="confirm__button button" type="submit" disabled={!isValid}>
         {t('description.forms.confirmButtonText')}
       </button>

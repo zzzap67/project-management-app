@@ -12,7 +12,7 @@ const Main = () => {
       <CreateNewBoardComponentForm
         formData={ru.REGISTER_FORM}
         errorMessage={''}
-        className={'board'}
+        className={'board-component'}
         onSubmit={() => console.log('Create board')}
       />
     </div>
