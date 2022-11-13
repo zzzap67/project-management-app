@@ -34,33 +34,26 @@ i18n
               aboutProject:
                 "Task management is the link between planning to do something and getting it done. This task management software allows you to centrally manage tasks and their timely completion and allow you to easily monitor all work processes and control the work of the team. Let's get organized together!",
             },
-            REGISTER_FORM: {
+            forms: {
               title: 'Welcome!',
               buttonText: 'Sign Up!',
+              cancelButtonText: 'Cancel',
+              confirmButtonText: 'Confirm',
               text: 'Already registered?',
               linkText: 'Sign In',
               linkTo: '/signin',
-              inputsData: [
-                {
-                  id: 'name',
-                  label: 'Name',
-                  type: 'text',
-                },
-                {
-                  id: 'email',
-                  label: 'E-mail',
-                  type: 'email',
-                },
-                {
-                  id: 'password',
-                  label: 'Password',
-                  type: 'password',
-                },
-              ],
+              inputs: {
+                nameLabel: 'Name',
+                emailLabel: 'E-mail',
+                passwordLabel: 'Password',
+                descriptionLabel: 'Description',
+                titleLabel: 'Title',
+              },
             },
-            MESSAGE: {
-              NAME_ERR: 'Name can only contain Latin, Cyrillic, space or hyphen',
-              EMAIL_ERR: 'Email format is invalid',
+            message: {
+              nameError: 'Name can only contain Latin, Cyrillic, space or hyphen',
+              emailError: 'Email format is invalid',
+              validationMessage: 'Please fill out this field.',
             },
           },
         },
@@ -82,33 +75,26 @@ i18n
               aboutProject:
                 'Управление задачами — это связующее звено между планированием чего-то и его выполнением. Это программное обеспечение для управления задачами позволяет централизованно управлять задачами и их своевременным выполнением, а также позволяет легко контролировать все рабочие процессы и контролировать работу команды. Давайте организуемся вместе!',
             },
-            REGISTER_FORM: {
+            forms: {
               title: 'Добро пожаловать!',
               buttonText: 'Зарегистрироваться',
+              cancelButtonText: 'Отменить',
+              confirmButtonText: 'Сохранить',
               text: 'Уже зарегистрированы?',
               linkText: 'Войти',
               linkTo: '/signin',
-              inputsData: [
-                {
-                  id: 'name',
-                  label: 'Имя',
-                  type: 'text',
-                },
-                {
-                  id: 'email',
-                  label: 'E-mail',
-                  type: 'email',
-                },
-                {
-                  id: 'password',
-                  label: 'Пароль',
-                  type: 'password',
-                },
-              ],
+              inputs: {
+                nameLabel: 'Имя',
+                emailLabel: 'E-mail',
+                passwordLabel: 'Пароль',
+                descriptionLabel: 'Описание',
+                titleLabel: 'Заголовок',
+              },
             },
-            MESSAGE: {
-              NAME_ERR: 'Имя может содержать только латиницу, кириллицу, пробел или дефис',
-              EMAIL_ERR: 'Неверный формат email',
+            message: {
+              nameError: 'Имя может содержать только латиницу, кириллицу, пробел или дефис',
+              emailError: 'Неверный формат email',
+              validationMessage: 'Пожалуйста, заполните это поле.',
             },
           },
         },

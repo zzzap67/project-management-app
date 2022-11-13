@@ -1,6 +1,7 @@
 import { FormProps } from 'components/Form';
 import Input, { InputProps } from 'components/Input';
 import { SyntheticEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useFormWithValidation } from 'utils';
 import './style.css';
 
@@ -12,6 +13,7 @@ const CreateNewBoardComponentForm = ({
 }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsBoardData, buttonBoardText, cancelButtonText } = formData;
+  const { t } = useTranslation('translation');
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     onSubmit(values);
@@ -24,11 +26,10 @@ const CreateNewBoardComponentForm = ({
   return (
     <form className={`form_${className}`} onSubmit={handleSubmit}>
       <div className="board__inputs-wrapper">{renderInputs(inputsBoardData)}</div>
-      {errorMessage && <p className="form__error">{errorMessage}</p>}
       <button className="confirm__button button" type="submit" disabled={!isValid}>
-        {buttonBoardText}
+        {t('description.forms.confirmButtonText')}
       </button>
-      <button className="cancel__button button">{cancelButtonText}</button>
+      <button className="cancel__button button">{t('description.forms.cancelButtonText')}</button>
     </form>
   );
 };
