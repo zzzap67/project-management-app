@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import './styles.css';
 
 export interface FormProps {
-  formData: typeof ru.REGISTER_FORM;
+  formData: typeof ru.REGISTER_FORM | typeof ru.BOARD_FORM;
   errorMessage: string;
   className: string;
   onSubmit: (values: Record<string, string>) => void;
@@ -15,7 +15,7 @@ export interface FormProps {
 
 const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  const { inputsData, linkTo } = formData;
+  const { inputsData, linkTo, title, buttonText, text, linkText } = formData;
   const { t } = useTranslation('translation');
 
   const renderInputs = (inputs: InputData[]) => {
@@ -31,27 +31,53 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
 
   return (
     <form className={`form ${className}`} onSubmit={handleSubmit}>
-      <h2 className="form__title">{t('description.forms.title')}</h2>
-      <div className="form__inputs-wrapper">{renderInputs(inputsData)}</div>
-      <div
-        className={`form__button-wrapper 
+      <h2 className={`form__title ${className}__title `}>{t(`description.forms.${title}`)!}</h2>
+      <div className={`form__inputs-wrapper ${className}__inputs-wrapper`}>
+        {renderInputs(inputsData)}
+      </div>
+
+      {errorMessage && <p className="form__error">{errorMessage}</p>}
+      {className === 'register__form' ? (
+        <>
+          <div
+            className={`form__button-wrapper 
         ${
           inputsData.length === 3
             ? 'form__button-wrapper_type_near'
             : 'form__button-wrapper_type_far'
         }`}
-      >
-        {errorMessage && <p className="form__error">{errorMessage}</p>}
-        <button className="form__button button" type="submit" disabled={!isValid}>
-          {t('description.forms.buttonText')}
+          ></div>
+          <button className="form__button button" type="submit" disabled={!isValid}>
+            {t(`description.forms.${buttonText}`)}
+          </button>
+          <p className="form__text">
+            {t(`description.forms.${text}`)}
+            <NavLink to={linkTo} className="form__link link">
+              {t(`description.forms.${linkText}`)}
+            </NavLink>
+          </p>
+        </>
+      ) : null}
+      {className === 'form_board' || className === 'form_task' ? (
+        <>
+          <button className="confirm__button button" type="submit" disabled={!isValid}>
+            {t('description.forms.confirmButtonText')}
+          </button>
+          <button className="cancel__button button">
+            {t('description.forms.cancelButtonText')}
+          </button>
+        </>
+      ) : null}
+      {/* <button className="form__button button" type="submit" disabled={!isValid}>
+          {t(`description.forms.${buttonText}`)}
         </button>
         <p className="form__text">
-          {t('description.forms.text')}
+          {t(`description.forms.${text}`)}
           <NavLink to={linkTo} className="form__link link">
-            {t('description.forms.linkText')}
+            {t(`description.forms.${linkText}`)}
           </NavLink>
-        </p>
-      </div>
+        </p> */}
+      {/* </div> */}
     </form>
   );
 };

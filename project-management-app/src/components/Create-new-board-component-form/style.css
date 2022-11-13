@@ -1,4 +1,4 @@
-.form_board-component {
+.form_board {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,6 +9,15 @@
   border: 2px solid rgb(212, 218, 200);
   border-radius: 15px;
   box-shadow: 5px 3px 10px 5px rgb(212, 218, 200);
+}
+.form_board__title {
+  font-size: 17px;
+  font-weight: 570;
+  color: #86a257;
+  align-self: center;
+}
+.form_board__inputs-wrapper {
+  margin: 0;
 }
 .title_input,
 .description_input {
@@ -52,11 +61,11 @@
   border-radius: 15px;
   color: white;
   background-color: #c8ccbfb7;
-  border: 1px solid  #c8ccbf7e;
+  border: 1px solid #c8ccbf7e;
   box-shadow: 3px 1px 3px 1 px rgb(216, 225, 205);
   cursor: pointer;
 }
-.cancel__button:hover{
+.cancel__button:hover {
   background-color: #c8ccbf5a;
   border: 1px solid #c8ccbf6c;
   box-shadow: 3px 1px 3px 1 px rgba(216, 225, 205, 0.543);

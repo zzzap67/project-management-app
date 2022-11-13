@@ -4,12 +4,12 @@ export const ru = {
     EMAIL_ERR: 'Неверный формат email',
   },
   REGISTER_FORM: {
-    title: 'Добро пожаловать!',
-    buttonText: 'Зарегистрироваться',
+    title: 'welcome',
+    buttonText: 'signUp',
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
-    text: 'Уже зарегистрированы?',
-    linkText: 'Войти',
+    text: 'alreadyRegistered',
+    linkText: 'signin',
     linkTo: '/signin',
     inputsData: [
       {
@@ -28,7 +28,24 @@ export const ru = {
         type: 'password',
       },
     ],
-    inputsBoardData: [
+    // inputsBoardData: [
+    //   {
+    //     id: 'title',
+    //     label: 'Заголовок',
+    //     type: 'text',
+    //   },
+    //   {
+    //     id: 'description',
+    //     label: 'Описание',
+    //     type: 'text',
+    //   },
+    // ],
+  },
+  BOARD_FORM: {
+    buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
+    title: 'createBoard',
+    inputsData: [
       {
         id: 'title',
         label: 'Заголовок',
@@ -37,6 +54,18 @@ export const ru = {
       {
         id: 'description',
         label: 'Описание',
+        type: 'text',
+      },
+    ],
+  },
+  COLUMN_FORM: {
+    buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
+    title: 'createColumn',
+    inputsData: [
+      {
+        id: 'title',
+        label: 'Заголовок',
         type: 'text',
       },
     ],
