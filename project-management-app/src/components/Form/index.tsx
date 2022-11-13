@@ -7,12 +7,23 @@ import { useTranslation } from 'react-i18next';
 import './styles.css';
 
 export interface FormProps {
-  formData: typeof ru.REGISTER_FORM | typeof ru.BOARD_FORM;
+  formData: typeof ru.REGISTER_FORM | typeof ru.BOARD_FORM | typeof ru.COLUMN_FORM;
   errorMessage: string;
   className: string;
   onSubmit: (values: Record<string, string>) => void;
 }
-
+export interface formBoardData {
+  inputsData: InputData[];
+  title: string;
+}
+export interface formRegisterData {
+  inputsData: InputData[];
+  linkTo: string;
+  title: string;
+  buttonText: string;
+  text: string;
+  linkText: string;
+}
 const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsData, linkTo, title, buttonText, text, linkText } = formData;
