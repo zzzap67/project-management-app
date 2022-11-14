@@ -1,9 +1,9 @@
 import Form from 'components/Form';
 import { ru } from 'components/locales/ru';
-import './style.css';
+import './styles.css';
 
-const CreateNewBoardComponentForm = () => {
-  const registerData = ru.BOARD_FORM;
+const EditBoardForm = () => {
+  const registerData = ru.BOARD_EDIT_FORM;
   const onSubmit = async (values: Record<string, string>) => {
     console.log({ values });
   };
@@ -12,4 +12,4 @@ const CreateNewBoardComponentForm = () => {
     <Form formData={registerData} errorMessage={''} className={'form_board'} onSubmit={onSubmit} />
   );
 };
-export default CreateNewBoardComponentForm;
+export default EditBoardForm;

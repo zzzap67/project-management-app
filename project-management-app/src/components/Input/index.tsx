@@ -17,20 +17,6 @@ const Input = ({ inputData, onChange, errors }: InputProps) => {
   const { id, type } = inputData;
   const { t } = useTranslation('translation');
 
-  // const translationErrors = (id: string) => {
-  //   switch (id) {
-  //     case 'name':
-  //       const translateNameError = t(`description.message.nameError`);
-  //       return translateNameError;
-  //     case 'email':
-  //       const translateEmailError = t(`description.message.emailError`);
-  //       return translateEmailError;
-  //     // case :
-  //     //   const translateError = t(`description.message.validationMessage`);
-  //     //   return translateError;
-  //   }
-  // };
-
   return (
     <div className="input">
       <label htmlFor={id} className={`input__labeаl  ${id}_input__label`}>

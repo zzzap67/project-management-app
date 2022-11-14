@@ -44,7 +44,25 @@ export const ru = {
   BOARD_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
+    EditTitle: 'editBoard',
     title: 'createBoard',
+    inputsData: [
+      {
+        id: 'title',
+        label: 'Заголовок',
+        type: 'text',
+      },
+      {
+        id: 'description',
+        label: 'Описание',
+        type: 'text',
+      },
+    ],
+  },
+  BOARD_EDIT_FORM: {
+    buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
+    title: 'editBoard',
     inputsData: [
       {
         id: 'title',

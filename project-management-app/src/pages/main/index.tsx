@@ -4,6 +4,7 @@ import WelcomePage from 'pages/welcome-page';
 import './style.css';
 import CreateNewColumnForm from 'components/Create-new-column';
 import CreateNewTaskForm from 'components/Create-new-task';
+import EditBoardForm from 'components/Edit-board-form';
 
 const Main = () => {
   return (
@@ -14,6 +15,7 @@ const Main = () => {
       <CreateNewBoardComponentForm />
       <CreateNewColumnForm />
       <CreateNewTaskForm />
+      <EditBoardForm />
     </div>
   );
 };
