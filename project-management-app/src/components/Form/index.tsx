@@ -4,12 +4,13 @@ import Input, { InputProps } from '../Input/';
 import './styles.css';
 import { useFormWithValidation } from '../../utils';
 import { ru } from '../locales/ru';
+import { ICreateUser } from '../../types';
 
 interface FormProps {
   formData: typeof ru.REGISTER_FORM;
-  errorMessage: string;
+  errorMessage?: string;
   className: string;
-  onSubmit: (values: Record<string, string>) => void;
+  onSubmit: (values: ICreateUser) => void;
 }
 
 const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
@@ -40,7 +41,11 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
         }`}
       >
         {errorMessage && <p className="form__error">{errorMessage}</p>}
-        <button className="form__button button" type="submit" disabled={!isValid}>
+        <button
+          className="form__button button"
+          type="submit"
+          disabled={!isValid || !Object.values(errors).every((error) => error === '')}
+        >
           {buttonText}
         </button>
         <p className="form__text">

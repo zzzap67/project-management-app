@@ -12,11 +12,14 @@ import Boards from 'pages/boards';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { useToken } from './api';
-import Register from './pages/Register';
+import Register from './pages/register';
 import InfoTooltip from './components/InfoTooltip';
+import { useAppSelector } from './store/hooks';
 
 function Layout() {
   useToken();
+  const user = useAppSelector((state) => state.userReducer);
+  console.log({ user });
   return (
     <>
       <div className="layout">

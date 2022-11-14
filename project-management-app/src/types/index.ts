@@ -21,4 +21,47 @@ enum ETooltipType {
   error = 'error',
 }
 
-export { MainState, IBoard, ITooltip, ETooltipType };
+interface IUser {
+  id: string;
+  name: string;
+  login: string;
+}
+
+interface ICreateUser {
+  name: string;
+  login: string;
+  password: string;
+}
+
+interface IUserState extends IUser {
+  isAuth: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
+enum EApiMethods {
+  get = 'GET',
+  post = 'POST',
+}
+
+interface IApiConfig {
+  method?: EApiMethods;
+  headers?: Headers;
+  body?: ICreateUser;
+}
+
+enum ELocalStorage {
+  token = 'token',
+}
+
+export {
+  MainState,
+  IBoard,
+  ITooltip,
+  ETooltipType,
+  IUserState,
+  EApiMethods,
+  ICreateUser,
+  IApiConfig,
+  IUser,
+};
