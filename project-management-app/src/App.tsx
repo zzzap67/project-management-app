@@ -15,6 +15,7 @@ import { useError } from './errors';
 import { useToken } from './api';
 import Register from './pages/Register';
 import EditBoardForm from 'components/Edit-board-form';
+import CreateNewBoardComponentForm from 'components/Create-new-board-component-form';
 
 function Layout() {
   useError();
@@ -38,6 +39,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Main />} />
             <Route path="/boards" element={<Boards />} />
+            <Route path="/boards/create" element={<CreateNewBoardComponentForm />} />
             <Route path="/board/:id" element={<div>{location.pathname}</div>} />
             <Route path="/board/:id/edit" element={<EditBoardForm />} />
             <Route path="/register" element={<Register />} />
