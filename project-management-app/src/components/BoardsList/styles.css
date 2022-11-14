@@ -1,0 +1,4 @@
+.boardList {
+  display: flex;
+  flex-wrap: wrap;
+}

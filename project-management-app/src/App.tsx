@@ -18,13 +18,16 @@ import InfoTooltip from './components/InfoTooltip';
 function Layout() {
   useToken();
   return (
-    <div className="layout">
-      <Header />
-      <main className="layout_main">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <div className="layout">
+        <Header />
+        <main className="layout_main">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+      <div id="modal"></div>
+    </>
   );
 }
 
