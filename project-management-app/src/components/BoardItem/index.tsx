@@ -23,45 +23,32 @@ const BoardItem = (props: IBoard) => {
   };
   return (
     <>
-      <div>
-        <div className="board">
-          <Link to={`/board/${id}`} key={id}>
-            <div>{title}</div>
-            <div>{description}</div>
-          </Link>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleModalQuestion();
-            }}
-          >
-            delete board
-          </button>
-        </div>
-        {/* <div>{title}</div>
-        <div>{description}</div> */}
-        <div className="board_item">
-          <TaskBoard className="task-board" />
-          <div className="info">
-            <div className="change_board">
-              <Link className="edit_link" to="/board/:id/edit">
-                <Edit className="edit_board" onClick={editBoard} />
-              </Link>
-              <Delete className="delete_board" onClick={deleteBoard} />
-            </div>
-            <Link className="board_link" to="/board/:id">
-              <p className="info_title">{title}</p>
-              <p className="info_description">{description}</p>
+      <div className="board_item">
+        <TaskBoard className="task-board" />
+        <div className="info">
+          <div className="change_board">
+            <Link className="edit_link" to="/board/:id/edit">
+              <Edit className="edit_board" onClick={editBoard} />
             </Link>
-            {showModal && (
-              <ModalConfirmation
-                confirmQuestion={<span>Do You Really Want To Delete {title}?</span>}
-                setShowModal={setShowModal}
-                onConfirm={deleteBoard}
-              />
-            )}
+            <Delete
+              className="delete_board"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleModalQuestion();
+              }}
+            />
           </div>
+          <Link className="board_link" to={`/board/${id}`} key={id}>
+            <p className="info_title">{title}</p>
+            <p className="info_description">{description}</p>
+          </Link>
+          {showModal && (
+            <ModalConfirmation
+              confirmQuestion={<span>Do You Really Want To Delete {title}?</span>}
+              setShowModal={setShowModal}
+              onConfirm={deleteBoard}
+            />
+          )}
         </div>
       </div>
     </>
