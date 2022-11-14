@@ -1,8 +1,71 @@
+.board_item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px;
+  padding: 5px 10px;
+  width: 390px;
+  color: #556737;
+  border: 2px solid rgb(212, 218, 200);
+  border-radius: 15px;
+  box-shadow: 5px 3px 10px 5px rgb(212, 218, 200);
+}
 .board {
   border-radius: 4px;
   padding: 2px;
   margin: 10px;
   border: 1px solid #888;
   text-align: center;
-  width:400px;
+  width: 400px;
+}
+.change_board {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.edit_link {
+  padding: 0;
+}
+.edit_board,
+.delete_board {
+  width: 21px;
+}
+.board_link {
+  text-decoration: none;
+  color: #556737;
+}
+a {
+  text-decoration: none;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 5px;
+  width: 280px;
+}
+.info_title {
+  font-size: 25px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.info_description {
+  font-size: 14px;
+  padding-bottom: 20px;
+  overflow-wrap: anywhere;
+}
+.task-board {
+  width: 63px;
+}
+@media (max-width: 440px) {
+  .board_item {
+    width: fit-content;
+  }
+  .info {
+    width: 250px;
+  }
+  .task-board {
+    display: none;
+  }
 }

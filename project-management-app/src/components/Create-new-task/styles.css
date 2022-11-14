@@ -1,0 +1,21 @@
+.form_task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 270px;
+  padding: 30px;
+  border: 2px solid rgb(212, 218, 200);
+  border-radius: 15px;
+  box-shadow: 5px 3px 10px 5px rgb(212, 218, 200);
+}
+.form_task__title {
+  font-size: 17px;
+  font-weight: 570;
+  color: #86a257;
+  align-self: center;
+}
+.form_task__inputs-wrapper {
+  margin: 0;
+}

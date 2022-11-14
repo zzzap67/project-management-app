@@ -8,7 +8,7 @@ import './style.css';
 
 const Header: React.FunctionComponent = () => {
   const [scrollEvent, setScrollEvent] = useState(false);
-  const [userAuthorized, setUserAuthorized] = useState(false);
+  const [userAuthorized, setUserAuthorized] = useState(true);
 
   const changeHeaderColor = () => {
     window.scrollY > 60 ? setScrollEvent(true) : setScrollEvent(false);
@@ -29,7 +29,7 @@ const Header: React.FunctionComponent = () => {
   const { t } = useTranslation('translation');
   return userAuthorized ? (
     <header className={scrollEvent ? 'header_color' : 'header_white'}>
-      <Link to="/">
+      <Link to="/boards">
         <Button
           className="link-to-add-new-board_button"
           buttonName={t('description.header.newBoard')}

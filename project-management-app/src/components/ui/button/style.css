@@ -49,3 +49,16 @@
   border: 1px solid #bfff00cf;
   box-shadow: 3px 1px 3px 1px rgb(219, 238, 151);
 }
+.create_board__button {
+  display: flex;
+  justify-content: center;
+  font-size: 80px;
+  padding: 30px 166px;
+  border-radius: 15px;
+  color: white;
+  background-color: #b2e94465;
+  border: 1px dashed #9fdf2198;
+  box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
+  cursor: pointer;
+
+}

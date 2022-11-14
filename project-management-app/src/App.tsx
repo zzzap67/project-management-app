@@ -13,6 +13,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { useToken } from './api';
 import Register from './pages/Register';
+import EditBoardForm from 'components/Edit-board-form';
+import CreateNewBoardComponentForm from 'components/Create-new-board-component-form';
 import InfoTooltip from './components/InfoTooltip';
 
 function Layout() {
@@ -39,7 +41,9 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Main />} />
             <Route path="/boards" element={<Boards />} />
+            <Route path="/boards/create" element={<CreateNewBoardComponentForm />} />
             <Route path="/board/:id" element={<div>{location.pathname}</div>} />
+            <Route path="/board/:id/edit" element={<EditBoardForm />} />
             <Route path="/register" element={<Register />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/404" element={<Error404 />} />
