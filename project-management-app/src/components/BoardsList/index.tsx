@@ -1,6 +1,5 @@
 import BoardItem from 'components/BoardItem';
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import './styles.css';
 import { useAppSelector } from '../../store/hooks';
 
@@ -12,11 +11,9 @@ const BoardsList = () => {
   }, [boards]);
 
   return (
-    <div>
+    <div className="boardList">
       {boardsList.map((board) => (
-        <Link to={`/board/${board.id}`} key={board.id}>
-          <BoardItem {...board} />
-        </Link>
+        <BoardItem {...board} key={board.id} />
       ))}
     </div>
   );
