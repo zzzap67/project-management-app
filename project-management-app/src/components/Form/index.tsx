@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Input, { InputData } from '../Input/';
 import { useFormWithValidation } from '../../utils';
 import { ru } from '../locales/ru';
@@ -28,6 +28,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsData, linkTo, title, buttonText, text, linkText } = formData;
   const { t } = useTranslation('translation');
+  const navigate = useNavigate();
 
   const renderInputs = (inputs: InputData[]) => {
     return inputs.map((input) => (
@@ -74,21 +75,16 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
           <button className="confirm__button button" type="submit" disabled={!isValid}>
             {t('description.forms.confirmButtonText')}
           </button>
-          <button className="cancel__button button">
+          <button
+            className="cancel__button button"
+            onClick={() => {
+              navigate(linkTo), console.log('go to boards');
+            }}
+          >
             {t('description.forms.cancelButtonText')}
           </button>
         </>
       ) : null}
-      {/* <button className="form__button button" type="submit" disabled={!isValid}>
-          {t(`description.forms.${buttonText}`)}
-        </button>
-        <p className="form__text">
-          {t(`description.forms.${text}`)}
-          <NavLink to={linkTo} className="form__link link">
-            {t(`description.forms.${linkText}`)}
-          </NavLink>
-        </p> */}
-      {/* </div> */}
     </form>
   );
 };

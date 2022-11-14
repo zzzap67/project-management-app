@@ -18,8 +18,10 @@ const BoardItem = (props: IBoard) => {
       <TaskBoard className="task-board" />
       <div className="info">
         <div className="change_board">
-          <Edit className="edit_board" onClick={deleteBoard} />
-          <Delete className="delete_board" onClick={editBoard} />
+          <Link className="edit_link" to="/board/:id/edit">
+            <Edit className="edit_board" onClick={editBoard} />
+          </Link>
+          <Delete className="delete_board" onClick={deleteBoard} />
         </div>
         <Link className="board_link" to="/board/:id">
           <p className="info_title">{title}</p>

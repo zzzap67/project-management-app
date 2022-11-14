@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import { useError } from './errors';
 import { useToken } from './api';
 import Register from './pages/Register';
+import EditBoardForm from 'components/Edit-board-form';
 
 function Layout() {
   useError();
@@ -38,6 +39,7 @@ function App() {
             <Route index element={<Main />} />
             <Route path="/boards" element={<Boards />} />
             <Route path="/board/:id" element={<div>{location.pathname}</div>} />
+            <Route path="/board/:id/edit" element={<EditBoardForm />} />
             <Route path="/register" element={<Register />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/404" element={<Error404 />} />

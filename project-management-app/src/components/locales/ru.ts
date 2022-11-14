@@ -28,23 +28,12 @@ export const ru = {
         type: 'password',
       },
     ],
-    // inputsBoardData: [
-    //   {
-    //     id: 'title',
-    //     label: 'Заголовок',
-    //     type: 'text',
-    //   },
-    //   {
-    //     id: 'description',
-    //     label: 'Описание',
-    //     type: 'text',
-    //   },
-    // ],
   },
   BOARD_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
     EditTitle: 'editBoard',
+    linkTo: '/boards',
     title: 'createBoard',
     inputsData: [
       {
@@ -62,6 +51,7 @@ export const ru = {
   BOARD_EDIT_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
+    linkTo: '/boards',
     title: 'editBoard',
     inputsData: [
       {
@@ -79,6 +69,7 @@ export const ru = {
   COLUMN_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
+    linkTo: '/board/:id',
     title: 'createColumn',
     inputsData: [
       {
@@ -92,6 +83,7 @@ export const ru = {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
     title: 'createTask',
+    linkTo: '/board/:id',
     inputsData: [
       {
         id: 'title',

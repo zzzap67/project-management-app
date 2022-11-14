@@ -16,6 +16,9 @@
   flex-wrap: wrap;
   gap: 5px;
 }
+.edit_link {
+  padding: 0;
+}
 .edit_board,
 .delete_board {
   width: 21px;
