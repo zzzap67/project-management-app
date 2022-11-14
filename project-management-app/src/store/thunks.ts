@@ -8,3 +8,7 @@ export const getAllBoardsThunk = createAsyncThunk('main/getAllBoardsThunk', asyn
 export const getBoardByIdThunk = createAsyncThunk('main/getBoardByIdThunk', async (id: string) => {
   return await api.getBoardId(id);
 });
+
+export const deleteBoardThunk = createAsyncThunk('main/deleteBoardThunk', async (id: string) => {
+  return await api.deleteBoard(id);
+});

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { MainState } from 'types';
-import { getAllBoardsThunk, getBoardByIdThunk } from './thunks';
+import { MainState, IBoard } from 'types';
+import { getAllBoardsThunk, getBoardByIdThunk, deleteBoardThunk } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
   isLoading: false,
@@ -48,6 +48,21 @@ export const mainSlice = createSlice({
       })
       // Показываем ошибку при неуспешном запросе
       .addCase(getBoardByIdThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+      .addCase(deleteBoardThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(deleteBoardThunk.fulfilled, (state, { payload: boardID }) => {
+        delete state.boards[boardID];
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(deleteBoardThunk.rejected, (state, { error }) => {
         if (error.message) {
           state.error = error.message;
         }
