@@ -11,4 +11,14 @@ interface IBoard {
   description: string;
 }
 
-export { MainState, IBoard };
+interface ITooltip {
+  message: string;
+  type: ETooltipType | undefined;
+}
+
+enum ETooltipType {
+  ok = 'ok',
+  error = 'error',
+}
+
+export { MainState, IBoard, ITooltip, ETooltipType };

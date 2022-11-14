@@ -11,14 +11,13 @@ import SignIn from 'pages/signIn';
 import Boards from 'pages/boards';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { useError } from './errors';
 import { useToken } from './api';
 import Register from './pages/Register';
 import EditBoardForm from 'components/Edit-board-form';
 import CreateNewBoardComponentForm from 'components/Create-new-board-component-form';
+import InfoTooltip from './components/InfoTooltip';
 
 function Layout() {
-  useError();
   useToken();
   return (
     <>
@@ -51,6 +50,7 @@ function App() {
             <Route path="*" element={<Navigate to="/404" />} />
           </Route>
         </Routes>
+        <InfoTooltip />
       </Provider>
     </div>
   );
