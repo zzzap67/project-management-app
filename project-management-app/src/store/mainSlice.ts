@@ -1,12 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { MainState } from 'types';
-import { getAllBoardsThunk, getBoardByIdThunk } from './thunks';
+import {
+  getAllBoardsThunk,
+  getAllColumnsThunk,
+  getBoardByIdThunk,
+  getColumnByIdThunk,
+} from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
   isLoading: false,
   boards: {},
   board: null,
   error: null,
+  columns: {},
+  column: null,
 };
 
 export const mainSlice = createSlice({
@@ -48,6 +55,41 @@ export const mainSlice = createSlice({
       })
       // Показываем ошибку при неуспешном запросе
       .addCase(getBoardByIdThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+
+      // Включаем лоадер
+      .addCase(getAllColumnsThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(getAllColumnsThunk.fulfilled, (state, { payload: columns }) => {
+        columns.forEach((column) => {
+          state.columns[column.id] = column;
+        });
+
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(getAllColumnsThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+      .addCase(getColumnByIdThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(getColumnByIdThunk.fulfilled, (state, { payload: column }) => {
+        state.column = column;
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(getColumnByIdThunk.rejected, (state, { error }) => {
         if (error.message) {
           state.error = error.message;
         }

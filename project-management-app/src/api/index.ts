@@ -1,5 +1,5 @@
 import { API_URL, AuthToken } from 'const';
-import { IBoard } from 'types';
+import { IBoard, IColumn } from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -61,11 +61,43 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+  async getAllColumns() {
+    let foundData: IColumn[] = [];
+    try {
+      const response = await fetch(`${this.baseUrl}/columns`, this.setConfig());
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
 
   async getBoardId(id: string) {
     let foundData: IBoard;
     try {
       const response = await fetch(`${this.baseUrl}/boards/${id}`, this.setConfig());
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async getColumnId(id: string) {
+    let foundData: IColumn;
+    try {
+      const response = await fetch(`${this.baseUrl}/columns/${id}`, this.setConfig());
       foundData = await response.json();
 
       if (response.ok) {
