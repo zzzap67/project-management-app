@@ -18,6 +18,7 @@ import CreateNewBoardComponentForm from 'components/Create-new-board-component-f
 import InfoTooltip from './components/InfoTooltip';
 import Board from 'pages/board';
 import CreateNewColumnForm from 'components/Create-new-column';
+import CreateNewTaskForm from 'components/Create-new-task';
 
 function Layout() {
   useToken();
@@ -47,6 +48,7 @@ function App() {
             <Route path="/boards" element={<Boards />} />
             <Route path="/boards/create" element={<CreateNewBoardComponentForm />} />
             <Route path="/board/:id/column" element={<CreateNewColumnForm />} />
+            <Route path="/board/:id/task" element={<CreateNewTaskForm />} />
             <Route
               path="/board/:id"
               element={

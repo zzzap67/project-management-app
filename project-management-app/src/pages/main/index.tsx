@@ -3,14 +3,14 @@ import WelcomePage from 'pages/welcome-page';
 import './style.css';
 import CreateNewColumnForm from 'components/Create-new-column';
 import CreateNewTaskForm from 'components/Create-new-task';
+import ColumnItem from 'components/ColumnItem';
 
 const Main = () => {
   return (
     <div className="main">
       {/* <WelcomePage /> */}
-      <CreateNewBoardComponentForm />
-      <CreateNewColumnForm />
       <CreateNewTaskForm />
+      <ColumnItem id={'fbdf'} title={'dbbf'} description={'dfbd'} />
     </div>
   );
 };
