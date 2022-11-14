@@ -3,8 +3,10 @@ import { MainState } from 'types';
 import {
   getAllBoardsThunk,
   getAllColumnsThunk,
+  getAllTasksThunk,
   getBoardByIdThunk,
   getColumnByIdThunk,
+  getTaskByIdThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -14,6 +16,8 @@ const MAIN_INITIAL_STATE: MainState = {
   error: null,
   columns: {},
   column: null,
+  tasks: {},
+  task: null,
 };
 
 export const mainSlice = createSlice({
@@ -90,6 +94,41 @@ export const mainSlice = createSlice({
       })
       // Показываем ошибку при неуспешном запросе
       .addCase(getColumnByIdThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+
+      // Включаем лоадер
+      .addCase(getAllTasksThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(getAllTasksThunk.fulfilled, (state, { payload: tasks }) => {
+        tasks.forEach((task) => {
+          state.tasks[task.id] = task;
+        });
+
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(getAllTasksThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+      .addCase(getTaskByIdThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(getTaskByIdThunk.fulfilled, (state, { payload: task }) => {
+        state.task = task;
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(getTaskByIdThunk.rejected, (state, { error }) => {
         if (error.message) {
           state.error = error.message;
         }

@@ -3,11 +3,11 @@ import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IBoard } from 'types';
+import { IColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
 
-const ColumnItem = (props: IBoard) => {
+const ColumnItem = (props: IColumn) => {
   const { id, title, description } = props;
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
