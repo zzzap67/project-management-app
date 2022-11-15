@@ -61,10 +61,10 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
-  async getAllColumns() {
+  async getAllColumns(id: string) {
     let foundData: IColumn[] = [];
     try {
-      const response = await fetch(`${this.baseUrl}/columns`, this.setConfig());
+      const response = await fetch(`${this.baseUrl}/boards/${id}/columns`, this.setConfig());
       foundData = await response.json();
 
       if (response.ok) {
@@ -77,10 +77,13 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
-  async getAllTasks() {
+  async getAllTasks(id: string) {
     let foundData: ITask[] = [];
     try {
-      const response = await fetch(`${this.baseUrl}/tasks`, this.setConfig());
+      const response = await fetch(
+        `${this.baseUrl}/boards/${id}/columns/${id}/tasks`,
+        this.setConfig()
+      );
       foundData = await response.json();
 
       if (response.ok) {
@@ -113,7 +116,7 @@ class Api implements IApi {
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {
-      const response = await fetch(`${this.baseUrl}/columns/${id}`, this.setConfig());
+      const response = await fetch(`${this.baseUrl}/boards/${id}/columns/${id}`, this.setConfig());
       foundData = await response.json();
 
       if (response.ok) {
@@ -129,7 +132,10 @@ class Api implements IApi {
   async getTaskId(id: string) {
     let foundData: ITask;
     try {
-      const response = await fetch(`${this.baseUrl}/tasks/${id}`, this.setConfig());
+      const response = await fetch(
+        `${this.baseUrl}/boards/${id}/columns/${id}/tasks/${id}`,
+        this.setConfig()
+      );
       foundData = await response.json();
 
       if (response.ok) {
