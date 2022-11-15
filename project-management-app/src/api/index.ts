@@ -1,5 +1,5 @@
 import { API_URL, AuthToken } from 'const';
-import { IBoard } from 'types';
+import { IBoard, IColumn, ITask } from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -61,6 +61,41 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+  async getAllColumns(id: string) {
+    let foundData: IColumn[] = [];
+    try {
+      const response = await fetch(`${this.baseUrl}/boards/${id}/columns`, this.setConfig());
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async getAllTasks(id: string) {
+    let foundData: ITask[] = [];
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${id}/columns/${id}/tasks`,
+        this.setConfig()
+      );
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
 
   async getBoardId(id: string) {
     let foundData: IBoard;
@@ -78,7 +113,6 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
-
   async deleteBoard(id: string) {
     try {
       const response = await fetch(`${this.baseUrl}/boards/${id}`, this.setConfig('DELETE'));
@@ -87,6 +121,41 @@ class Api implements IApi {
       }
 
       throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async getColumnId(id: string) {
+    let foundData: IColumn;
+    try {
+      const response = await fetch(`${this.baseUrl}/boards/${id}/columns/${id}`, this.setConfig());
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async getTaskId(id: string) {
+    let foundData: ITask;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${id}/columns/${id}/tasks/${id}`,
+        this.setConfig()
+      );
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
     } catch (e) {
       const err = e as Error;
       return Promise.reject(err.message ? err.message : err);

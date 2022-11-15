@@ -16,6 +16,9 @@ import Register from './pages/Register';
 import EditBoardForm from 'components/Edit-board-form';
 import CreateNewBoardComponentForm from 'components/Create-new-board-component-form';
 import InfoTooltip from './components/InfoTooltip';
+import Board from 'pages/board';
+import CreateNewColumnForm from 'components/Create-new-column';
+import CreateNewTaskForm from 'components/Create-new-task';
 
 function Layout() {
   useToken();
@@ -24,7 +27,9 @@ function Layout() {
       <div className="layout">
         <Header />
         <main className="layout_main">
-          <Outlet />
+          <div className="outlet">
+            <Outlet />
+          </div>
         </main>
         <Footer />
       </div>
@@ -42,7 +47,15 @@ function App() {
             <Route index element={<Main />} />
             <Route path="/boards" element={<Boards />} />
             <Route path="/boards/create" element={<CreateNewBoardComponentForm />} />
-            <Route path="/board/:id" element={<div>{location.pathname}</div>} />
+            <Route path="/board/:id/column" element={<CreateNewColumnForm />} />
+            <Route path="/board/:id/task" element={<CreateNewTaskForm />} />
+            <Route
+              path="/board/:id"
+              element={
+                <Board />
+                // <div>{location.pathname}</div>
+              }
+            />
             <Route path="/board/:id/edit" element={<EditBoardForm />} />
             <Route path="/register" element={<Register />} />
             <Route path="/signin" element={<SignIn />} />
