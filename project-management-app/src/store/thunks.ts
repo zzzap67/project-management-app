@@ -26,3 +26,7 @@ export const getColumnByIdThunk = createAsyncThunk(
 export const getTaskByIdThunk = createAsyncThunk('main/getTaskByIdThunk', async (id: string) => {
   return await api.getTaskId(id);
 });
+
+export const deleteBoardThunk = createAsyncThunk('main/deleteBoardThunk', async (id: string) => {
+  return await api.deleteBoard(id);
+});

@@ -27,7 +27,7 @@ class Api implements IApi {
             ...headers,
           }
         : {
-            'Content-Type': 'application/json',
+            //'Content-Type': 'application/json',
           },
     };
 
@@ -108,6 +108,19 @@ class Api implements IApi {
       }
 
       throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async deleteBoard(id: string) {
+    try {
+      const response = await fetch(`${this.baseUrl}/boards/${id}`, this.setConfig('DELETE'));
+      if (response.ok) {
+        return id;
+      }
+
+      throw response.body;
     } catch (e) {
       const err = e as Error;
       return Promise.reject(err.message ? err.message : err);
