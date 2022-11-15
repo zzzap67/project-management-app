@@ -5,11 +5,14 @@ export const getAllBoardsThunk = createAsyncThunk('main/getAllBoardsThunk', asyn
   return await api.getAllBoards();
 });
 
-export const getAllColumnsThunk = createAsyncThunk('main/getAllColumnsThunk', async () => {
-  return await api.getAllColumns();
-});
-export const getAllTasksThunk = createAsyncThunk('main/getAllTasksThunk', async () => {
-  return await api.getAllTasks();
+export const getAllColumnsThunk = createAsyncThunk(
+  'main/getAllColumnsThunk',
+  async (id: string) => {
+    return await api.getAllColumns(id);
+  }
+);
+export const getAllTasksThunk = createAsyncThunk('main/getAllTasksThunk', async (id: string) => {
+  return await api.getAllTasks(id);
 });
 export const getBoardByIdThunk = createAsyncThunk('main/getBoardByIdThunk', async (id: string) => {
   return await api.getBoardId(id);
