@@ -57,6 +57,8 @@ i18n
                 passwordPlaceholder: 'Inter password',
                 descriptionPlaceholder: 'Inter description',
                 titlePlaceholder: 'Inter title',
+                loginLabel: 'Login',
+                loginPlaceholder: 'Inter login',
               },
             },
             message: {
@@ -107,6 +109,8 @@ i18n
                 passwordPlaceholder: 'Введите пароль',
                 descriptionPlaceholder: 'Введите описание',
                 titlePlaceholder: 'Введите заголовок',
+                loginLabel: 'Логин',
+                loginPlaceholder: 'Введите логин',
               },
             },
             message: {
