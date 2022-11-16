@@ -1,17 +1,25 @@
-import { useState } from 'react';
 import './styles.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
 import logo from '../../assets/icons/logo.svg';
 import { ru } from '../../components/locales/ru';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { signUp } from '../../store/thunks';
 
 const Register = () => {
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const registerData = ru.REGISTER_FORM;
+  const error = useAppSelector((state) => state.userReducer.error);
+  const dispatch = useAppDispatch();
 
   const onSubmit = async (values: Record<string, string>) => {
-    console.log({ values });
+    console.log(values);
+    await dispatch(signUp(values));
+    if (!error) {
+      navigate('/signin', { replace: true });
+    } else {
+      console.log('error', error);
+    }
     // try {
     //   const { email, name, password } = values;
     //   await mainApi.signUp(values);
@@ -42,12 +50,7 @@ const Register = () => {
       <NavLink to="/" className="register__link">
         <img src={logo} alt="Логотип: зеленый кружок" className="register__logo" />
       </NavLink>
-      <Form
-        formData={registerData}
-        errorMessage={errorMessage}
-        className="register__form"
-        onSubmit={onSubmit}
-      />
+      <Form formData={registerData} className="register__form" onSubmit={onSubmit} />
     </main>
   );
 };

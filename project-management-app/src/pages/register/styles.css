@@ -1,6 +1,6 @@
 .register {
   position: relative;
-  max-width: 396px;
+  width: 396px;
   margin: 0 auto;
   padding: 70px 0;
 }

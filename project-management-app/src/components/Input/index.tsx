@@ -31,13 +31,7 @@ const Input = ({ inputData, onChange, errors }: InputProps) => {
         placeholder={t(`description.forms.inputs.${id}Placeholder`)}
         onChange={onChange}
       />
-      {/* {errors[id] && <p className="input__error">{errors[id]}</p>} */}
-
-      {errors[id] && (
-        <p className="input__error">
-          {id === 'name' || id === 'email' ? t(`description.message.${id}Error`) : null}
-        </p>
-      )}
+      {errors[id] && <p className="input__error">{errors[id]}</p>}
     </div>
   );
 };

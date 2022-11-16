@@ -1,14 +1,14 @@
 import { SyntheticEvent } from 'react';
+import './styles.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Input, { InputData } from '../Input/';
 import { useFormWithValidation } from '../../utils';
 import { ru } from '../locales/ru';
 import { useTranslation } from 'react-i18next';
-import './styles.css';
 
 export interface FormProps {
   formData: typeof ru.REGISTER_FORM | typeof ru.BOARD_FORM | typeof ru.COLUMN_FORM;
-  errorMessage: string;
+  errorMessage?: string;
   className: string;
   onSubmit: (values: Record<string, string>) => void;
 }
@@ -59,7 +59,11 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
             : 'form__button-wrapper_type_far'
         }`}
           ></div>
-          <button className="form__button button" type="submit" disabled={!isValid}>
+          <button
+            className="form__button button"
+            type="submit"
+            disabled={!isValid || !Object.values(errors).every((error) => error === '')}
+          >
             {t(`description.forms.${buttonText}`)}
           </button>
           <p className="form__text">

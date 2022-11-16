@@ -1,9 +1,10 @@
 import { t } from 'i18next';
 import { ChangeEvent, useCallback, useState } from 'react';
-import { ru } from '../components/locales/ru';
+
+const initValues = { name: '', login: '', password: '' };
 
 export function useFormWithValidation() {
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState<Record<string, string>>(initValues);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const nameRegExp = /[^a-z\- а-яё]/gi;
@@ -13,27 +14,31 @@ export function useFormWithValidation() {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const { name, value, validationMessage = t('description.message.validationMessage') } = target;
-
     setValues({ ...values, [name]: value });
-    setIsValid((target.closest('form') as HTMLFormElement).checkValidity());
     setErrors({ ...errors, [name]: validationMessage });
+    setIsValid((target.closest('form') as HTMLFormElement).checkValidity());
     if (name === 'name' && nameRegExp.test(value) && !validationMessage) {
       setErrors({
         ...errors,
-        [name]: ru.MESSAGE.NAME_ERR,
+        [name]: t(`description.message.nameError`),
       });
     }
     if (name === 'email' && !emailRegExp.test(value) && !validationMessage) {
       setErrors({
         ...errors,
-        [name]: ru.MESSAGE.EMAIL_ERR,
+        [name]: t(`description.message.emailError`),
       });
-      setIsValid(false);
+    }
+    if (name === 'password' && value.length < 5 && !validationMessage) {
+      setErrors({
+        ...errors,
+        [name]: t(`description.message.passwordError`),
+      });
     }
   };
 
   const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
+    (newValues = initValues, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);

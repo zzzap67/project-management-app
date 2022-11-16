@@ -1,8 +1,4 @@
 export const ru = {
-  MESSAGE: {
-    NAME_ERR: 'Имя может содержать только латиницу, кириллицу, пробел или дефис',
-    EMAIL_ERR: 'Неверный формат email',
-  },
   REGISTER_FORM: {
     title: 'welcome',
     buttonText: 'signUp',
@@ -18,9 +14,9 @@ export const ru = {
         type: 'text',
       },
       {
-        id: 'email',
-        label: 'E-mail',
-        type: 'email',
+        id: 'login',
+        label: 'Логин',
+        type: 'text',
       },
       {
         id: 'password',
