@@ -64,6 +64,7 @@ i18n
             message: {
               nameError: 'Name can only contain Latin, Cyrillic, space or hyphen',
               emailError: 'Email format is invalid',
+              passwordError: 'Password should contain min 4 symbols',
               validationMessage: 'Please fill out this field.',
             },
           },
@@ -116,6 +117,7 @@ i18n
             message: {
               nameError: 'Имя может содержать только латиницу, кириллицу, пробел или дефис',
               emailError: 'Неверный формат email',
+              passwordError: 'Пароль должен быть больше 4 символов',
               validationMessage: 'Пожалуйста, заполните это поле.',
             },
           },
