@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { MainState, IBoard } from 'types';
+import { MainState } from 'types';
 import {
   getAllBoardsThunk,
   getBoardByIdThunk,
