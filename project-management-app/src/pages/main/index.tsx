@@ -1,16 +1,14 @@
-import CreateNewBoardComponentForm from 'components/Create-new-board-component-form';
+import CreateNewTaskForm from 'components/Create-new-task';
+import TaskItem from 'components/TaskItem';
 import WelcomePage from 'pages/welcome-page';
 import './style.css';
-import CreateNewColumnForm from 'components/Create-new-column';
-import CreateNewTaskForm from 'components/Create-new-task';
 
 const Main = () => {
   return (
     <div className="main">
       {/* <WelcomePage /> */}
-      <CreateNewBoardComponentForm />
-      <CreateNewColumnForm />
       <CreateNewTaskForm />
+      <TaskItem key={''} id={''} title={'fbdbf'} description={''} />
     </div>
   );
 };

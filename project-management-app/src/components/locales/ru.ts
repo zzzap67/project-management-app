@@ -33,6 +33,9 @@ export const ru = {
   BOARD_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
+    linkText: '',
+    buttonText: '',
+    text: '',
     EditTitle: 'editBoard',
     linkTo: '/boards',
     title: 'createBoard',
@@ -52,6 +55,9 @@ export const ru = {
   BOARD_EDIT_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
+    linkText: '',
+    text: '',
+    buttonText: '',
     linkTo: '/boards',
     title: 'editBoard',
     inputsData: [
@@ -70,6 +76,9 @@ export const ru = {
   COLUMN_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
+    linkText: '',
+    text: '',
+    buttonText: '',
     linkTo: '/board/:id',
     title: 'createColumn',
     inputsData: [
@@ -83,6 +92,9 @@ export const ru = {
   TASK_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',
+    linkText: '',
+    text: '',
+    buttonText: '',
     title: 'createTask',
     linkTo: '/board/:id',
     inputsData: [

@@ -1,0 +1,20 @@
+.column_item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px 10px;
+  width: 390px;
+  color: #556737;
+  border: 2px solid rgb(212, 218, 200);
+  border-radius: 15px;
+  box-shadow: 5px 3px 10px 5px rgb(212, 218, 200);
+}
+.column_info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.column_title{
+    font-size: 30px;
+}

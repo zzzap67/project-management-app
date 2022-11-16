@@ -60,5 +60,26 @@
   border: 1px dashed #9fdf2198;
   box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
   cursor: pointer;
+}
+.create_column__button,
+.create_task__button {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 10px 40px;
+  border-radius: 15px;
+  color: white;
+  background-color: #b2e94465;
+  border: 1px dashed #9fdf2198;
+  box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
+  cursor: pointer;
+}
 
+.create_board__button:hover,
+.create_column__button:hover,
+.create_task__button:hover {
+  background-color: #d2fb5798;
+  border: 1px dashed #c4fb5798;
+  box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
 }
