@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { ru } from '../components/locales/ru';
 import { ICreateUser } from '../types';
@@ -14,7 +15,7 @@ export function useFormWithValidation() {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
-    const { name, value, validationMessage } = target;
+    const { name, value, validationMessage = t('description.message.validationMessage') } = target;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: validationMessage });
     setIsValid((target.closest('form') as HTMLFormElement).checkValidity());
