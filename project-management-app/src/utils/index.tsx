@@ -1,6 +1,5 @@
 import { t } from 'i18next';
 import { ChangeEvent, useCallback, useState } from 'react';
-import { ru } from '../components/locales/ru';
 
 const initValues = { name: '', login: '', password: '' };
 
@@ -21,19 +20,19 @@ export function useFormWithValidation() {
     if (name === 'name' && nameRegExp.test(value) && !validationMessage) {
       setErrors({
         ...errors,
-        [name]: ru.MESSAGE.NAME_ERR,
+        [name]: t(`description.message.nameError`),
       });
     }
     if (name === 'email' && !emailRegExp.test(value) && !validationMessage) {
       setErrors({
         ...errors,
-        [name]: ru.MESSAGE.EMAIL_ERR,
+        [name]: t(`description.message.emailError`),
       });
     }
     if (name === 'password' && value.length < 5 && !validationMessage) {
       setErrors({
         ...errors,
-        [name]: ru.MESSAGE.PASSWORD_ERR,
+        [name]: t(`description.message.passwordError`),
       });
     }
   };
