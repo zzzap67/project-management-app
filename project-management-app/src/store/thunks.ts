@@ -30,3 +30,7 @@ export const getTaskByIdThunk = createAsyncThunk('main/getTaskByIdThunk', async 
 export const deleteBoardThunk = createAsyncThunk('main/deleteBoardThunk', async (id: string) => {
   return await api.deleteBoard(id);
 });
+
+export const createNewBoardThunk = createAsyncThunk('main/createNewBoardThunk', async (values) => {
+  return await api.createNewBoard(values);
+});

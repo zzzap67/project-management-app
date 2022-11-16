@@ -1,12 +1,24 @@
 import ColumnList from 'components/ColumnList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
+import { getAllBoardsThunk, getAllColumnsThunk } from 'store/thunks';
 
 const Board = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const getLocationId = (path: string) => {
+    const splitedPath: string[] = path.split('/');
+    return splitedPath[splitedPath.length - 1];
+  };
+
+  useEffect(() => {
+    dispatch(getAllColumnsThunk(getLocationId(location.pathname)));
+  }, [dispatch]);
+
   return (
     <div className="board_page">
       <div className="column_list">
