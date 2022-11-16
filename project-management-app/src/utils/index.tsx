@@ -1,12 +1,11 @@
 import { t } from 'i18next';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { ru } from '../components/locales/ru';
-import { ICreateUser } from '../types';
 
 const initValues = { name: '', login: '', password: '' };
 
 export function useFormWithValidation() {
-  const [values, setValues] = useState<ICreateUser>(initValues);
+  const [values, setValues] = useState<Record<string, string>>(initValues);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const nameRegExp = /[^a-z\- а-яё]/gi;

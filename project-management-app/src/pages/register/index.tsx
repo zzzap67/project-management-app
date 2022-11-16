@@ -5,7 +5,6 @@ import logo from '../../assets/icons/logo.svg';
 import { ru } from '../../components/locales/ru';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signUp } from '../../store/thunks';
-import { ICreateUser } from '../../types';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ const Register = () => {
   const error = useAppSelector((state) => state.userReducer.error);
   const dispatch = useAppDispatch();
 
-  const onSubmit = async (values: ICreateUser) => {
+  const onSubmit = async (values: Record<string, string>) => {
     console.log(values);
     await dispatch(signUp(values));
     if (!error) {

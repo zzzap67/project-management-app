@@ -58,6 +58,7 @@ interface IUserState extends IUser {
 enum EApiMethods {
   get = 'GET',
   post = 'POST',
+  delete = 'DELETE',
 }
 
 interface IApiConfig {
@@ -73,7 +74,8 @@ enum ELocalStorage {
 export {
   MainState,
   IBoard,
-  IColumn, ITask,
+  IColumn,
+  ITask,
   ITooltip,
   ETooltipType,
   IUserState,
