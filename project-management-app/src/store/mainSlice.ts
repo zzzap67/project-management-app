@@ -9,6 +9,7 @@ import {
   getColumnByIdThunk,
   getTaskByIdThunk,
   createNewBoardThunk,
+  createNewColumnThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -157,11 +158,27 @@ export const mainSlice = createSlice({
       })
       // Изменяем state при успешном запросе
       .addCase(createNewBoardThunk.fulfilled, (state, { payload: board }) => {
-        state.boards = { ...state.boards, board };
+        // state.boards = { ...state.boards, board };
         state.isLoading = false;
       })
       // Показываем ошибку при неуспешном запросе
       .addCase(createNewBoardThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+
+      .addCase(createNewColumnThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(createNewColumnThunk.fulfilled, (state, { payload: column }) => {
+        state.isLoading = false;
+        //  navigate(`/board/${id}/column`);
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(createNewColumnThunk.rejected, (state, { error }) => {
         if (error.message) {
           state.error = error.message;
         }

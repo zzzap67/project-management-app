@@ -31,6 +31,17 @@ export const deleteBoardThunk = createAsyncThunk('main/deleteBoardThunk', async 
   return await api.deleteBoard(id);
 });
 
-export const createNewBoardThunk = createAsyncThunk('main/createNewBoardThunk', async (values) => {
-  return await api.createNewBoard(values);
-});
+export const createNewBoardThunk = createAsyncThunk(
+  'main/createNewBoardThunk',
+  async (values: Record<string, string>) => {
+    return await api.createNewBoard(values);
+  }
+);
+
+export const createNewColumnThunk = createAsyncThunk(
+  'main/createNewColumnThunk',
+  async (values: Record<string, string>) => {
+    console.log(values, 'thunk');
+    return await api.createNewColumn(values);
+  }
+);

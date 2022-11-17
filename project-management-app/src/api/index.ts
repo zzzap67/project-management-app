@@ -175,20 +175,42 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
-  async createNewBoard(values) {
+  async createNewBoard(values: Record<string, string>) {
     let newBoard: IBoard;
     try {
       const response = await fetch(
         `${this.baseUrl}/boards`,
         this.setConfig({
           method: 'POST',
-          body: { title: values.title, description: values.description },
+          body: values,
         })
       );
       newBoard = await response.json();
       console.log(newBoard);
       if (response.ok) {
         return newBoard;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async createNewColumn(values: Record<string, string>) {
+    let newColumn: IColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.id}/columns`,
+        this.setConfig({
+          method: 'POST',
+          body: { title: values.title },
+        })
+      );
+      newColumn = await response.json();
+      console.log(newColumn);
+      if (response.ok) {
+        return newColumn;
       }
 
       throw response.body;
