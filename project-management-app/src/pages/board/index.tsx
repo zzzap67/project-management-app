@@ -2,9 +2,10 @@ import ColumnList from 'components/ColumnList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
-import { getAllBoardsThunk, getAllColumnsThunk } from 'store/thunks';
+import { getAllColumnsThunk } from 'store/thunks';
+import './styles.css';
 
 const Board = () => {
   const dispatch = useAppDispatch();

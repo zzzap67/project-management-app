@@ -125,7 +125,7 @@ class Api implements IApi {
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${id}`,
-        this.setConfig({ method: 'DELETE' })
+        this.setConfig({ method: 'DELETE', body: id })
       );
       if (response.ok) {
         return id;
@@ -199,6 +199,28 @@ class Api implements IApi {
   }
   async createNewColumn(values: Record<string, string>) {
     let newColumn: IColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.id}/columns`,
+        this.setConfig({
+          method: 'POST',
+          body: { title: values.title },
+        })
+      );
+      newColumn = await response.json();
+      console.log(newColumn);
+      if (response.ok) {
+        return newColumn;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async createNewTask(values: Record<string, string>) {
+    let newColumn: ITask;
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${values.id}/columns`,
