@@ -203,21 +203,6 @@ export const mainSlice = createSlice({
         }
         state.isLoading = false;
       }),
-  // .addCase(deleteColumnThunk.pending, (state) => {
-  //   state.isLoading = true;
-  // })
-  // // Изменяем state при успешном запросе
-  // .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {
-  //   delete state.columns[columnID];
-  //   state.isLoading = false;
-  // })
-  // // Показываем ошибку при неуспешном запросе
-  // .addCase(deleteColumnThunk.rejected, (state, { error }) => {
-  //   if (error.message) {
-  //     state.error = error.message;
-  //   }
-  //   state.isLoading = false;
-  // }),
 });
 
 export const { cleanErrorState } = mainSlice.actions;
