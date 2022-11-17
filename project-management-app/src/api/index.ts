@@ -240,10 +240,10 @@ class Api implements IApi {
     let newColumn: ITask;
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${values.id}/columns`,
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
         this.setConfig({
           method: 'POST',
-          body: { title: values.title },
+          body: { title: values.title, description: values.description },
         })
       );
       newColumn = await response.json();

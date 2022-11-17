@@ -11,6 +11,7 @@ import {
   createNewBoardThunk,
   createNewColumnThunk,
   deleteColumnThunk,
+  createNewTaskThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -182,6 +183,21 @@ export const mainSlice = createSlice({
       })
       // Показываем ошибку при неуспешном запросе
       .addCase(createNewColumnThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+
+      .addCase(createNewTaskThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(createNewTaskThunk.rejected, (state, { error }) => {
         if (error.message) {
           state.error = error.message;
         }
