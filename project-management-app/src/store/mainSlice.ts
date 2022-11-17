@@ -25,132 +25,63 @@ export const mainSlice = createSlice({
   name: 'main',
   initialState: MAIN_INITIAL_STATE,
   reducers: {
-    cleanErrorState(state) {
+    cleanMainError(state) {
       state.error = null;
     },
   },
   extraReducers: (builder) =>
     builder
-      // Включаем лоадер
-      .addCase(getAllBoardsThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(getAllBoardsThunk.fulfilled, (state, { payload: boards }) => {
         boards.forEach((board) => {
           state.boards[board.id] = board;
         });
-
-        state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(getAllBoardsThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-      .addCase(getBoardByIdThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
         state.board = board;
-        state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(getBoardByIdThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-      .addCase(deleteBoardThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(deleteBoardThunk.fulfilled, (state, { payload: boardID }) => {
         delete state.boards[boardID];
-        state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(deleteBoardThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-
-      // Включаем лоадер
-      .addCase(getAllColumnsThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(getAllColumnsThunk.fulfilled, (state, { payload: columns }) => {
         columns.forEach((column) => {
           state.columns[column.id] = column;
         });
-
-        state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(getAllColumnsThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-      .addCase(getColumnByIdThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(getColumnByIdThunk.fulfilled, (state, { payload: column }) => {
         state.column = column;
-        state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(getColumnByIdThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-
-      // Включаем лоадер
-      .addCase(getAllTasksThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(getAllTasksThunk.fulfilled, (state, { payload: tasks }) => {
         tasks.forEach((task) => {
           state.tasks[task.id] = task;
         });
-
-        state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(getAllTasksThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-      .addCase(getTaskByIdThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(getTaskByIdThunk.fulfilled, (state, { payload: task }) => {
         state.task = task;
-        state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(getTaskByIdThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
+      .addMatcher(
+        (action) => action.type.endsWith('/pending'),
+        (state) => ({
+          ...state,
+          error: null,
+          isLoading: true,
+        })
+      )
+      .addMatcher(
+        (action) => action.type.endsWith('/rejected'),
+        (state, { error }) => {
+          if (error.message) {
+            state.error = error.message;
+          }
+          state.isLoading = false;
         }
-        state.isLoading = false;
-      }),
+      )
+      .addMatcher(
+        (action) => action.type.endsWith('/fulfilled'),
+        (state) => {
+          state.isLoading = false;
+        }
+      ),
 });
 
-export const { cleanErrorState } = mainSlice.actions;
+export const { cleanMainError } = mainSlice.actions;
 export default mainSlice.reducer;

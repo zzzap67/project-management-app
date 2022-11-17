@@ -65,6 +65,26 @@ class Api implements IApi {
     }
   }
 
+  async postSignIn(body: Omit<ICreateUser, 'name'>) {
+    let foundData: Record<'token', string> | null = null;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/signin`,
+        this.setConfig({ method: EApiMethods.post, body: body as Omit<ICreateUser, 'name'> })
+      );
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async getAllBoards() {
     let foundData: IBoard[] = [];
     try {

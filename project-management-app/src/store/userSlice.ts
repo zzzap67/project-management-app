@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserState } from '../types';
-import { signUp } from './thunks';
+import { signIn, signUp } from './thunks';
 
 const initialState: IUserState = {
   isAuth: false,
@@ -17,23 +17,43 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(signUp.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(signUp.fulfilled, (state, { payload: user }) => {
         state = {
           ...state,
           ...user,
           isAuth: true,
         };
-        state.isLoading = false;
       })
-      .addCase(signUp.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
+      .addCase(signIn.fulfilled, (state, { payload }) => {
+        console.log('payload: ', payload);
+        // state = {
+        //   ...state,
+        //   isAuth: true,
+        // };
+      })
+      .addMatcher(
+        (action) => action.type.endsWith('/pending'),
+        (state) => ({
+          ...state,
+          error: null,
+          isLoading: true,
+        })
+      )
+      .addMatcher(
+        (action) => action.type.endsWith('/rejected'),
+        (state, { error }) => {
+          if (error.message) {
+            state.error = error.message;
+          }
+          state.isLoading = false;
         }
-        state.isLoading = false;
-      }),
+      )
+      .addMatcher(
+        (action) => action.type.endsWith('/fulfilled'),
+        (state) => {
+          state.isLoading = false;
+        }
+      ),
 });
 
 export default userSlice.reducer;

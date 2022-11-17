@@ -4,8 +4,9 @@ import errorIcon from '../../assets/icons/icon-error.svg';
 import './styles.css';
 import { ETooltipType, ITooltip } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { cleanErrorState } from '../../store/mainSlice';
+import { cleanMainError } from '../../store/mainSlice';
 import { createPortal } from 'react-dom';
+import { selectAnyError } from '../../store/selectors';
 
 const initialTooltip: ITooltip = {
   message: '',
@@ -15,7 +16,7 @@ const initialTooltip: ITooltip = {
 const InfoTooltip: FC = () => {
   const [tooltip, setTooltip] = useState<ITooltip>(initialTooltip);
   const [visible, setVisible] = useState<boolean>(false);
-  const error = useAppSelector((state) => state.mainReducer.error);
+  const error = useAppSelector(selectAnyError);
   const dispatch = useAppDispatch();
 
   const { message, type } = tooltip;
@@ -29,7 +30,7 @@ const InfoTooltip: FC = () => {
     if (visible) {
       setTimeout(() => {
         handleClose();
-        dispatch(cleanErrorState());
+        dispatch(cleanMainError());
       }, 2000);
     }
   }, [visible, dispatch]);

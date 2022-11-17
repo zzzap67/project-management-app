@@ -64,7 +64,7 @@ enum EApiMethods {
 interface IApiConfig {
   method?: EApiMethods;
   headers?: Headers;
-  body?: ICreateUser;
+  body?: Partial<ICreateUser>;
 }
 
 enum ELocalStorage {

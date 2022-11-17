@@ -13,13 +13,13 @@ const Register = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (values: Record<string, string>) => {
-    console.log(values);
     await dispatch(signUp(values));
-    if (!error) {
-      navigate('/signin', { replace: true });
-    } else {
-      console.log('error', error);
-    }
+
+    // if (!error) {
+    //   navigate('/signin', { replace: true });
+    // } else {
+    //   console.log('error', error);
+    // }
     // try {
     //   const { email, name, password } = values;
     //   await mainApi.signUp(values);
