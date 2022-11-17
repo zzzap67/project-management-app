@@ -1,5 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../api';
+import { ICreateUser } from '../types';
+
+export const signUp = createAsyncThunk(
+  'main/getAllBoardsThunk',
+  async (body: ICreateUser | Record<string, string>) => {
+    return await api.postSignUp(body);
+  }
+);
 
 export const getAllBoardsThunk = createAsyncThunk('main/getAllBoardsThunk', async () => {
   return await api.getAllBoards();

@@ -8,6 +8,7 @@ import { getAllColumnsThunk } from 'store/thunks';
 import './styles.css';
 
 const Board = () => {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();

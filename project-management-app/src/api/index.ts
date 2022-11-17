@@ -1,5 +1,5 @@
 import { API_URL, AuthToken } from 'const';
-import { IBoard, IColumn, ITask } from 'types';
+import { EApiMethods, IApiConfig, IBoard, IColumn, ICreateUser, ITask, IUser } from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -28,14 +28,14 @@ class Api implements IApi {
     body?: unknown;
   }): RequestInit {
     const config: RequestInit = {
-      method: method ? method : 'GET',
+      method: method ? method : EApiMethods.get,
       headers: headers
         ? {
             'Content-Type': 'application/json',
             ...headers,
           }
         : {
-            //'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
           },
     };
 
@@ -51,6 +51,26 @@ class Api implements IApi {
     }
 
     return config;
+  }
+
+  async postSignUp(body: ICreateUser | Record<string, string>) {
+    let foundData: IUser | null = null;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/signup`,
+        this.setConfig({ method: EApiMethods.post, body: body as ICreateUser })
+      );
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
   }
 
   async getAllBoards() {
@@ -69,6 +89,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async getAllColumns(id: string) {
     let foundData: IColumn[] = [];
     try {
@@ -85,6 +106,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async getAllTasks(id: string) {
     let foundData: ITask[] = [];
     try {
@@ -121,12 +143,18 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async deleteBoard(id: string) {
     try {
+      
       const response = await fetch(
         `${this.baseUrl}/boards/${id}`,
-        this.setConfig({ method: 'DELETE', body: id })
+        this.setConfig({ method: EApiMethods.delete })
       );
+      // const response = await fetch(
+      //   `${this.baseUrl}/boards/${id}`,
+      //   this.setConfig({ method: 'DELETE', body: id })
+      // );
       if (response.ok) {
         return id;
       }
@@ -137,7 +165,6 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
-
   async deleteColumn(values: Record<string, string>) {
     try {
       const response = await fetch(
@@ -157,10 +184,7 @@ class Api implements IApi {
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {
-      const response = await fetch(
-        `${this.baseUrl}/boards/${id}/columns/${id}`,
-        this.setConfig({})
-      );
+      const response = await fetch(`${this.baseUrl}/boards/${id}/columns/${id}`, this.setConfig({}));
       foundData = await response.json();
 
       if (response.ok) {
@@ -173,6 +197,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async getTaskId(id: string) {
     let foundData: ITask;
     try {
