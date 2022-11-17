@@ -224,14 +224,6 @@ class Api implements IApi {
 export const api = new Api(API_URL);
 
 export const useToken = () => {
-  // TODO
-  // const { authToken } = useAppSelector((state) => state.mainReducer);
-  // const dispatch = useAppDispatch();
-  //
-  // useEffect(() => {
-  //   dispatch(getAuthToken);
-  // }, [dispatch]);
-
   const authToken = AuthToken;
 
   api.setToken(authToken);

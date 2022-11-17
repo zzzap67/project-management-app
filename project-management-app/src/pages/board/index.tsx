@@ -9,11 +9,6 @@ import { getAllBoardsThunk, getAllColumnsThunk } from 'store/thunks';
 const Board = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const getLocationId = (path: string) => {
-  //   const splitedPath: string[] = path.split('/');
-  //   return splitedPath[splitedPath.length - 1];
-  // };
   const { id } = useParams();
 
   useEffect(() => {

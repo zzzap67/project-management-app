@@ -12,29 +12,7 @@ const Register = () => {
 
   const onSubmit = async (values: Record<string, string>) => {
     console.log({ values });
-    // try {
-    //   const { email, name, password } = values;
-    //   await mainApi.signUp(values);
-    //   const { token } = await mainApi.signIn({ email, password });
-    //   localStorage.clear();
-    //   localStorage.setItem(constants.STORAGE.JWT, token);
-    //   setUser({ email, name });
-    //   navigate('/movies', { replace: true });
-    // } catch (e) {
-    //   switch (e.message) {
-    //     case '409': {
-    //       setErrorMessage(constants.MESSAGE.CONFLICT_USER);
-    //       break;
-    //     }
-    //     case '400': {
-    //       setErrorMessage(constants.MESSAGE.REGISTER_ERR);
-    //       break;
-    //     }
-    //     default: {
-    //       setErrorMessage(constants.MESSAGE.SERVER_ERR);
-    //     }
-    //   }
-    // }
+
   };
 
   return (
