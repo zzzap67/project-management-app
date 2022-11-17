@@ -146,7 +146,6 @@ class Api implements IApi {
 
   async deleteBoard(id: string) {
     try {
-      
       const response = await fetch(
         `${this.baseUrl}/boards/${id}`,
         this.setConfig({ method: EApiMethods.delete })
@@ -184,7 +183,10 @@ class Api implements IApi {
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {
-      const response = await fetch(`${this.baseUrl}/boards/${id}/columns/${id}`, this.setConfig({}));
+      const response = await fetch(
+        `${this.baseUrl}/boards/${id}/columns/${id}`,
+        this.setConfig({})
+      );
       foundData = await response.json();
 
       if (response.ok) {
