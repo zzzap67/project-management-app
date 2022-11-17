@@ -4,7 +4,6 @@ import errorIcon from '../../assets/icons/icon-error.svg';
 import './styles.css';
 import { ETooltipType, ITooltip } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { cleanMainError } from '../../store/mainSlice';
 import { createPortal } from 'react-dom';
 import { selectAnyError } from '../../store/selectors';
 
@@ -30,7 +29,6 @@ const InfoTooltip: FC = () => {
     if (visible) {
       setTimeout(() => {
         handleClose();
-        dispatch(cleanMainError());
       }, 2000);
     }
   }, [visible, dispatch]);

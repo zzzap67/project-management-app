@@ -17,22 +17,16 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(signUp.fulfilled, (state, { payload: user }) => {
-        state = {
-          ...state,
-          ...user,
-          isAuth: true,
-        };
-      })
-      .addCase(signIn.fulfilled, (state, { payload }) => {
-        console.log('payload: ', payload);
-        // state = {
-        //   ...state,
-        //   isAuth: true,
-        // };
-      })
+      .addCase(signUp.fulfilled, (state, { payload }) => ({
+        ...state,
+        ...payload,
+      }))
+      .addCase(signIn.fulfilled, (state) => ({
+        ...state,
+        isAuth: true,
+      }))
       .addMatcher(
-        (action) => action.type.endsWith('/pending'),
+        ({ type }) => type.includes('user') && type.endsWith('/pending'),
         (state) => ({
           ...state,
           error: null,
@@ -40,7 +34,7 @@ export const userSlice = createSlice({
         })
       )
       .addMatcher(
-        (action) => action.type.endsWith('/rejected'),
+        ({ type }) => type.includes('user') && type.endsWith('/rejected'),
         (state, { error }) => {
           if (error.message) {
             state.error = error.message;
@@ -49,7 +43,7 @@ export const userSlice = createSlice({
         }
       )
       .addMatcher(
-        (action) => action.type.endsWith('/fulfilled'),
+        ({ type }) => type.includes('user') && type.endsWith('/fulfilled'),
         (state) => {
           state.isLoading = false;
         }

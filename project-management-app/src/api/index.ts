@@ -1,5 +1,14 @@
 import { API_URL, AuthToken } from 'const';
-import { EApiMethods, IApiConfig, IBoard, IColumn, ICreateUser, ITask, IUser } from 'types';
+import {
+  EApiMethods,
+  IApiConfig,
+  IBoard,
+  IColumn,
+  ICreateUser,
+  ISignIn,
+  ITask,
+  IUser,
+} from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -66,7 +75,7 @@ class Api implements IApi {
   }
 
   async postSignIn(body: Omit<ICreateUser, 'name'>) {
-    let foundData: Record<'token', string> | null = null;
+    let foundData: ISignIn | null = null;
     try {
       const response = await fetch(
         `${this.baseUrl}/signin`,

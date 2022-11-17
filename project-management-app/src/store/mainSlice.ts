@@ -24,11 +24,7 @@ const MAIN_INITIAL_STATE: MainState = {
 export const mainSlice = createSlice({
   name: 'main',
   initialState: MAIN_INITIAL_STATE,
-  reducers: {
-    cleanMainError(state) {
-      state.error = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(getAllBoardsThunk.fulfilled, (state, { payload: boards }) => {
@@ -59,7 +55,7 @@ export const mainSlice = createSlice({
         state.task = task;
       })
       .addMatcher(
-        (action) => action.type.endsWith('/pending'),
+        ({ type }) => type.includes('main') && type.endsWith('/pending'),
         (state) => ({
           ...state,
           error: null,
@@ -67,7 +63,7 @@ export const mainSlice = createSlice({
         })
       )
       .addMatcher(
-        (action) => action.type.endsWith('/rejected'),
+        ({ type }) => type.includes('main') && type.endsWith('/rejected'),
         (state, { error }) => {
           if (error.message) {
             state.error = error.message;
@@ -76,12 +72,11 @@ export const mainSlice = createSlice({
         }
       )
       .addMatcher(
-        (action) => action.type.endsWith('/fulfilled'),
+        ({ type }) => type.includes('main') && type.endsWith('/fulfilled'),
         (state) => {
           state.isLoading = false;
         }
       ),
 });
 
-export const { cleanMainError } = mainSlice.actions;
 export default mainSlice.reducer;
