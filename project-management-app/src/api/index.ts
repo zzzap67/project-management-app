@@ -137,6 +137,23 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
+  async deleteColumn(values: Record<string, string>) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        this.setConfig({ method: 'DELETE', body: values.columnId })
+      );
+      if (response.ok) {
+        return values.columnId;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {

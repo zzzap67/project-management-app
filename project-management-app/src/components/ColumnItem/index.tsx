@@ -5,7 +5,7 @@ import { t } from 'i18next';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
-import { getAllColumnsThunk, getAllTasksThunk } from 'store/thunks';
+import { deleteColumnThunk, getAllTasksThunk } from 'store/thunks';
 import { IColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
@@ -28,8 +28,9 @@ const ColumnItem = (props: IColumn) => {
   const handleModalQuestion = () => {
     setShowModal(true);
   };
-  const deleteColumn = async () => {
+  const deleteColumn = async (values: Record<string, string>) => {
     console.log('delete column');
+    dispatch(deleteColumnThunk(values));
   };
   return (
     <div className="column_item">

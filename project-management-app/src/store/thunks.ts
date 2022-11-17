@@ -30,6 +30,12 @@ export const getTaskByIdThunk = createAsyncThunk('main/getTaskByIdThunk', async 
 export const deleteBoardThunk = createAsyncThunk('main/deleteBoardThunk', async (id: string) => {
   return await api.deleteBoard(id);
 });
+export const deleteColumnThunk = createAsyncThunk(
+  'main/deleteColumnThunk',
+  async (values: Record<string, string>) => {
+    return await api.deleteColumn(values);
+  }
+);
 
 export const createNewBoardThunk = createAsyncThunk(
   'main/createNewBoardThunk',
@@ -45,7 +51,7 @@ export const createNewColumnThunk = createAsyncThunk(
   }
 );
 export const createNewTaskThunk = createAsyncThunk(
-  'main/createNewColumnThunk',
+  'main/createNewTaskThunk',
   async (values: Record<string, string>) => {
     return await api.createNewTask(values);
   }
