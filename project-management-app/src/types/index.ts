@@ -73,6 +73,7 @@ interface IApiConfig {
 
 enum ELocalStorage {
   token = 'token',
+  userId = 'userId',
 }
 
 export {

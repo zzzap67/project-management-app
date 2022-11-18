@@ -46,6 +46,9 @@ i18n
               alreadyRegistered: 'Already registered?',
               signin: 'Sign In',
               linkTo: '/signin',
+              gladToSee: 'Glad to see you again!',
+              notRegistered: 'Have not registered yet?',
+              register: 'Register',
               inputs: {
                 nameLabel: 'Name',
                 emailLabel: 'E-mail',
@@ -99,6 +102,9 @@ i18n
               alreadyRegistered: 'Уже зарегистрированы?',
               signin: 'Войти',
               linkTo: '/signin',
+              gladToSee: 'Рады видеть!',
+              notRegistered: 'Ещё не зарегистрированы?',
+              register: 'Регистрация',
               inputs: {
                 nameLabel: 'Имя',
                 emailLabel: 'E-mail',

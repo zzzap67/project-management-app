@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserState } from '../types';
-import { signIn, signUp } from './thunks';
+import { signIn, signUp, userById } from './thunks';
 
 const initialState: IUserState = {
   isAuth: false,
@@ -14,15 +14,25 @@ const initialState: IUserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    signOut(state) {
+      state.isAuth = false;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(signUp.fulfilled, (state, { payload }) => ({
         ...state,
         ...payload,
+        isAuth: true,
       }))
       .addCase(signIn.fulfilled, (state) => ({
         ...state,
+        isAuth: true,
+      }))
+      .addCase(userById.fulfilled, (state, { payload }) => ({
+        ...state,
+        ...payload,
         isAuth: true,
       }))
       .addMatcher(
@@ -49,5 +59,7 @@ export const userSlice = createSlice({
         }
       ),
 });
+
+export const { signOut } = userSlice.actions;
 
 export default userSlice.reducer;

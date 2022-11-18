@@ -6,6 +6,7 @@ import { ru } from '../../components/locales/ru';
 import { useAppDispatch } from '../../store/hooks';
 import { signIn, signUp } from '../../store/thunks';
 import { ELocalStorage } from '../../types';
+import { api } from '../../api';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -26,8 +27,13 @@ const Register = () => {
 
       if (token) {
         localStorage.setItem(ELocalStorage.token, token);
+        localStorage.setItem(
+          ELocalStorage.userId,
+          (signInRes.payload as Record<string, string>).id
+        );
+        api.setToken(token);
       }
-      navigate('/', { replace: true });
+      navigate('/boards', { replace: true });
     }
   };
 
