@@ -27,7 +27,15 @@ class Api implements IApi {
     this.token = token;
   }
 
-  setConfig({ method, headers, body }: IApiConfig): RequestInit {
+  setConfig({
+    method = 'GET',
+    headers = {},
+    body = null,
+  }: {
+    method?: string;
+    headers?: HeadersInit;
+    body?: unknown;
+  }): RequestInit {
     const config: RequestInit = {
       method: method ? method : EApiMethods.get,
       headers: headers
@@ -171,6 +179,10 @@ class Api implements IApi {
         `${this.baseUrl}/boards/${id}`,
         this.setConfig({ method: EApiMethods.delete })
       );
+      // const response = await fetch(
+      //   `${this.baseUrl}/boards/${id}`,
+      //   this.setConfig({ method: 'DELETE', body: id })
+      // );
       if (response.ok) {
         return id;
       }
@@ -181,7 +193,22 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+  async deleteColumn(values: Record<string, string>) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        this.setConfig({ method: 'DELETE', body: values.columnId })
+      );
+      if (response.ok) {
+        return values.columnId;
+      }
 
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {
@@ -221,19 +248,77 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+  async createNewBoard(values: Record<string, string>) {
+    let newBoard: IBoard;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards`,
+        this.setConfig({
+          method: 'POST',
+          body: values,
+        })
+      );
+      newBoard = await response.json();
+      console.log(newBoard);
+      if (response.ok) {
+        return newBoard;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async createNewColumn(values: Record<string, string>) {
+    let newColumn: IColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.id}/columns`,
+        this.setConfig({
+          method: 'POST',
+          body: { title: values.title },
+        })
+      );
+      newColumn = await response.json();
+      console.log(newColumn);
+      if (response.ok) {
+        return newColumn;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async createNewTask(values: Record<string, string>) {
+    let newColumn: ITask;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        this.setConfig({
+          method: 'POST',
+          body: { title: values.title, description: values.description },
+        })
+      );
+      newColumn = await response.json();
+      console.log(newColumn);
+      if (response.ok) {
+        return newColumn;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
 }
 
 export const api = new Api(API_URL);
 
 export const useToken = () => {
-  // TODO
-  // const { authToken } = useAppSelector((state) => state.mainReducer);
-  // const dispatch = useAppDispatch();
-  //
-  // useEffect(() => {
-  //   dispatch(getAuthToken);
-  // }, [dispatch]);
-
   const authToken = AuthToken;
 
   api.setToken(authToken);
