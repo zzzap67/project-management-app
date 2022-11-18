@@ -20,6 +20,7 @@ import Board from 'pages/board';
 import CreateNewColumnForm from 'components/Create-new-column';
 import CreateNewTaskForm from 'components/Create-new-task';
 import { useAppSelector } from './store/hooks';
+import Preloader from './components/Preloader';
 
 function Layout() {
   useToken();
@@ -67,6 +68,7 @@ function App() {
           </Route>
         </Routes>
         <InfoTooltip />
+        <Preloader />
       </Provider>
     </div>
   );

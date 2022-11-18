@@ -88,4 +88,5 @@ export {
   IApiConfig,
   IUser,
   ISignIn,
+  ELocalStorage,
 };
