@@ -54,9 +54,9 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/boards" element={<Boards />} />
               <Route path="/boards/create" element={<CreateNewBoardComponentForm />} />
-              <Route path="/board/:id/column" element={<CreateNewColumnForm />} />
+              <Route path="/board/*/column" element={<CreateNewColumnForm />} />
               <Route path="/board/:id/task" element={<CreateNewTaskForm />} />
-              <Route path="/board/:id" element={<Board />} />
+              <Route path="/board/*" element={<Board />} />
               <Route path="/board/:id/edit" element={<EditBoardForm />} />
             </Route>
           </Route>

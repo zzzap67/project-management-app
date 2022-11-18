@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
 import { getAllColumnsThunk } from 'store/thunks';
+import './styles.css';
 
 const Board = () => {
   const { id } = useParams();
@@ -12,8 +13,10 @@ const Board = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getAllColumnsThunk(id as string));
-  }, [dispatch]);
+    if (id) {
+      dispatch(getAllColumnsThunk(id as string));
+    }
+  }, [dispatch, id]);
 
   return (
     <div className="board_page">
@@ -23,7 +26,7 @@ const Board = () => {
       <Button
         className="create_column__button"
         buttonName={t('description.forms.createColumn')}
-        eventHandler={() => navigate('/board/:id/column')}
+        eventHandler={() => navigate(`/board/${id}/column`)}
       />
     </div>
   );

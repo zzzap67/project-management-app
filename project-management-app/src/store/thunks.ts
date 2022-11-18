@@ -46,3 +46,29 @@ export const getTaskByIdThunk = createAsyncThunk('main/getTaskByIdThunk', async 
 export const deleteBoardThunk = createAsyncThunk('main/deleteBoardThunk', async (id: string) => {
   return await api.deleteBoard(id);
 });
+export const deleteColumnThunk = createAsyncThunk(
+  'main/deleteColumnThunk',
+  async (values: Record<string, string>) => {
+    return await api.deleteColumn(values);
+  }
+);
+
+export const createNewBoardThunk = createAsyncThunk(
+  'main/createNewBoardThunk',
+  async (values: Record<string, string>) => {
+    return await api.createNewBoard(values);
+  }
+);
+
+export const createNewColumnThunk = createAsyncThunk(
+  'main/createNewColumnThunk',
+  async (values: Record<string, string>) => {
+    return await api.createNewColumn(values);
+  }
+);
+export const createNewTaskThunk = createAsyncThunk(
+  'main/createNewTaskThunk',
+  async (values: Record<string, string>) => {
+    return await api.createNewTask(values);
+  }
+);

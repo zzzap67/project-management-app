@@ -75,6 +75,10 @@
   box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
   cursor: pointer;
 }
+.create_column__button {
+  width: fit-content;
+  align-self: center;
+}
 
 .create_board__button:hover,
 .create_column__button:hover,

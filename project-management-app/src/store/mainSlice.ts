@@ -8,6 +8,10 @@ import {
   getAllTasksThunk,
   getColumnByIdThunk,
   getTaskByIdThunk,
+  createNewBoardThunk,
+  createNewColumnThunk,
+  deleteColumnThunk,
+  createNewTaskThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -53,6 +57,69 @@ export const mainSlice = createSlice({
       })
       .addCase(getTaskByIdThunk.fulfilled, (state, { payload: task }) => {
         state.task = task;
+      })
+
+      .addCase(createNewBoardThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(createNewBoardThunk.fulfilled, (state, { payload: board }) => {
+        // state.boards = { ...state.boards, board };
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(createNewBoardThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+
+      .addCase(createNewColumnThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(createNewColumnThunk.fulfilled, (state, { payload: column }) => {
+        state.isLoading = false;
+        //  navigate(`/board/${id}/column`);
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(createNewColumnThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+
+      .addCase(createNewTaskThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(createNewTaskThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
+      })
+
+      .addCase(deleteColumnThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      // Изменяем state при успешном запросе
+      .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {
+        delete state.columns[columnID];
+        state.isLoading = false;
+      })
+      // Показываем ошибку при неуспешном запросе
+      .addCase(deleteColumnThunk.rejected, (state, { error }) => {
+        if (error.message) {
+          state.error = error.message;
+        }
+        state.isLoading = false;
       })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),
