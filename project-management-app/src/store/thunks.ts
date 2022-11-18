@@ -3,11 +3,15 @@ import { api } from '../api';
 import { ICreateUser } from '../types';
 
 export const signUp = createAsyncThunk(
-  'main/getAllBoardsThunk',
+  'user/signUp',
   async (body: ICreateUser | Record<string, string>) => {
     return await api.postSignUp(body);
   }
 );
+
+export const signIn = createAsyncThunk('user/signIn', async (body: Omit<ICreateUser, 'name'>) => {
+  return await api.postSignIn(body);
+});
 
 export const getAllBoardsThunk = createAsyncThunk('main/getAllBoardsThunk', async () => {
   return await api.getAllBoards();

@@ -4,22 +4,50 @@ import Form from '../../components/Form';
 import logo from '../../assets/icons/logo.svg';
 import { ru } from '../../components/locales/ru';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { signUp } from '../../store/thunks';
+import { signUp, signIn } from '../../store/thunks';
 
 const Register = () => {
   const navigate = useNavigate();
   const registerData = ru.REGISTER_FORM;
-  const error = useAppSelector((state) => state.userReducer.error);
   const dispatch = useAppDispatch();
 
   const onSubmit = async (values: Record<string, string>) => {
-    console.log(values);
-    await dispatch(signUp(values));
-    if (!error) {
+    const signUpRes = await dispatch(signUp(values));
+    if (signUpRes.meta.requestStatus !== 'rejected') {
+      const signInRes = await dispatch(
+        signIn({
+          login: values.login,
+          password: values.password,
+        })
+      );
+
+      const token = (signInRes.payload as Record<string, string>).token;
+      if (token) {
+        console.log('token', token);
+      }
       navigate('/signin', { replace: true });
-    } else {
-      console.log('error', error);
     }
+    //user
+    // :
+    // error
+    // :
+    // null
+    // id
+    // :
+    // "0087bade-bf28-4f9c-970b-ba69b0869d3e"
+    // isAuth
+    // :
+    // true
+    // isLoading
+    // :
+    // false
+    // login
+    // :
+    // "torta"
+    // name
+    // :
+    // "sdv"
+
     // try {
     //   const { email, name, password } = values;
     //   await mainApi.signUp(values);
