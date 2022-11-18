@@ -1,5 +1,14 @@
 import { API_URL, AuthToken } from 'const';
-import { EApiMethods, IApiConfig, IBoard, IColumn, ICreateUser, ITask, IUser } from 'types';
+import {
+  EApiMethods,
+  IApiConfig,
+  IBoard,
+  IColumn,
+  ICreateUser,
+  ISignIn,
+  ITask,
+  IUser,
+} from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -59,6 +68,26 @@ class Api implements IApi {
       const response = await fetch(
         `${this.baseUrl}/signup`,
         this.setConfig({ method: EApiMethods.post, body: body as ICreateUser })
+      );
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
+  async postSignIn(body: Omit<ICreateUser, 'name'>) {
+    let foundData: ISignIn | null = null;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/signin`,
+        this.setConfig({ method: EApiMethods.post, body: body as Omit<ICreateUser, 'name'> })
       );
       foundData = await response.json();
 

@@ -11,7 +11,6 @@ const Board = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
 
   useEffect(() => {
     if (id) {

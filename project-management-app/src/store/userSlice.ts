@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserState } from '../types';
-import { signUp } from './thunks';
+import { signIn, signUp } from './thunks';
 
 const initialState: IUserState = {
   isAuth: false,
@@ -17,23 +17,37 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(signUp.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(signUp.fulfilled, (state, { payload: user }) => {
-        state = {
+      .addCase(signUp.fulfilled, (state, { payload }) => ({
+        ...state,
+        ...payload,
+      }))
+      .addCase(signIn.fulfilled, (state) => ({
+        ...state,
+        isAuth: true,
+      }))
+      .addMatcher(
+        ({ type }) => type.includes('user') && type.endsWith('/pending'),
+        (state) => ({
           ...state,
-          ...user,
-          isAuth: true,
-        };
-        state.isLoading = false;
-      })
-      .addCase(signUp.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
+          error: null,
+          isLoading: true,
+        })
+      )
+      .addMatcher(
+        ({ type }) => type.includes('user') && type.endsWith('/rejected'),
+        (state, { error }) => {
+          if (error.message) {
+            state.error = error.message;
+          }
+          state.isLoading = false;
         }
-        state.isLoading = false;
-      }),
+      )
+      .addMatcher(
+        ({ type }) => type.includes('user') && type.endsWith('/fulfilled'),
+        (state) => {
+          state.isLoading = false;
+        }
+      ),
 });
 
 export default userSlice.reducer;

@@ -55,6 +55,10 @@ interface IUserState extends IUser {
   error: string | null;
 }
 
+interface ISignIn {
+  token: string;
+}
+
 enum EApiMethods {
   get = 'GET',
   post = 'POST',
@@ -64,7 +68,7 @@ enum EApiMethods {
 interface IApiConfig {
   method?: EApiMethods;
   headers?: Headers;
-  body?: ICreateUser;
+  body?: Partial<ICreateUser>;
 }
 
 enum ELocalStorage {
@@ -83,4 +87,5 @@ export {
   ICreateUser,
   IApiConfig,
   IUser,
+  ISignIn,
 };
