@@ -3,7 +3,9 @@ import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useAppDispatch } from 'store/hooks';
+import { deleteColumnThunk } from 'store/thunks';
 import { IColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
@@ -11,7 +13,10 @@ import './styles.css';
 const ColumnItem = (props: IColumn) => {
   const { id, title } = props;
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location, 'LOCATION');
   const params = useParams();
   const boardId = params.id;
 
@@ -20,7 +25,9 @@ const ColumnItem = (props: IColumn) => {
   };
   const deleteColumn = async () => {
     console.log('delete column');
-    // dispatch(deleteColumnThunk(values));
+    if (boardId) {
+      dispatch(deleteColumnThunk({ columnId: id, boardId }));
+    }
   };
   return (
     <div className="column_item">

@@ -185,7 +185,7 @@ class Api implements IApi {
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
-        this.setConfig({ method: EApiMethods.delete, body: '' })
+        this.setConfig({ method: EApiMethods.delete, body: values.columnId })
       );
       if (response.ok) {
         return values.columnId;
