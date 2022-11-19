@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import ColumnList from 'components/ColumnList';
 import { ColumnsRecord, IColumn, ITask, MainState, TaskRecord, TasksRecord } from 'types';
 import {
   getAllBoardsThunk,
@@ -9,8 +8,8 @@ import {
   // getAllTasksThunk,
   // getColumnByIdThunk,
   // getTaskByIdThunk,
-  createNewBoardThunk,
-  createNewColumnThunk,
+  // createNewBoardThunk,
+  // createNewColumnThunk,
   deleteColumnThunk,
   createNewTaskThunk,
 } from './thunks';
@@ -38,6 +37,7 @@ export const mainSlice = createSlice({
         });
       })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
+        console.log(board);
         state.board = board;
         state.columns = board.columns.reduce((acc: ColumnsRecord, item: IColumn) => {
           acc[item.id] = item;
@@ -46,6 +46,7 @@ export const mainSlice = createSlice({
         state.tasks = board.columns.reduce((acc: TasksRecord, itemColumn: IColumn) => {
           acc[itemColumn.id] = itemColumn.tasks.reduce((acc: TaskRecord, itemTask: ITask) => {
             acc[itemTask.id] = itemTask;
+            console.log(itemTask);
             return acc;
           }, {});
           return acc;
@@ -72,8 +73,12 @@ export const mainSlice = createSlice({
       // })
 
       // Изменяем state при успешном запросе
-      .addCase(createNewBoardThunk.fulfilled, (state, { payload: board }) => {
-        // state.boards = { ...state.boards, board };
+      // .addCase(createNewBoardThunk.fulfilled, (state, { payload: board }) => {
+      //   // state.boards = { ...state.boards, board };
+      //   state.isLoading = false;
+      // })
+      .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
+        state.tasks = { ...state.tasks, task };
         state.isLoading = false;
       })
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {

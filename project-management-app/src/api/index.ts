@@ -1,14 +1,5 @@
 import { API_URL, AuthToken } from 'const';
-import {
-  EApiMethods,
-  IApiConfig,
-  IBoard,
-  IColumn,
-  ICreateUser,
-  ISignIn,
-  ITask,
-  IUser,
-} from 'types';
+import { EApiMethods, IBoard, IColumn, ICreateUser, ISignIn, ITask, IUser } from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -288,18 +279,23 @@ class Api implements IApi {
     }
   }
   async createNewTask(values: Record<string, string>) {
-    let newColumn: ITask;
+    let newTask;
+    //: ITask;
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks`,
         this.setConfig({
           method: 'POST',
-          body: { title: values.title, description: values.description },
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+          },
         })
       );
-      newColumn = await response.json();
+      newTask = await response.json();
       if (response.ok) {
-        return newColumn;
+        return newTask;
       }
 
       throw response.body;

@@ -7,11 +7,13 @@ interface MainState {
   column: IColumn | null;
   task: ITask | null;
   error: string | null;
+
 }
 type ColumnsRecord = Record<IColumn['id'], IColumn>;
 type BoardsRecord = Record<IBoard['id'], IBoard>;
 type TasksRecord = Record<IColumn['id'], TaskRecord>;
 type TaskRecord = Record<ITask['id'], ITask>;
+
 interface IBoard {
   id: string;
   title: string;
@@ -26,11 +28,13 @@ interface IColumn {
   tasks: ITask[];
 }
 interface ITask {
+  userId?: string;
   id: string;
   title: string;
   description: string;
   key: string;
 }
+
 interface PropsTask {
   columnId: string;
 }

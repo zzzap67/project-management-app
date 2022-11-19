@@ -13,7 +13,7 @@ const CreateNewColumnForm = () => {
   const onSubmit = async (values: Record<string, string>) => {
     if (id) {
       dispatch(createNewColumnThunk({ title: values.title, id }));
-      navigate(`/board/${id}/column`);
+      navigate(`/board/${id}`);
     }
   };
 

@@ -9,7 +9,7 @@ import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
 
 const ColumnItem = (props: IColumn) => {
-  const { id, title, description } = props;
+  const { id, title } = props;
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
@@ -40,7 +40,7 @@ const ColumnItem = (props: IColumn) => {
       <Button
         className="create_task__button"
         buttonName={t('description.forms.createTask')}
-        eventHandler={() => navigate(`/board/${boardId}/task`)}
+        eventHandler={() => navigate(`/board/${boardId}/${id}/task`)}
       />
       {showModal && (
         <ModalConfirmation

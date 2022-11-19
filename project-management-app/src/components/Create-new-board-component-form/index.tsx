@@ -11,6 +11,7 @@ const CreateNewBoardComponentForm = () => {
   const dispatch = useAppDispatch();
   const onSubmit = async (values: Record<string, string>) => {
     dispatch(createNewBoardThunk(values));
+    navigate(`/boards`);
   };
 
   return (

@@ -51,7 +51,7 @@ function App() {
             <Route path="/boards" element={<Boards />} />
             <Route path="/boards/create" element={<CreateNewBoardComponentForm />} />
             <Route path="/board/:id/column" element={<CreateNewColumnForm />} />
-            <Route path="/board/:id/task" element={<CreateNewTaskForm />} />
+            <Route path="/board/:id/:id/task" element={<CreateNewTaskForm />} />
             <Route path="/board/:id" element={<Board />} />
             <Route path="/board/:id/edit" element={<EditBoardForm />} />
             <Route path="/register" element={<Register />} />
