@@ -84,6 +84,7 @@ interface IApiConfig {
 
 enum ELocalStorage {
   token = 'token',
+  userId = 'userId',
 }
 
 export {
@@ -99,6 +100,7 @@ export {
   IApiConfig,
   IUser,
   ISignIn,
+  ELocalStorage,
   PropsTask,
   BoardsRecord,
   ColumnsRecord,

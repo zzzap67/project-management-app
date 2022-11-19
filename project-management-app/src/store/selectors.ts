@@ -5,8 +5,14 @@ export const selectAnyError = createSelector(
   (state: RootState) => state.mainReducer.error,
   (state: RootState) => state.userReducer.error,
   (errorMain, errorUser) => {
-    // console.log(errorMain, errorUser);
-    // console.log(errorMain || errorUser);
-    return errorUser;
+    return errorMain || errorUser;
+  }
+);
+
+export const selectAnyLoading = createSelector(
+  (state: RootState) => state.mainReducer.isLoading,
+  (state: RootState) => state.userReducer.isLoading,
+  (loadingMain, loadingUser) => {
+    return loadingMain || loadingUser;
   }
 );

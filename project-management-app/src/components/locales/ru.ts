@@ -25,6 +25,27 @@ export const ru = {
       },
     ],
   },
+  LOGIN_FORM: {
+    title: 'gladToSee',
+    buttonText: 'signin',
+    text: 'notRegistered',
+    linkText: 'register',
+    linkTo: '/register',
+    inputsData: [
+      {
+        id: 'login',
+        label: 'Логин',
+        type: 'text',
+        error: '',
+      },
+      {
+        id: 'password',
+        label: 'Пароль',
+        type: 'password',
+        error: '',
+      },
+    ],
+  },
   BOARD_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',

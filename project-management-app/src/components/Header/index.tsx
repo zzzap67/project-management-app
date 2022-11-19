@@ -5,10 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
 import './style.css';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { signOut } from '../../store/userSlice';
+import { ELocalStorage } from '../../types';
 
 const Header: React.FunctionComponent = () => {
   const [scrollEvent, setScrollEvent] = useState(false);
-  const [userAuthorized, setUserAuthorized] = useState(true);
+  const isAuth = useAppSelector((state) => state.userReducer.isAuth);
+  const dispatch = useAppDispatch();
 
   const changeHeaderColor = () => {
     window.scrollY > 60 ? setScrollEvent(true) : setScrollEvent(false);
@@ -26,8 +30,14 @@ const Header: React.FunctionComponent = () => {
     }
   };
 
+  const onSignOut = () => {
+    dispatch(signOut());
+    localStorage.removeItem(ELocalStorage.token);
+    localStorage.removeItem(ELocalStorage.userId);
+  };
+
   const { t } = useTranslation('translation');
-  return userAuthorized ? (
+  return isAuth ? (
     <header className={scrollEvent ? 'header_color' : 'header_white'}>
       <Link to="/boards">
         <Button
@@ -48,12 +58,11 @@ const Header: React.FunctionComponent = () => {
             buttonName={t('description.header.editProfile')}
           />
         </Link>
-        <Link to="/">
-          <Button
-            className="link-to-sign-out_button"
-            buttonName={t('description.header.signOut')}
-          />
-        </Link>
+        <Button
+          className="link-to-sign-out_button"
+          buttonName={t('description.header.signOut')}
+          eventHandler={onSignOut}
+        />
         <Button
           className="change_language_button"
           buttonName={'EN/RU'}
