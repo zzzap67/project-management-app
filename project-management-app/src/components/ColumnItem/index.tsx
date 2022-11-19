@@ -2,10 +2,8 @@ import ModalConfirmation from 'components/ModalConfirmation';
 import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppDispatch } from 'store/hooks';
-import { deleteColumnThunk, getAllTasksThunk } from 'store/thunks';
 import { IColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
@@ -14,23 +12,15 @@ const ColumnItem = (props: IColumn) => {
   const { id, title, description } = props;
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const params = useParams();
-  console.log(params);
   const boardId = params.id;
-
-  useEffect(() => {
-    if (id) {
-      dispatch(getAllTasksThunk(id as string));
-    }
-  }, [dispatch, id]);
 
   const handleModalQuestion = () => {
     setShowModal(true);
   };
-  const deleteColumn = async (values: Record<string, string>) => {
+  const deleteColumn = async () => {
     console.log('delete column');
-    dispatch(deleteColumnThunk(values));
+    // dispatch(deleteColumnThunk(values));
   };
   return (
     <div className="column_item">
@@ -45,7 +35,7 @@ const ColumnItem = (props: IColumn) => {
         />
       </div>
       <div className="task_list">
-        <TaskList />
+        <TaskList columnId={id} />
       </div>
       <Button
         className="create_task__button"

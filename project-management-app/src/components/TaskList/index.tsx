@@ -2,12 +2,13 @@ import TaskItem from 'components/TaskItem';
 import React, { useMemo } from 'react';
 import './styles.css';
 import { useAppSelector } from '../../store/hooks';
+import { PropsTask } from 'types';
 
-const TaskList = () => {
+const TaskList = (props: PropsTask) => {
   const { tasks } = useAppSelector((state) => state.mainReducer);
 
   const taskList = useMemo(() => {
-    return Object.values(tasks);
+    return Object.values(tasks[props.columnId]);
   }, [tasks]);
 
   return (

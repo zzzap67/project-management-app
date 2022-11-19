@@ -14,7 +14,6 @@ const TaskItem = (props: ITask) => {
   const deleteTask = async () => {
     console.log('delete item');
   };
-
   const handleModalQuestion = () => {
     setShowModal(true);
   };

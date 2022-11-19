@@ -157,7 +157,8 @@ class Api implements IApi {
   }
 
   async getBoardId(id: string) {
-    let foundData: IBoard;
+    let foundData;
+    // : IBoard;
     try {
       const response = await fetch(`${this.baseUrl}/boards/${id}`, this.setConfig({}));
       foundData = await response.json();
@@ -177,12 +178,8 @@ class Api implements IApi {
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${id}`,
-        this.setConfig({ method: EApiMethods.delete })
+        this.setConfig({ method: EApiMethods.delete, body: id })
       );
-      // const response = await fetch(
-      //   `${this.baseUrl}/boards/${id}`,
-      //   this.setConfig({ method: 'DELETE', body: id })
-      // );
       if (response.ok) {
         return id;
       }
@@ -197,7 +194,7 @@ class Api implements IApi {
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
-        this.setConfig({ method: 'DELETE', body: values.columnId })
+        this.setConfig({ method: EApiMethods.delete, body: '' })
       );
       if (response.ok) {
         return values.columnId;
@@ -255,11 +252,10 @@ class Api implements IApi {
         `${this.baseUrl}/boards`,
         this.setConfig({
           method: 'POST',
-          body: values,
+          body: { title: values.title, description: values.description },
         })
       );
       newBoard = await response.json();
-      console.log(newBoard);
       if (response.ok) {
         return newBoard;
       }
@@ -281,7 +277,6 @@ class Api implements IApi {
         })
       );
       newColumn = await response.json();
-      console.log(newColumn);
       if (response.ok) {
         return newColumn;
       }
@@ -303,7 +298,6 @@ class Api implements IApi {
         })
       );
       newColumn = await response.json();
-      console.log(newColumn);
       if (response.ok) {
         return newColumn;
       }

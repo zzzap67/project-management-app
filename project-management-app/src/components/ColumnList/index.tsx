@@ -12,9 +12,9 @@ const ColumnList = () => {
 
   return (
     <div className="columnList">
-      {columnList.map((column) => (
-        <ColumnItem {...column} key={column.id} />
-      ))}
+      {columnList.map((column) => {
+        return <ColumnItem {...column} key={column.id} />;
+      })}
     </div>
   );
 };
