@@ -37,7 +37,6 @@ export const mainSlice = createSlice({
         });
       })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
-        console.log(board);
         state.board = board;
         state.columns = board.columns.reduce((acc: ColumnsRecord, item: IColumn) => {
           acc[item.id] = item;
@@ -46,7 +45,6 @@ export const mainSlice = createSlice({
         state.tasks = board.columns.reduce((acc: TasksRecord, itemColumn: IColumn) => {
           acc[itemColumn.id] = itemColumn.tasks.reduce((acc: TaskRecord, itemTask: ITask) => {
             acc[itemTask.id] = itemTask;
-            console.log(itemTask);
             return acc;
           }, {});
           return acc;

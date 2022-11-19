@@ -197,6 +197,22 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+  async deleteTask(values: Record<string, string>) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.taskId}`,
+        this.setConfig({ method: EApiMethods.delete, body: values.taskId })
+      );
+      if (response.ok) {
+        return values.tasksId;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {

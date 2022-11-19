@@ -7,7 +7,6 @@ interface MainState {
   column: IColumn | null;
   task: ITask | null;
   error: string | null;
-
 }
 type ColumnsRecord = Record<IColumn['id'], IColumn>;
 type BoardsRecord = Record<IBoard['id'], IBoard>;
@@ -29,6 +28,7 @@ interface IColumn {
 }
 interface ITask {
   userId?: string;
+  columnId?: string;
   id: string;
   title: string;
   description: string;

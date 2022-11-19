@@ -3,7 +3,7 @@ import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
 import { deleteColumnThunk } from 'store/thunks';
 import { IColumn } from 'types';
@@ -15,8 +15,6 @@ const ColumnItem = (props: IColumn) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location, 'LOCATION');
   const params = useParams();
   const boardId = params.id;
 
@@ -24,7 +22,6 @@ const ColumnItem = (props: IColumn) => {
     setShowModal(true);
   };
   const deleteColumn = async () => {
-    console.log('delete column');
     if (boardId) {
       dispatch(deleteColumnThunk({ columnId: id, boardId }));
     }

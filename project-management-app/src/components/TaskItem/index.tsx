@@ -2,7 +2,9 @@ import ModalConfirmation from 'components/ModalConfirmation';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAppDispatch } from 'store/hooks';
+import { deleteTaskThunk } from 'store/thunks';
 import { ITask } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
@@ -10,10 +12,15 @@ import './styles.css';
 const TaskItem = (props: ITask) => {
   const { id, title, description } = props;
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const params = useParams();
+  const boardId = params.id;
   const deleteTask = async () => {
-    console.log('delete item');
+    if (props.columnId && boardId) {
+      dispatch(deleteTaskThunk({ columnId: props.columnId, taskId: id, boardId }));
+    }
   };
+
   const handleModalQuestion = () => {
     setShowModal(true);
   };

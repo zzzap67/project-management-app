@@ -48,6 +48,12 @@ export const deleteColumnThunk = createAsyncThunk(
     return await api.deleteColumn(values);
   }
 );
+export const deleteTaskThunk = createAsyncThunk(
+  'main/deleteColumnThunk',
+  async (values: Record<string, string>) => {
+    return await api.deleteTask(values);
+  }
+);
 
 export const createNewBoardThunk = createAsyncThunk(
   'main/createNewBoardThunk',
