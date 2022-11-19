@@ -1,7 +1,7 @@
 import Form from 'components/Form';
 import { ru } from 'components/locales/ru';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useAppDispatch } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { createNewTaskThunk } from 'store/thunks';
 
 import './styles.css';
@@ -12,6 +12,7 @@ const CreateNewTaskForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
+  const user = useAppSelector((state) => state.userReducer);
 
   const boardId = (path: string) => {
     return path.split('/').slice(2, 3).join();
@@ -26,7 +27,7 @@ const CreateNewTaskForm = () => {
           description: values.description,
           columnId: id,
           boardId: boardId(location.pathname),
-          // userId,
+          userId: user.id,
         })
       );
       navigate(`/board/${boardId(location.pathname)}`);
