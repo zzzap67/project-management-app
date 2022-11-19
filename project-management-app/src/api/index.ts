@@ -1,4 +1,4 @@
-import { API_URL, AuthToken } from 'const';
+import { API_URL } from 'const';
 import {
   EApiMethods,
   IApiConfig,
@@ -102,6 +102,23 @@ class Api implements IApi {
     }
   }
 
+  async getUserById(id: string) {
+    let foundData: IUser | null = null;
+    try {
+      const response = await fetch(`${this.baseUrl}/users/${id}`, this.setConfig({}));
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async getAllBoards() {
     let foundData: IBoard[] = [];
     try {
@@ -179,10 +196,6 @@ class Api implements IApi {
         `${this.baseUrl}/boards/${id}`,
         this.setConfig({ method: EApiMethods.delete })
       );
-      // const response = await fetch(
-      //   `${this.baseUrl}/boards/${id}`,
-      //   this.setConfig({ method: 'DELETE', body: id })
-      // );
       if (response.ok) {
         return id;
       }
@@ -317,9 +330,3 @@ class Api implements IApi {
 }
 
 export const api = new Api(API_URL);
-
-export const useToken = () => {
-  const authToken = AuthToken;
-
-  api.setToken(authToken);
-};

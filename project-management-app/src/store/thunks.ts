@@ -13,6 +13,10 @@ export const signIn = createAsyncThunk('user/signIn', async (body: Omit<ICreateU
   return await api.postSignIn(body);
 });
 
+export const userById = createAsyncThunk('user/userById', async (id: string) => {
+  return await api.getUserById(id);
+});
+
 export const getAllBoardsThunk = createAsyncThunk('main/getAllBoardsThunk', async () => {
   return await api.getAllBoards();
 });

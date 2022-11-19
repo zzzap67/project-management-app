@@ -7,15 +7,21 @@ import { ru } from '../locales/ru';
 import { useTranslation } from 'react-i18next';
 
 export interface FormProps {
-  formData: typeof ru.REGISTER_FORM | typeof ru.BOARD_FORM | typeof ru.COLUMN_FORM;
+  formData:
+    | typeof ru.REGISTER_FORM
+    | typeof ru.BOARD_FORM
+    | typeof ru.COLUMN_FORM
+    | typeof ru.LOGIN_FORM;
   errorMessage?: string;
   className: string;
   onSubmit: (values: Record<string, string>) => void;
 }
+
 export interface formBoardData {
   inputsData: InputData[];
   title: string;
 }
+
 export interface formRegisterData {
   inputsData: InputData[];
   linkTo: string;
@@ -24,6 +30,7 @@ export interface formRegisterData {
   text: string;
   linkText: string;
 }
+
 const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsData, linkTo, title, buttonText, text, linkText } = formData;
@@ -49,7 +56,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
       </div>
 
       {errorMessage && <p className="form__error">{errorMessage}</p>}
-      {className === 'register__form' ? (
+      {(className.includes('register') || className.includes('login')) && (
         <>
           <div
             className={`form__button-wrapper 
@@ -73,7 +80,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
             </NavLink>
           </p>
         </>
-      ) : null}
+      )}
       {className === 'form_board' || className === 'form_task' || className === 'form_column' ? (
         <>
           <button className="confirm__button button" type="submit" disabled={!isValid}>
