@@ -47,6 +47,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Main />} />
+            <Route path="/boards" element={<Boards />} />
+            <Route path="/boards/create" element={<CreateNewBoardComponentForm />} />
+            <Route path="/board/*/column" element={<CreateNewColumnForm />} />
+            <Route path="/board/:id/task" element={<CreateNewTaskForm />} />
+            <Route path="/board/*" element={<Board />} />
+            <Route path="/board/:id/edit" element={<EditBoardForm />} />
             <Route path="/register" element={<Register />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/404" element={<Error404 />} />
