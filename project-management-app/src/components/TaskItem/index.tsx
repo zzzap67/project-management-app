@@ -1,5 +1,4 @@
 import ModalConfirmation from 'components/ModalConfirmation';
-import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';

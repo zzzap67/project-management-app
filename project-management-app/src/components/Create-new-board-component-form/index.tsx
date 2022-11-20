@@ -10,7 +10,7 @@ const CreateNewBoardComponentForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onSubmit = async (values: Record<string, string>) => {
-    dispatch(createNewBoardThunk(values));
+    await dispatch(createNewBoardThunk(values));
     navigate(`/boards`);
   };
 

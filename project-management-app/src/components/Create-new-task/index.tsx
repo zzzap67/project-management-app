@@ -1,7 +1,6 @@
 import Form from 'components/Form';
 import { ru } from 'components/locales/ru';
-import { useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { createNewTaskThunk } from 'store/thunks';
 

@@ -4,12 +4,6 @@ import {
   getAllBoardsThunk,
   getBoardByIdThunk,
   deleteBoardThunk,
-  // getAllColumnsThunk,
-  // getAllTasksThunk,
-  // getColumnByIdThunk,
-  // getTaskByIdThunk,
-  // createNewBoardThunk,
-  // createNewColumnThunk,
   deleteColumnThunk,
   createNewTaskThunk,
 } from './thunks';
@@ -55,30 +49,8 @@ export const mainSlice = createSlice({
       .addCase(deleteBoardThunk.fulfilled, (state, { payload: boardID }) => {
         delete state.boards[boardID];
       })
-      // .addCase(getAllColumnsThunk.fulfilled, (state, { payload: columns }) => {
-      //   columns.forEach((column) => {
-      //     state.columns[column.id] = column;
-      //   });
-      // })
-      // .addCase(getColumnByIdThunk.fulfilled, (state, { payload: column }) => {
-      //   state.column = column;
-      // })
-      // .addCase(getAllTasksThunk.fulfilled, (state, { payload: tasks }) => {
-      //   tasks.forEach((task) => {
-      //     state.tasks[task.id] = task;
-      //   });
-      // })
-      // .addCase(getTaskByIdThunk.fulfilled, (state, { payload: task }) => {
-      //   state.task = task;
-      // })
 
-      // Изменяем state при успешном запросе
-      // .addCase(createNewBoardThunk.fulfilled, (state, { payload: board }) => {
-      //   // state.boards = { ...state.boards, board };
-      //   state.isLoading = false;
-      // })
       .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
-        // state.tasks = { ...state.tasks, task };
         state.isLoading = false;
       })
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {

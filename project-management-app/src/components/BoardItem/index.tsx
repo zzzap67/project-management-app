@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { IBoard } from 'types';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ModalConfirmation from 'components/ModalConfirmation';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as TaskBoard } from '../../assets/icons/task-board.svg';
-import { deleteBoardThunk, getBoardByIdThunk } from '../../store/thunks';
+import { deleteBoardThunk } from '../../store/thunks';
 import { useAppDispatch } from '../../store/hooks';
 import './styles.css';
 
 const BoardItem = (props: IBoard) => {
   const { id, title, description } = props;
   const [showModal, setShowModal] = useState(false);
-  const { boardId } = useParams();
   const dispatch = useAppDispatch();
   const deleteBoard = async () => {
     dispatch(deleteBoardThunk(id));
