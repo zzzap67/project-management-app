@@ -11,6 +11,9 @@
   overflow-x: scroll;
   flex: 1;
 }
+.column_list::-webkit-scrollbar{
+  display: none;
+}
 .columnList {
   display: flex;
   gap: 20px;
