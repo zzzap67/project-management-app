@@ -9,14 +9,14 @@ import './styles.css';
 
 const Board = () => {
   const { id } = useParams();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   useEffect(() => {
     if (id) {
       dispatch(getBoardByIdThunk(id));
     }
-  }, [dispatch, id]);
+  }, [dispatch]);
   return (
     <div className="board_page">
       <div className="column_list">

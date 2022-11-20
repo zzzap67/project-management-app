@@ -12,13 +12,15 @@ import './styles.css';
 const TaskItem = (props: ITask) => {
   const { id, title, description } = props;
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
   const boardId = params.id;
   const deleteTask = async () => {
     if (props.columnId && boardId) {
-      dispatch(deleteTaskThunk({ columnId: props.columnId, taskId: id, boardId }));
+      await dispatch(deleteTaskThunk({ columnId: props.columnId, taskId: id, boardId }));
     }
+    navigate(`/board/${boardId}`);
   };
 
   const handleModalQuestion = () => {

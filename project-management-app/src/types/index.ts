@@ -7,6 +7,7 @@ interface MainState {
   column: IColumn | null;
   task: ITask | null;
   error: string | null;
+  userId: string | null;
 }
 type ColumnsRecord = Record<IColumn['id'], IColumn>;
 type BoardsRecord = Record<IBoard['id'], IBoard>;

@@ -1,5 +1,6 @@
 import Form from 'components/Form';
 import { ru } from 'components/locales/ru';
+import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { createNewTaskThunk } from 'store/thunks';
@@ -10,27 +11,20 @@ const CreateNewTaskForm = () => {
   const registerData = ru.TASK_FORM;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const { id } = useParams();
+  const { boardId, columnId } = useParams();
   const user = useAppSelector((state) => state.userReducer);
-
-  const boardId = (path: string) => {
-    return path.split('/').slice(2, 3).join();
-  };
   const onSubmit = async (values: Record<string, string>) => {
-    console.log({ values });
-    if (id) {
-      console.log(values);
-      dispatch(
+    if (boardId && columnId) {
+      await dispatch(
         createNewTaskThunk({
           title: values.title,
           description: values.description,
-          columnId: id,
-          boardId: boardId(location.pathname),
+          columnId,
+          boardId,
           userId: user.id,
         })
       );
-      navigate(`/board/${boardId(location.pathname)}`);
+      navigate(`/board/${boardId}`);
     }
   };
 

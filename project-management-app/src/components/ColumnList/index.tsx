@@ -7,6 +7,7 @@ const ColumnList = () => {
   const { columns } = useAppSelector((state) => state.mainReducer);
 
   const columnList = useMemo(() => {
+    console.log(columns);
     return Object.values(columns);
   }, [columns]);
 

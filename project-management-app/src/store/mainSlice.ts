@@ -23,6 +23,7 @@ const MAIN_INITIAL_STATE: MainState = {
   column: null,
   tasks: {},
   task: null,
+  userId: null,
 };
 
 export const mainSlice = createSlice({
@@ -37,6 +38,7 @@ export const mainSlice = createSlice({
         });
       })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
+        console.log(board);
         state.board = board;
         state.columns = board.columns.reduce((acc: ColumnsRecord, item: IColumn) => {
           acc[item.id] = item;
@@ -76,7 +78,7 @@ export const mainSlice = createSlice({
       //   state.isLoading = false;
       // })
       .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
-        state.tasks = { ...state.tasks, task };
+        // state.tasks = { ...state.tasks, task };
         state.isLoading = false;
       })
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {

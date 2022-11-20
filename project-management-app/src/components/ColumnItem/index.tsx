@@ -44,7 +44,7 @@ const ColumnItem = (props: IColumn) => {
       <Button
         className="create_task__button"
         buttonName={t('description.forms.createTask')}
-        eventHandler={() => navigate(`/board/${boardId}/${id}/task`)}
+        eventHandler={() => navigate(`/board/${boardId}/column/${id}/task`)}
       />
       {showModal && (
         <ModalConfirmation
