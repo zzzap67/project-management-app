@@ -6,6 +6,7 @@ import {
   deleteBoardThunk,
   deleteColumnThunk,
   createNewTaskThunk,
+  editBoardThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -57,7 +58,9 @@ export const mainSlice = createSlice({
         delete state.columns[columnID];
         state.isLoading = false;
       })
-
+      .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {
+        state.isLoading = false;
+      })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),
         (state) => ({

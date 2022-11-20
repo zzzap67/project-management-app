@@ -337,6 +337,31 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+  async editBoard(values: Record<string, string>) {
+    let editBoard;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+          },
+        })
+      );
+      editBoard = await response.json();
+      if (response.ok) {
+        return editBoard;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
 }
 
 export const api = new Api(API_URL);

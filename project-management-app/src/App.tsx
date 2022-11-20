@@ -57,7 +57,7 @@ function App() {
               <Route path="/board/:id/column" element={<CreateNewColumnForm />} />
               <Route path="/board/:boardId/column/:columnId/task" element={<CreateNewTaskForm />} />
               <Route path="/board/:id" element={<Board />} />
-              <Route path="/board/:id/edit" element={<EditBoardForm />} />
+              <Route path="/boards/:boardId/edit" element={<EditBoardForm />} />
             </Route>
           </Route>
         </Routes>

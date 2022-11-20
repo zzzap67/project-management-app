@@ -78,3 +78,9 @@ export const createNewTaskThunk = createAsyncThunk(
     return await api.createNewTask(values);
   }
 );
+export const editBoardThunk = createAsyncThunk(
+  'main/editBoardThunkThunk',
+  async (values: Record<string, string>) => {
+    return await api.editBoard(values);
+  }
+);
