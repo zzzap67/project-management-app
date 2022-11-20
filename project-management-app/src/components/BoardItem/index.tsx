@@ -8,6 +8,7 @@ import { ReactComponent as TaskBoard } from '../../assets/icons/task-board.svg';
 import { deleteBoardThunk } from '../../store/thunks';
 import { useAppDispatch } from '../../store/hooks';
 import './styles.css';
+import { t } from 'i18next';
 
 const BoardItem = (props: IBoard) => {
   const { id, title, description } = props;
@@ -47,7 +48,7 @@ const BoardItem = (props: IBoard) => {
           </Link>
           {showModal && (
             <ModalConfirmation
-              confirmQuestion={<span>Do You Really Want To Delete {title}?</span>}
+              confirmQuestion={<span>{`${t('description.forms.deleteQuestion')} ${title}?`}</span>}
               setShowModal={setShowModal}
               onConfirm={deleteBoard}
             />

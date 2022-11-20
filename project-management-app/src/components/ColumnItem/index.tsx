@@ -48,7 +48,7 @@ const ColumnItem = (props: IColumn) => {
       />
       {showModal && (
         <ModalConfirmation
-          confirmQuestion={<span>Do You Really Want To Delete {title}?</span>}
+          confirmQuestion={<span>{`${t('description.forms.deleteQuestion')} ${title}?`}</span>}
           setShowModal={setShowModal}
           onConfirm={deleteColumn}
         />

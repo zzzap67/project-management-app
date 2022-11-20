@@ -1,5 +1,6 @@
 import { ReactElement, Dispatch, SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
+import { t } from 'i18next';
 import './styles.css';
 
 interface IModalConfirmation {
@@ -24,10 +25,10 @@ function ModalConfirmation({ confirmQuestion, setShowModal, onConfirm }: IModalC
         <div>{confirmQuestion}</div>
         <div>
           <button className="confirm" onClick={handleCallback}>
-            OK
+            {t('description.forms.okButtonText')}
           </button>
           <button className="cancel" onClick={closeModal}>
-            Cancel
+            {t('description.forms.cancelButtonText')}
           </button>
         </div>
       </div>
