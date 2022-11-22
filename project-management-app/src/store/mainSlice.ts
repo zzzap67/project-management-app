@@ -1,17 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { MainState } from 'types';
+import { ColumnsRecord, IColumn, ITask, MainState, TaskRecord, TasksRecord } from 'types';
 import {
   getAllBoardsThunk,
   getBoardByIdThunk,
   deleteBoardThunk,
-  getAllColumnsThunk,
-  getAllTasksThunk,
-  getColumnByIdThunk,
-  getTaskByIdThunk,
-  createNewBoardThunk,
-  createNewColumnThunk,
   deleteColumnThunk,
   createNewTaskThunk,
+  editBoardThunk,
+  deleteTaskThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -23,6 +19,7 @@ const MAIN_INITIAL_STATE: MainState = {
   column: null,
   tasks: {},
   task: null,
+  userId: null,
 };
 
 export const mainSlice = createSlice({
@@ -38,87 +35,34 @@ export const mainSlice = createSlice({
       })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
         state.board = board;
+        state.columns = board.columns.reduce((acc: ColumnsRecord, item: IColumn) => {
+          acc[item.id] = item;
+          return acc;
+        }, {});
+        state.tasks = board.columns.reduce((acc: TasksRecord, itemColumn: IColumn) => {
+          acc[itemColumn.id] = itemColumn.tasks.reduce((acc: TaskRecord, itemTask: ITask) => {
+            acc[itemTask.id] = itemTask;
+            return acc;
+          }, {});
+          return acc;
+        }, {});
       })
       .addCase(deleteBoardThunk.fulfilled, (state, { payload: boardID }) => {
         delete state.boards[boardID];
       })
-      .addCase(getAllColumnsThunk.fulfilled, (state, { payload: columns }) => {
-        columns.forEach((column) => {
-          state.columns[column.id] = column;
-        });
-      })
-      .addCase(getColumnByIdThunk.fulfilled, (state, { payload: column }) => {
-        state.column = column;
-      })
-      .addCase(getAllTasksThunk.fulfilled, (state, { payload: tasks }) => {
-        tasks.forEach((task) => {
-          state.tasks[task.id] = task;
-        });
-      })
-      .addCase(getTaskByIdThunk.fulfilled, (state, { payload: task }) => {
-        state.task = task;
-      })
 
-      .addCase(createNewBoardThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
-      .addCase(createNewBoardThunk.fulfilled, (state, { payload: board }) => {
-        // state.boards = { ...state.boards, board };
-        state.isLoading = false;
-      })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(createNewBoardThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-
-      .addCase(createNewColumnThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
-      .addCase(createNewColumnThunk.fulfilled, (state, { payload: column }) => {
-        state.isLoading = false;
-        //  navigate(`/board/${id}/column`);
-      })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(createNewColumnThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-
-      .addCase(createNewTaskThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
         state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(createNewTaskThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
-        state.isLoading = false;
-      })
-
-      .addCase(deleteColumnThunk.pending, (state) => {
-        state.isLoading = true;
-      })
-      // Изменяем state при успешном запросе
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {
         delete state.columns[columnID];
         state.isLoading = false;
       })
-      // Показываем ошибку при неуспешном запросе
-      .addCase(deleteColumnThunk.rejected, (state, { error }) => {
-        if (error.message) {
-          state.error = error.message;
-        }
+      .addCase(deleteTaskThunk.fulfilled, (state, { payload: values }) => {
+        delete state.tasks[values.columnId][values.taskId];
+        state.isLoading = false;
+      })
+      .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {
         state.isLoading = false;
       })
       .addMatcher(

@@ -4,20 +4,19 @@ import { t } from 'i18next';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
-import { getAllColumnsThunk } from 'store/thunks';
+import { getBoardByIdThunk } from 'store/thunks';
 import './styles.css';
 
 const Board = () => {
   const { id } = useParams();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   useEffect(() => {
     if (id) {
-      dispatch(getAllColumnsThunk(id as string));
+      dispatch(getBoardByIdThunk(id));
     }
-  }, [dispatch, id]);
-
+  }, [dispatch]);
   return (
     <div className="board_page">
       <div className="column_list">

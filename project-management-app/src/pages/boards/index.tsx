@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import BoardsList from 'components/BoardsList';
 import { useAppDispatch } from '../../store/hooks';
 import { getAllBoardsThunk } from '../../store/thunks';

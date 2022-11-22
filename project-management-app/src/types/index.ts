@@ -1,13 +1,18 @@
 interface MainState {
   isLoading: boolean;
-  boards: Record<IBoard['id'], IBoard>;
-  columns: Record<IColumn['id'], IColumn>;
-  tasks: Record<ITask['id'], ITask>;
+  boards: BoardsRecord;
+  columns: ColumnsRecord;
+  tasks: TasksRecord;
   board: IBoard | null;
   column: IColumn | null;
   task: ITask | null;
   error: string | null;
+  userId: string | null;
 }
+type ColumnsRecord = Record<IColumn['id'], IColumn>;
+type BoardsRecord = Record<IBoard['id'], IBoard>;
+type TasksRecord = Record<IColumn['id'], TaskRecord>;
+type TaskRecord = Record<ITask['id'], ITask>;
 
 interface IBoard {
   id: string;
@@ -20,12 +25,20 @@ interface IColumn {
   title: string;
   description: string;
   key: string;
+  tasks: ITask[];
 }
 interface ITask {
+  userId?: string;
+  columnId?: string;
   id: string;
   title: string;
   description: string;
   key: string;
+  ref: any;
+}
+
+interface PropsTask {
+  columnId: string;
 }
 interface ITooltip {
   message: string;
@@ -90,4 +103,9 @@ export {
   IUser,
   ISignIn,
   ELocalStorage,
+  PropsTask,
+  BoardsRecord,
+  ColumnsRecord,
+  TasksRecord,
+  TaskRecord,
 };

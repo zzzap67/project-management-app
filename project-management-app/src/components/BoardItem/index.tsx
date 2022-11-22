@@ -1,14 +1,14 @@
-import React from 'react';
 import { useState } from 'react';
 import { IBoard } from 'types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ModalConfirmation from 'components/ModalConfirmation';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as TaskBoard } from '../../assets/icons/task-board.svg';
-import { deleteBoardThunk } from '../../store/thunks';
+import { deleteBoardThunk, editBoardThunk } from '../../store/thunks';
 import { useAppDispatch } from '../../store/hooks';
 import './styles.css';
+import { t } from 'i18next';
 
 const BoardItem = (props: IBoard) => {
   const { id, title, description } = props;
@@ -17,21 +17,19 @@ const BoardItem = (props: IBoard) => {
   const deleteBoard = async () => {
     dispatch(deleteBoardThunk(id));
   };
-  const editBoard = () => {
-    console.log('edit board');
-  };
 
   const handleModalQuestion = () => {
     setShowModal(true);
   };
+
   return (
     <>
       <div className="board_item">
         <TaskBoard className="task-board" />
         <div className="info">
           <div className="change_board">
-            <Link className="edit_link" to="/board/:id/edit">
-              <Edit className="edit_board" onClick={editBoard} />
+            <Link className="edit_link" to={`/boards/${id}/edit`}>
+              <Edit className="edit_board" />
             </Link>
             <Delete
               className="delete_board"
@@ -47,7 +45,7 @@ const BoardItem = (props: IBoard) => {
           </Link>
           {showModal && (
             <ModalConfirmation
-              confirmQuestion={<span>Do You Really Want To Delete {title}?</span>}
+              confirmQuestion={<span>{`${t('description.forms.deleteQuestion')} ${title}?`}</span>}
               setShowModal={setShowModal}
               onConfirm={deleteBoard}
             />

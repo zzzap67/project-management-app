@@ -1,6 +1,6 @@
 import Form from 'components/Form';
 import { ru } from 'components/locales/ru';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
 import { createNewColumnThunk } from 'store/thunks';
 import './styles.css';
@@ -12,9 +12,9 @@ const CreateNewColumnForm = () => {
   const { id } = useParams();
   const onSubmit = async (values: Record<string, string>) => {
     if (id) {
-      dispatch(createNewColumnThunk({ title: values.title, id }));
-      navigate(`/board/${id}/column`);
+      await dispatch(createNewColumnThunk({ title: values.title, id }));
     }
+    navigate(`/board/${id}`);
   };
 
   return (

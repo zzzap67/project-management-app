@@ -2,6 +2,7 @@ import BoardItem from 'components/BoardItem';
 import React, { useMemo } from 'react';
 import './styles.css';
 import { useAppSelector } from '../../store/hooks';
+import { IBoard } from 'types';
 
 const BoardsList = () => {
   const { boards } = useAppSelector((state) => state.mainReducer);
@@ -12,7 +13,7 @@ const BoardsList = () => {
 
   return (
     <div className="boardList">
-      {boardsList.map((board) => (
+      {boardsList.map((board: IBoard) => (
         <BoardItem {...board} key={board.id} />
       ))}
     </div>

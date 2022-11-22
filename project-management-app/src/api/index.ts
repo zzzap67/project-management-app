@@ -1,14 +1,5 @@
 import { API_URL } from 'const';
-import {
-  EApiMethods,
-  IApiConfig,
-  IBoard,
-  IColumn,
-  ICreateUser,
-  ISignIn,
-  ITask,
-  IUser,
-} from 'types';
+import { EApiMethods, IBoard, IColumn, ICreateUser, ISignIn, ITask, IUser } from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -174,7 +165,8 @@ class Api implements IApi {
   }
 
   async getBoardId(id: string) {
-    let foundData: IBoard;
+    let foundData;
+    // : IBoard;
     try {
       const response = await fetch(`${this.baseUrl}/boards/${id}`, this.setConfig({}));
       foundData = await response.json();
@@ -194,7 +186,7 @@ class Api implements IApi {
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${id}`,
-        this.setConfig({ method: EApiMethods.delete })
+        this.setConfig({ method: EApiMethods.delete, body: id })
       );
       if (response.ok) {
         return id;
@@ -210,10 +202,27 @@ class Api implements IApi {
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
-        this.setConfig({ method: 'DELETE', body: values.columnId })
+        this.setConfig({ method: EApiMethods.delete, body: values.columnId })
       );
       if (response.ok) {
         return values.columnId;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async deleteTask(values: Record<string, string>) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.taskId}`,
+        this.setConfig({ method: EApiMethods.delete, body: values.taskId })
+      );
+      if (response.ok) {
+        console.log(values);
+        return values;
       }
 
       throw response.body;
@@ -268,11 +277,10 @@ class Api implements IApi {
         `${this.baseUrl}/boards`,
         this.setConfig({
           method: 'POST',
-          body: values,
+          body: { title: values.title, description: values.description },
         })
       );
       newBoard = await response.json();
-      console.log(newBoard);
       if (response.ok) {
         return newBoard;
       }
@@ -294,7 +302,6 @@ class Api implements IApi {
         })
       );
       newColumn = await response.json();
-      console.log(newColumn);
       if (response.ok) {
         return newColumn;
       }
@@ -306,19 +313,48 @@ class Api implements IApi {
     }
   }
   async createNewTask(values: Record<string, string>) {
-    let newColumn: ITask;
+    let newTask;
+    //: ITask;
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks`,
         this.setConfig({
           method: 'POST',
-          body: { title: values.title, description: values.description },
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+          },
         })
       );
-      newColumn = await response.json();
-      console.log(newColumn);
+      newTask = await response.json();
       if (response.ok) {
-        return newColumn;
+        return newTask;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async editBoard(values: Record<string, string>) {
+    let editBoard;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+          },
+        })
+      );
+      editBoard = await response.json();
+      if (response.ok) {
+        return editBoard;
       }
 
       throw response.body;

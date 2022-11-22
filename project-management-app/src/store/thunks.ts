@@ -52,6 +52,12 @@ export const deleteColumnThunk = createAsyncThunk(
     return await api.deleteColumn(values);
   }
 );
+export const deleteTaskThunk = createAsyncThunk(
+  'main/deleteTaskThunk',
+  async (values: Record<string, string>) => {
+    return await api.deleteTask(values);
+  }
+);
 
 export const createNewBoardThunk = createAsyncThunk(
   'main/createNewBoardThunk',
@@ -70,5 +76,11 @@ export const createNewTaskThunk = createAsyncThunk(
   'main/createNewTaskThunk',
   async (values: Record<string, string>) => {
     return await api.createNewTask(values);
+  }
+);
+export const editBoardThunk = createAsyncThunk(
+  'main/editBoardThunkThunk',
+  async (values: Record<string, string>) => {
+    return await api.editBoard(values);
   }
 );

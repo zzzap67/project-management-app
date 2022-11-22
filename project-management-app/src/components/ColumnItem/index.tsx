@@ -2,35 +2,30 @@ import ModalConfirmation from 'components/ModalConfirmation';
 import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
-import { deleteColumnThunk, getAllTasksThunk } from 'store/thunks';
+import { deleteColumnThunk } from 'store/thunks';
 import { IColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
 
-const ColumnItem = (props: IColumn) => {
-  const { id, title, description } = props;
+const ColumnItem = React.forwardRef((props: IColumn, ref) => {
+  const { id, title } = props;
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const params = useParams();
-  console.log(params);
   const boardId = params.id;
-
-  useEffect(() => {
-    if (id) {
-      dispatch(getAllTasksThunk(id as string));
-    }
-  }, [dispatch, id]);
 
   const handleModalQuestion = () => {
     setShowModal(true);
   };
-  const deleteColumn = async (values: Record<string, string>) => {
-    console.log('delete column');
-    dispatch(deleteColumnThunk(values));
+  const deleteColumn = async () => {
+    if (boardId) {
+      dispatch(deleteColumnThunk({ columnId: id, boardId }));
+    }
   };
   return (
     <div className="column_item">
@@ -45,21 +40,21 @@ const ColumnItem = (props: IColumn) => {
         />
       </div>
       <div className="task_list">
-        <TaskList />
+        <TaskList columnId={id} />
       </div>
       <Button
         className="create_task__button"
         buttonName={t('description.forms.createTask')}
-        eventHandler={() => navigate(`/board/${boardId}/task`)}
+        eventHandler={() => navigate(`/board/${boardId}/column/${id}/task`)}
       />
       {showModal && (
         <ModalConfirmation
-          confirmQuestion={<span>Do You Really Want To Delete {title}?</span>}
+          confirmQuestion={<span>{`${t('description.forms.deleteQuestion')} ${title}?`}</span>}
           setShowModal={setShowModal}
           onConfirm={deleteColumn}
         />
       )}
     </div>
   );
-};
+});
 export default ColumnItem;
