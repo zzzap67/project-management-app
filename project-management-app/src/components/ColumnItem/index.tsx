@@ -2,6 +2,7 @@ import ModalConfirmation from 'components/ModalConfirmation';
 import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
@@ -10,7 +11,7 @@ import { IColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
 
-const ColumnItem = (props: IColumn) => {
+const ColumnItem = React.forwardRef((props: IColumn, ref) => {
   const { id, title } = props;
   const [showModal, setShowModal] = useState(false);
   const dispatch = useAppDispatch();
@@ -55,5 +56,5 @@ const ColumnItem = (props: IColumn) => {
       )}
     </div>
   );
-};
+});
 export default ColumnItem;

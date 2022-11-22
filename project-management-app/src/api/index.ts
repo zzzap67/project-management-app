@@ -221,7 +221,8 @@ class Api implements IApi {
         this.setConfig({ method: EApiMethods.delete, body: values.taskId })
       );
       if (response.ok) {
-        return values.tasksId;
+        console.log(values);
+        return values;
       }
 
       throw response.body;

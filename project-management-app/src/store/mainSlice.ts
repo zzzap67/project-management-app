@@ -7,6 +7,7 @@ import {
   deleteColumnThunk,
   createNewTaskThunk,
   editBoardThunk,
+  deleteTaskThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -33,7 +34,6 @@ export const mainSlice = createSlice({
         });
       })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
-        console.log(board);
         state.board = board;
         state.columns = board.columns.reduce((acc: ColumnsRecord, item: IColumn) => {
           acc[item.id] = item;
@@ -56,6 +56,10 @@ export const mainSlice = createSlice({
       })
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {
         delete state.columns[columnID];
+        state.isLoading = false;
+      })
+      .addCase(deleteTaskThunk.fulfilled, (state, { payload: values }) => {
+        delete state.tasks[values.columnId][values.taskId];
         state.isLoading = false;
       })
       .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {

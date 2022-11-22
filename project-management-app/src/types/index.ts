@@ -34,6 +34,7 @@ interface ITask {
   title: string;
   description: string;
   key: string;
+  ref: any;
 }
 
 interface PropsTask {

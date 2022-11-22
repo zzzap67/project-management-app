@@ -1,5 +1,6 @@
 import ModalConfirmation from 'components/ModalConfirmation';
 import { t } from 'i18next';
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
@@ -8,7 +9,7 @@ import { ITask } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
 
-const TaskItem = (props: ITask) => {
+const TaskItem = React.forwardRef((props: ITask, ref) => {
   const { id, title, description } = props;
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
@@ -46,5 +47,5 @@ const TaskItem = (props: ITask) => {
       )}
     </div>
   );
-};
+});
 export default TaskItem;

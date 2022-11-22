@@ -53,7 +53,7 @@ export const deleteColumnThunk = createAsyncThunk(
   }
 );
 export const deleteTaskThunk = createAsyncThunk(
-  'main/deleteColumnThunk',
+  'main/deleteTaskThunk',
   async (values: Record<string, string>) => {
     return await api.deleteTask(values);
   }

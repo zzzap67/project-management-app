@@ -2,14 +2,18 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 20px;
+  margin: 3px 0;
   padding: 5px 10px;
   color: #556737;
   border: 2px solid rgb(212, 218, 200);
   background-color: #b2e94465;
   border: 1px dashed #9fdf2198;
   border-radius: 15px;
+  cursor: move;
+
+  transition: background-color 0.5s;
 }
+
 .task_info {
   display: flex;
   flex-direction: row;
@@ -24,4 +28,3 @@
   height: 15px;
   align-self: center;
 }
-
