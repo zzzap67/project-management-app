@@ -8,7 +8,9 @@ interface MainState {
   task: ITask | null;
   error: string | null;
   userId: string | null;
+  language: string;
 }
+
 type ColumnsRecord = Record<IColumn['id'], IColumn>;
 type BoardsRecord = Record<IBoard['id'], IBoard>;
 type TasksRecord = Record<IColumn['id'], TaskRecord>;
@@ -34,7 +36,6 @@ interface ITask {
   title: string;
   description: string;
   key: string;
-  ref: any;
 }
 
 interface PropsTask {

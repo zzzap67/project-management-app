@@ -7,11 +7,13 @@ import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
 import './style.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOut } from '../../store/userSlice';
+import { setLanguage } from 'store/mainSlice';
 import { ELocalStorage } from '../../types';
 
 const Header: React.FunctionComponent = () => {
   const [scrollEvent, setScrollEvent] = useState(false);
   const isAuth = useAppSelector((state) => state.userReducer.isAuth);
+  const { language } = useAppSelector((state) => state.mainReducer);
   const dispatch = useAppDispatch();
 
   const changeHeaderColor = () => {
@@ -19,14 +21,15 @@ const Header: React.FunctionComponent = () => {
   };
 
   window.addEventListener('scroll', () => changeHeaderColor());
-  const [language, setLanguage] = useState('en');
-  const changeLanguage = (language: string) => {
+  //const [language, setLanguage] = useState('en');
+  const changeLanguage = () => {
+    console.log('curr', language);
     if (language === 'en') {
-      setLanguage('ru');
-      i18n.changeLanguage(language);
+      dispatch(setLanguage({ lang: 'ru' }));
+      i18n.changeLanguage('ru');
     } else if (language === 'ru') {
-      setLanguage('en');
-      i18n.changeLanguage(language);
+      dispatch(setLanguage({ lang: 'en' }));
+      i18n.changeLanguage('en');
     }
   };
 
@@ -63,11 +66,18 @@ const Header: React.FunctionComponent = () => {
           buttonName={t('description.header.signOut')}
           eventHandler={onSignOut}
         />
-        <Button
-          className="change_language_button"
-          buttonName={'EN/RU'}
-          eventHandler={() => changeLanguage(language)}
-        />
+        <div className="language-switch">
+          <input
+            id="language-toggle"
+            className="language-toggle language-toggle-flat"
+            type="checkbox"
+            defaultChecked={language === 'ru'}
+            onClick={() => changeLanguage()}
+          />
+          <label htmlFor="language-toggle" />
+          <span className="on">EN</span>
+          <span className="off">RU</span>
+        </div>
       </div>
     </header>
   ) : (
@@ -88,11 +98,18 @@ const Header: React.FunctionComponent = () => {
         <Link to="/signin">
           <Button className="link-to-sign-in_button" buttonName={t('description.header.signIn')} />
         </Link>
-        <Button
-          className="change_language_button"
-          buttonName={'EN/RU'}
-          eventHandler={() => changeLanguage(language)}
-        />
+        <div className="language-switch">
+          <input
+            id="language-toggle"
+            className="language-toggle language-toggle-flat"
+            type="checkbox"
+            defaultChecked={language === 'ru'}
+            onClick={() => changeLanguage()}
+          />
+          <label htmlFor="language-toggle" />
+          <span className="on">EN</span>
+          <span className="off">RU</span>
+        </div>
       </div>
     </header>
   );
