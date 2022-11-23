@@ -1,6 +1,7 @@
 import React from 'react';
 import data from '../ui/developer-card/developers.json';
 import './style.css';
+import rsLogo from '../../assets/icons/rs-logo.svg';
 
 const Footer: React.FunctionComponent = () => {
   return (
@@ -13,7 +14,7 @@ const Footer: React.FunctionComponent = () => {
         ))}
       </div>
       <a className="rss_link" href="https://rs.school/react/">
-        © 2022 The Rolling Scopes
+        <img src={rsLogo} alt="RS School logo" width={80} /> © 2022 The Rolling Scopes
       </a>
     </footer>
   );
