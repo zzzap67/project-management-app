@@ -25,7 +25,7 @@ i18n
               signUp: 'Sign Up',
               signIn: 'Sign In',
               signOut: 'Sign Out',
-              editProfile: 'Edit Profile',
+              editProfile: 'Edit Index',
               newBoard: 'New Board',
             },
             welcomePage: {
@@ -36,6 +36,8 @@ i18n
             },
             forms: {
               welcome: 'Welcome!',
+              editUser: 'Edit user profile',
+              save: 'Save profile',
               signUp: 'Sign Up!',
               createBoard: 'Create board',
               editBoard: 'Edit board',
@@ -94,6 +96,8 @@ i18n
             },
             forms: {
               welcome: 'Добро пожаловать!',
+              editUser: 'Редактировать профиль',
+              save: 'Сохранить профиль',
               signUp: 'Зарегистрироваться',
               createBoard: 'Создать доску',
               editBoard: 'Редактировать доску',

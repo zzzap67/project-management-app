@@ -1,4 +1,4 @@
-import { API_URL } from 'const';
+import { API_URL } from 'constants';
 import { EApiMethods, IBoard, IColumn, ICreateUser, ISignIn, ITask, IUser } from 'types';
 
 interface IApi {
