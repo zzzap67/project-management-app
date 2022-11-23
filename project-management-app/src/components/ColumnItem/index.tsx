@@ -11,14 +11,13 @@ import { IColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
 
-const ColumnItem = React.forwardRef((props: IColumn, ref) => {
+const ColumnItem = (props: IColumn) => {
   const { id, title } = props;
   const [showModal, setShowModal] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const boardId = params.id;
-
   const handleModalQuestion = () => {
     setShowModal(true);
   };
@@ -40,7 +39,7 @@ const ColumnItem = React.forwardRef((props: IColumn, ref) => {
         />
       </div>
       <div className="task_list">
-        <TaskList columnId={id} />
+        <TaskList columnId={id} {...props} />
       </div>
       <Button
         className="create_task__button"
@@ -56,5 +55,5 @@ const ColumnItem = React.forwardRef((props: IColumn, ref) => {
       )}
     </div>
   );
-});
+};
 export default ColumnItem;

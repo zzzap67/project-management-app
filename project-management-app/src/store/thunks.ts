@@ -27,9 +27,18 @@ export const getAllColumnsThunk = createAsyncThunk(
     return await api.getAllColumns(id);
   }
 );
-export const getAllTasksThunk = createAsyncThunk('main/getAllTasksThunk', async (id: string) => {
-  return await api.getAllTasks(id);
-});
+export const getAllTasksThunk = createAsyncThunk(
+  'main/getAllTasksThunk',
+  async (values: Record<string, string>) => {
+    return await api.getAllTasks(values);
+  }
+);
+export const updateTaskThunk = createAsyncThunk(
+  'main/updateTaskThunk',
+  async (values: Record<string, string>) => {
+    return await api.updateTask(values);
+  }
+);
 export const getBoardByIdThunk = createAsyncThunk('main/getBoardByIdThunk', async (id: string) => {
   return await api.getBoardId(id);
 });

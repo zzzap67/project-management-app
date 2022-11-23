@@ -8,6 +8,8 @@ import {
   createNewTaskThunk,
   editBoardThunk,
   deleteTaskThunk,
+  getAllTasksThunk,
+  updateTaskThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -31,6 +33,12 @@ export const mainSlice = createSlice({
       .addCase(getAllBoardsThunk.fulfilled, (state, { payload: boards }) => {
         boards.forEach((board) => {
           state.boards[board.id] = board;
+        });
+      })
+      .addCase(getAllTasksThunk.fulfilled, (state, { payload: tasks }) => {
+        console.log(tasks);
+        tasks.forEach((task) => {
+          state.tasks[task.id] = task;
         });
       })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
@@ -61,6 +69,12 @@ export const mainSlice = createSlice({
       .addCase(deleteTaskThunk.fulfilled, (state, { payload: values }) => {
         delete state.tasks[values.columnId][values.taskId];
         state.isLoading = false;
+      })
+      .addCase(updateTaskThunk.fulfilled, (state, { payload: tasks }) => {
+        state.isLoading = false;
+        tasks.forEach((task) => {
+          state.tasks[task.id] = task;
+        });
       })
       .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {
         state.isLoading = false;

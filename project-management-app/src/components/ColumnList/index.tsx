@@ -10,17 +10,17 @@ const ColumnList = () => {
   const columnList = useMemo(() => {
     return Object.values(columns);
   }, [columns]);
-  const [list, setList] = useState(columnList);
+  // const [list, setList] = useState(columnList);
 
-  function handleOnDragEnd(result) {
-    if (result.destination) {
-      const items = Array.from(list);
-      const [reorderedItem] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reorderedItem);
+  // function handleOnDragEnd(result) {
+  //   if (result.destination) {
+  //     const items = Array.from(list);
+  //     const [reorderedItem] = items.splice(result.source.index, 1);
+  //     items.splice(result.destination.index, 0, reorderedItem);
 
-      setList(items);
-    }
-  }
+  //     setList(items);
+  //   }
+  //}
   return (
     <div className="columnList">
       {columnList.map((column) => {

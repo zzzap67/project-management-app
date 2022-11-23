@@ -144,11 +144,12 @@ class Api implements IApi {
     }
   }
 
-  async getAllTasks(id: string) {
-    let foundData: ITask[] = [];
+  async getAllTasks(values: Record<string, string>) {
+    let foundData;
+    // : ITask[] = [];
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${id}/columns/${id}/tasks`,
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks`,
         this.setConfig({})
       );
       foundData = await response.json();
@@ -330,6 +331,36 @@ class Api implements IApi {
       newTask = await response.json();
       if (response.ok) {
         return newTask;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
+  async updateTask(values: Record<string, string>) {
+    let updateTask;
+    //: ITask;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.taskId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+            order: values.newOrder,
+            boardId: values.boardId,
+            columnId: values.columnId,
+          },
+        })
+      );
+      updateTask = await response.json();
+      if (response.ok) {
+        return updateTask;
       }
 
       throw response.body;
