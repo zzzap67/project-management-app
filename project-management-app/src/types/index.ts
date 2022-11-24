@@ -1,3 +1,8 @@
+enum Languages {
+  En = 'en',
+  Ru = 'ru',
+}
+
 interface MainState {
   isLoading: boolean;
   boards: BoardsRecord;
@@ -8,7 +13,6 @@ interface MainState {
   task: ITask | null;
   error: string | null;
   userId: string | null;
-  language: string;
 }
 
 type ColumnsRecord = Record<IColumn['id'], IColumn>;
@@ -109,4 +113,5 @@ export {
   ColumnsRecord,
   TasksRecord,
   TaskRecord,
+  Languages,
 };

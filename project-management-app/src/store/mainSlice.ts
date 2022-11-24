@@ -20,20 +20,12 @@ const MAIN_INITIAL_STATE: MainState = {
   tasks: {},
   task: null,
   userId: null,
-  language: 'en',
 };
 
 export const mainSlice = createSlice({
   name: 'main',
   initialState: MAIN_INITIAL_STATE,
-  reducers: {
-    setLanguage(state, { payload: lang }) {
-      console.log(state.language);
-      console.log(lang);
-      state.language = lang.lang;
-      console.log(state.language);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(getAllBoardsThunk.fulfilled, (state, { payload: boards }) => {
@@ -97,7 +89,5 @@ export const mainSlice = createSlice({
         }
       ),
 });
-
-export const { setLanguage } = mainSlice.actions;
 
 export default mainSlice.reducer;

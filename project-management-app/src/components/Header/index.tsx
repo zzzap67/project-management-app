@@ -7,13 +7,11 @@ import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
 import './style.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOut } from '../../store/userSlice';
-import { setLanguage } from 'store/mainSlice';
-import { ELocalStorage } from '../../types';
+import { ELocalStorage, Languages } from '../../types';
 
 const Header: React.FunctionComponent = () => {
   const [scrollEvent, setScrollEvent] = useState(false);
   const isAuth = useAppSelector((state) => state.userReducer.isAuth);
-  const { language } = useAppSelector((state) => state.mainReducer);
   const dispatch = useAppDispatch();
 
   const changeHeaderColor = () => {
@@ -23,13 +21,10 @@ const Header: React.FunctionComponent = () => {
   window.addEventListener('scroll', () => changeHeaderColor());
   //const [language, setLanguage] = useState('en');
   const changeLanguage = () => {
-    console.log('curr', language);
-    if (language === 'en') {
-      dispatch(setLanguage({ lang: 'ru' }));
-      i18n.changeLanguage('ru');
-    } else if (language === 'ru') {
-      dispatch(setLanguage({ lang: 'en' }));
-      i18n.changeLanguage('en');
+    if (i18n.language === Languages.En) {
+      i18n.changeLanguage(Languages.Ru);
+    } else {
+      i18n.changeLanguage(Languages.En);
     }
   };
 
@@ -71,7 +66,7 @@ const Header: React.FunctionComponent = () => {
             id="language-toggle"
             className="language-toggle language-toggle-flat"
             type="checkbox"
-            defaultChecked={language === 'ru'}
+            defaultChecked={i18n.language === Languages.Ru}
             onClick={() => changeLanguage()}
           />
           <label htmlFor="language-toggle" />
@@ -103,7 +98,7 @@ const Header: React.FunctionComponent = () => {
             id="language-toggle"
             className="language-toggle language-toggle-flat"
             type="checkbox"
-            defaultChecked={language === 'ru'}
+            defaultChecked={i18n.language === Languages.Ru}
             onClick={() => changeLanguage()}
           />
           <label htmlFor="language-toggle" />
