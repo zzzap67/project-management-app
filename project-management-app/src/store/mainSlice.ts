@@ -5,11 +5,10 @@ import {
   getBoardByIdThunk,
   deleteBoardThunk,
   deleteColumnThunk,
-  editBoardThunk,
   deleteTaskThunk,
-  getAllTasksThunk,
   DragNDropTaskThunk,
   getAllColumnsThunk,
+  DragNDropTaskInOneColumnThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -78,6 +77,14 @@ export const mainSlice = createSlice({
         state.isLoading = false;
         console.log(payload);
         state.boards[payload.board.id] = payload.board;
+
+        // state.tasks[task.id] = task;
+      })
+      .addCase(DragNDropTaskInOneColumnThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        console.log(payload);
+        state.boards[payload.board.id] = payload.board;
+        state.tasks[payload.task.id] = payload.task;
 
         // state.tasks[task.id] = task;
       })

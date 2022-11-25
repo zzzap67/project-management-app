@@ -23,6 +23,7 @@ const ColumnList = () => {
               return (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
                   <ColumnItem {...column} key={column.id} />
+                  {provided.placeholder}
                 </div>
               );
             }}

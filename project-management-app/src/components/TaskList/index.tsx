@@ -1,12 +1,10 @@
+import React, { useMemo, useState } from 'react';
 import TaskItem from 'components/TaskItem';
-import React, { useEffect, useMemo, useState } from 'react';
-import './styles.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { PropsTask } from 'types';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { getAllTasksThunk, updateTaskOrderThunk, updateTaskThunk } from 'store/thunks';
+import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd';
 import { useParams } from 'react-router-dom';
-import ColumnItem from 'components/ColumnItem';
+import './styles.css';
 
 const TaskList = React.forwardRef((props: PropsTask, ref) => {
   const { tasks } = useAppSelector((state) => state.mainReducer);
@@ -15,11 +13,9 @@ const TaskList = React.forwardRef((props: PropsTask, ref) => {
   const params = useParams();
   const boardId = params.id;
   const taskList = useMemo(() => {
-    return Object.values(tasks[props.columnId]);
-    // .sort((a, b) => a.order - b.order);
+    return Object.values(tasks[props.columnId]).sort((a, b) => Number(a.order) - Number(b.order));
   }, [tasks]);
 
-  const [list, setList] = useState(taskList);
   // useEffect(() => {
   //   dispatch(
   //     getAllTasksThunk({
@@ -29,31 +25,33 @@ const TaskList = React.forwardRef((props: PropsTask, ref) => {
   //   );
   // }, [dispatch]);
 
-  const handleOnDragEnd = (result) => {
-    if (result.destination) {
-      const items = Array.from(list);
-      const reorderedItem = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, ...reorderedItem);
-      setList(items);
-      console.log('dragEnd');
-      // {columnId,boardId,tasks:{firstOrdered:taskList[result.destination.index + 1],secondOrdered{id,order}}}
-      // dispatch(
-      //   updateTaskOrderThunk({
-      //     columnId: props.columnId as string,
-      //     boardId: boardId as string,
-      //     firstTaskId: taskList[result.source.index].id,
-      //     secondTaskId: taskList[result.destination.index].id,
-      //     firstTaskTitle: items[result.source.index].title,
-      //     firstTaskDescription: items[result.source.index].description,
-      //     secondTaskTitle: items[result.destination.index].title,
-      //     secondTaskDescription: items[result.destination.index].description,
-      //     firstOrder: items[result.destination.index].order,
-      //     secondOrder: items[result.source.index].order,
-      //     userId: user.id,
-      //   })
-      // );
-    }
-  };
+  //const handleOnDragEnd = (result: DropResult) => {
+  // if (result.destination) {
+  //   const items = Array.from(list);
+  //   const reorderedItem = items.splice(result.source.index, 1);
+  //   items.splice(result.destination.index, 0, ...reorderedItem);
+  //   // setList(items);
+  //   console.log('dragEnd');
+  // }
+
+  // {columnId,boardId,tasks:{firstOrdered:taskList[result.destination.index + 1],secondOrdered{id,order}}}
+  // dispatch(
+  //   updateTaskOrderThunk({
+  //     columnId: props.columnId as string,
+  //     boardId: boardId as string,
+  //     firstTaskId: taskList[result.source.index].id,
+  //     secondTaskId: taskList[result.destination.index].id,
+  //     firstTaskTitle: items[result.source.index].title,
+  //     firstTaskDescription: items[result.source.index].description,
+  //     secondTaskTitle: items[result.destination.index].title,
+  //     secondTaskDescription: items[result.destination.index].description,
+  //     firstOrder: items[result.destination.index].order,
+  //     secondOrder: items[result.source.index].order,
+  //     userId: user.id,
+  //   })
+  // );
+  //}
+  //};
 
   return (
     // <div className="taskList">
@@ -61,7 +59,7 @@ const TaskList = React.forwardRef((props: PropsTask, ref) => {
     //     <TaskItem {...task} key={task.id} columnId={props.columnId} />
     //   ))}
     // </div>
-    // <DragDropContext onDragEnd={handleOnDragEnd}>
+
     <Droppable droppableId={props.columnId}>
       {(provided) => (
         <div className="taskList" {...provided.droppableProps} ref={provided.innerRef}>

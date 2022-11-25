@@ -9,7 +9,7 @@ import { ITask } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
 
-const TaskItem = React.forwardRef((props: ITask) => {
+const TaskItem = React.forwardRef((props: ITask, ref) => {
   const { id, title } = props;
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();

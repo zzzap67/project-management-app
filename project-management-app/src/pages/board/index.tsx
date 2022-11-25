@@ -1,12 +1,17 @@
 import ColumnList from 'components/ColumnList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { useNavigate, useParams } from 'react-router-dom';
-import { store } from 'store';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { DragNDropTaskThunk, getBoardByIdThunk } from 'store/thunks';
+import {
+  DragNDropTaskInOneColumnThunk,
+  DragNDropTaskThunk,
+  getAllTasksThunk,
+  getBoardByIdThunk,
+} from 'store/thunks';
+import { ITask } from 'types';
 import './styles.css';
 
 const Board = () => {
@@ -22,6 +27,7 @@ const Board = () => {
   }, [dispatch, id]);
 
   const onDragEnd = (result: DropResult) => {
+    console.log(result);
     if (result.destination && id) {
       const boardId = id;
       const fromColumn = result.source.droppableId;
@@ -31,18 +37,31 @@ const Board = () => {
       const description = tasks[result.source.droppableId][result.draggableId].description;
       const userId = user.id;
       const order = tasks[result.source.droppableId][result.draggableId].order;
-      dispatch(
-        DragNDropTaskThunk({
-          boardId,
-          fromColumn,
-          toColumn,
-          taskId,
-          title,
-          description,
-          userId,
-          order,
-        })
-      );
+      const destinationOrder = result.destination.index;
+      fromColumn !== toColumn
+        ? dispatch(
+            DragNDropTaskThunk({
+              boardId,
+              fromColumn,
+              toColumn,
+              taskId,
+              title,
+              description,
+              userId,
+              order,
+            })
+          )
+        : dispatch(
+            DragNDropTaskInOneColumnThunk({
+              boardId,
+              fromColumn,
+              destinationOrder,
+              taskId,
+              title,
+              description,
+              userId,
+            })
+          );
     }
   };
 

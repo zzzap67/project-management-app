@@ -41,10 +41,21 @@ export const updateTaskThunk = createAsyncThunk(
 );
 
 export const DragNDropTaskThunk = createAsyncThunk(
-  'main/updateTaskOrderThunk',
+  'main/updateTaskColumnThunk',
   async (values: Record<string, string>) => {
+    console.log('between columns');
     return {
       task: await api.addTaskToDestinationColumn(values),
+      board: await api.getBoardId(values.boardId),
+    };
+  }
+);
+export const DragNDropTaskInOneColumnThunk = createAsyncThunk(
+  'main/updateTaskOrderInColumnThunk',
+  async (values: Record<string, string>) => {
+    console.log('in column');
+    return {
+      task: await api.moveTaskToDestinationOrder(values),
       board: await api.getBoardId(values.boardId),
     };
   }

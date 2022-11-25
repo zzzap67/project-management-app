@@ -3,6 +3,7 @@ import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useState } from 'react';
+import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
 import { deleteColumnThunk } from 'store/thunks';
@@ -38,7 +39,16 @@ const ColumnItem = (props: IColumn) => {
         />
       </div>
       <div className="task_list">
-        <TaskList columnId={id} {...props} />
+        <Droppable droppableId={id}>
+          {(provided: DroppableProvided) => {
+            return (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                <TaskList columnId={id} {...props} />
+                {provided.placeholder}
+              </div>
+            );
+          }}
+        </Droppable>
       </div>
       <Button
         className="create_task__button"
