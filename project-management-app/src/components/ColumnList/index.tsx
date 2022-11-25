@@ -2,7 +2,7 @@ import ColumnItem from 'components/ColumnItem';
 import { useMemo } from 'react';
 import './styles.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { Droppable, DroppableProvided } from 'react-beautiful-dnd';
+import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import { useParams } from 'react-router-dom';
 
 const ColumnList = () => {
@@ -19,11 +19,21 @@ const ColumnList = () => {
     <div className="columnList">
       {columnList.map((column, index: number) => {
         return (
-          <Droppable key={index + 1} droppableId={column.id}>
+          <Droppable key={index + 1} droppableId={`column/${column.id}`} type="COLUMN">
             {(provided: DroppableProvided) => {
               return (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
-                  <ColumnItem {...column} key={column.id} />
+                  <Draggable key={column.id} draggableId={`column/${column.id}`} index={index + 1}>
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <ColumnItem {...column} key={column.id} />
+                      </div>
+                    )}
+                  </Draggable>
                   {provided.placeholder}
                 </div>
               );

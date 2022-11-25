@@ -2,7 +2,7 @@ import ColumnList from 'components/ColumnList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useEffect } from 'react';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
@@ -28,20 +28,28 @@ const Board = () => {
     }
   }, [dispatch, id]);
 
+  const getClearId = (str: string) => {
+    return str.replace(/\w*\//, '');
+  };
+  const compareDroppableContext = (str: string, compareStr: string) => {
+    return str.includes(compareStr);
+  };
   const onDragEnd = (result: DropResult) => {
     console.log(result);
     if (result.destination && id) {
       const boardId = id;
-      const fromColumn = result.source.droppableId;
-      const toColumn = result.destination.droppableId;
-      const taskId = result.draggableId;
-      const title = tasks[result.source.droppableId][result.draggableId].title;
-      const description = tasks[result.source.droppableId][result.draggableId].description;
+      const fromColumn = getClearId(result.source.droppableId);
+      const toColumn = getClearId(result.destination.droppableId);
+      const taskId = getClearId(result.draggableId);
+      const title = tasks[fromColumn][taskId].title;
+      const description = tasks[fromColumn][taskId].description;
       const userId = user.id;
-      const order = tasks[result.source.droppableId][result.draggableId].order;
-      const destinationOrder = result.destination.index;
-      fromColumn !== toColumn
-        ? dispatch(
+      const order = tasks[fromColumn][taskId].order;
+      const destinationOrder = String(result.destination.index);
+      switch (true) {
+        case fromColumn !== toColumn &&
+          compareDroppableContext(result.destination.droppableId, 'column'):
+          dispatch(
             DragNDropTaskThunk({
               boardId,
               fromColumn,
@@ -52,8 +60,11 @@ const Board = () => {
               userId,
               order,
             })
-          )
-        : dispatch(
+          );
+          break;
+        case fromColumn === toColumn &&
+          compareDroppableContext(result.destination.droppableId, 'column'):
+          dispatch(
             DragNDropTaskInOneColumnThunk({
               boardId,
               fromColumn,
@@ -64,14 +75,24 @@ const Board = () => {
               userId,
             })
           );
+          break;
+      }
     }
-    console.log(state.board, 'board');
   };
 
   return (
     <div className="board_page">
       <DragDropContext onDragEnd={onDragEnd}>
-        <ColumnList />
+        <Droppable droppableId={`board/${id}`} type="BOARD">
+          {(provided: DroppableProvided) => {
+            return (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                <ColumnList />
+                {provided.placeholder}
+              </div>
+            );
+          }}
+        </Droppable>
       </DragDropContext>
       <Button
         className="create_column__button"

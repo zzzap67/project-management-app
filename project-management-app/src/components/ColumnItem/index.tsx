@@ -38,18 +38,18 @@ const ColumnItem = (props: IColumn) => {
           }}
         />
       </div>
-      <div className="task_list">
-        <Droppable droppableId={id}>
-          {(provided: DroppableProvided) => {
-            return (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
-                <TaskList columnId={id} {...props} />
-                {provided.placeholder}
-              </div>
-            );
-          }}
-        </Droppable>
-      </div>
+      {/* <div className="task_list"> */}
+      <Droppable droppableId={`column/${id}`} type="TASK">
+        {(provided: DroppableProvided) => {
+          return (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <TaskList columnId={id} {...props} />
+              {provided.placeholder}
+            </div>
+          );
+        }}
+      </Droppable>
+      {/* </div> */}
       <Button
         className="create_task__button"
         buttonName={t('description.forms.createTask')}

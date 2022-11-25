@@ -427,7 +427,7 @@ class Api implements IApi {
             title: values.title,
             description: values.description,
             userId: values.userId,
-            order: values.destinationOrder,
+            order: Number(values.destinationOrder),
             boardId: values.boardId,
             columnId: values.fromColumn,
           },

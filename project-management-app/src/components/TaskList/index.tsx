@@ -62,11 +62,11 @@ const TaskList = React.forwardRef((props: PropsTask, ref) => {
     //   ))}
     // </div>
 
-    <Droppable droppableId={props.columnId}>
+    <Droppable droppableId={`column/${props.columnId}`} type="TASK">
       {(provided) => (
-        <div className="taskList" {...provided.droppableProps} ref={provided.innerRef}>
+        <div className="task_list" {...provided.droppableProps} ref={provided.innerRef}>
           {taskList.map((task, index) => (
-            <Draggable key={task.id} draggableId={task.id} index={index + 1}>
+            <Draggable key={task.id} draggableId={`task/${task.id}`} index={index + 1}>
               {(provided) => (
                 <div
                   ref={provided.innerRef}
