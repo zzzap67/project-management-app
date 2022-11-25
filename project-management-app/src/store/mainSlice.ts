@@ -5,11 +5,11 @@ import {
   getBoardByIdThunk,
   deleteBoardThunk,
   deleteColumnThunk,
-  createNewTaskThunk,
   editBoardThunk,
   deleteTaskThunk,
   getAllTasksThunk,
-  updateTaskThunk,
+  DragNDropTaskThunk,
+  getAllColumnsThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -35,12 +35,16 @@ export const mainSlice = createSlice({
           state.boards[board.id] = board;
         });
       })
-      .addCase(getAllTasksThunk.fulfilled, (state, { payload: tasks }) => {
-        console.log(tasks);
-        tasks.forEach((task) => {
-          state.tasks[task.id] = task;
+      .addCase(getAllColumnsThunk.fulfilled, (state, { payload: columns }) => {
+        columns.forEach((column) => {
+          state.columns[column.id] = column;
         });
       })
+      // .addCase(getAllTasksThunk.fulfilled, (state, { payload: tasks }) => {
+      //   tasks.forEach((task) => {
+      //     state.tasks[task.id] = task;
+      //   });
+      // })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
         state.board = board;
         state.columns = board.columns.reduce((acc: ColumnsRecord, item: IColumn) => {
@@ -59,9 +63,9 @@ export const mainSlice = createSlice({
         delete state.boards[boardID];
       })
 
-      .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
-        state.isLoading = false;
-      })
+      // .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
+      //   state.isLoading = false;
+      // })
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {
         delete state.columns[columnID];
         state.isLoading = false;
@@ -70,15 +74,16 @@ export const mainSlice = createSlice({
         delete state.tasks[values.columnId][values.taskId];
         state.isLoading = false;
       })
-      .addCase(updateTaskThunk.fulfilled, (state, { payload: tasks }) => {
+      .addCase(DragNDropTaskThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        tasks.forEach((task) => {
-          state.tasks[task.id] = task;
-        });
+        console.log(payload);
+        state.boards[payload.board.id] = payload.board;
+
+        // state.tasks[task.id] = task;
       })
-      .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {
-        state.isLoading = false;
-      })
+      // .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {
+      //   state.isLoading = false;
+      // })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),
         (state) => ({

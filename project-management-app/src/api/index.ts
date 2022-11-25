@@ -1,5 +1,14 @@
 import { API_URL } from 'const';
-import { EApiMethods, IBoard, IColumn, ICreateUser, ISignIn, ITask, IUser } from 'types';
+import {
+  EApiMethods,
+  IBoard,
+  IColumn,
+  ICreateUser,
+  ISignIn,
+  ITask,
+  IUser,
+  TaskRecord,
+} from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -232,6 +241,25 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
+  async deleteTaskFromSourceColumn(values: Record<string, string>) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.fromColumn}/tasks/${values.taskId}`,
+        this.setConfig({ method: EApiMethods.delete, body: values.taskId })
+      );
+      if (response.ok) {
+        console.log(values);
+        return values;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {
@@ -341,8 +369,7 @@ class Api implements IApi {
   }
 
   async updateTask(values: Record<string, string>) {
-    let updateTask;
-    //: ITask;
+    let updateTask: ITask;
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.taskId}`,
@@ -352,9 +379,37 @@ class Api implements IApi {
             title: values.title,
             description: values.description,
             userId: values.userId,
-            order: values.newOrder,
+            order: values.order,
             boardId: values.boardId,
             columnId: values.columnId,
+          },
+        })
+      );
+      updateTask = await response.json();
+      if (response.ok) {
+        return updateTask;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async addTaskToDestinationColumn(values: Record<string, string>) {
+    let updateTask: ITask;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.fromColumn}/tasks/${values.taskId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+            order: 1,
+            boardId: values.boardId,
+            columnId: values.toColumn,
           },
         })
       );

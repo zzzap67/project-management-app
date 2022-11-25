@@ -39,6 +39,16 @@ export const updateTaskThunk = createAsyncThunk(
     return await api.updateTask(values);
   }
 );
+
+export const DragNDropTaskThunk = createAsyncThunk(
+  'main/updateTaskOrderThunk',
+  async (values: Record<string, string>) => {
+    return {
+      task: await api.addTaskToDestinationColumn(values),
+      board: await api.getBoardId(values.boardId),
+    };
+  }
+);
 export const getBoardByIdThunk = createAsyncThunk('main/getBoardByIdThunk', async (id: string) => {
   return await api.getBoardId(id);
 });
