@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
   DragNDropTaskInOneColumnThunk,
   DragNDropTaskThunk,
+  getAllBoardsThunk,
   getAllTasksThunk,
   getBoardByIdThunk,
 } from 'store/thunks';
@@ -17,6 +18,7 @@ import './styles.css';
 const Board = () => {
   const { id } = useParams();
   const { tasks } = useAppSelector((state) => state.mainReducer);
+  const state = useAppSelector((state) => state.mainReducer);
   const user = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -63,6 +65,7 @@ const Board = () => {
             })
           );
     }
+    console.log(state.board, 'board');
   };
 
   return (

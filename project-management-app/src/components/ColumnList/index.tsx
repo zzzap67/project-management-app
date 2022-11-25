@@ -11,6 +11,7 @@ const ColumnList = () => {
   const params = useParams();
   const boardId = params.id;
   const columnList = useMemo(() => {
+    console.log(columns);
     return Object.values(columns);
   }, [columns]);
 

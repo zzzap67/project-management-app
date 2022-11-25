@@ -22,7 +22,21 @@ const MAIN_INITIAL_STATE: MainState = {
   task: null,
   userId: null,
 };
-
+const generateHashMapColumn = (columns: IColumn[]) => {
+  return columns.reduce((acc: ColumnsRecord, item: IColumn) => {
+    acc[item.id] = item;
+    return acc;
+  }, {});
+};
+const generateHashMapTasks = (columns: IColumn[]) => {
+  return columns.reduce((acc: TasksRecord, itemColumn: IColumn) => {
+    acc[itemColumn.id] = itemColumn.tasks.reduce((acc: TaskRecord, itemTask: ITask) => {
+      acc[itemTask.id] = itemTask;
+      return acc;
+    }, {});
+    return acc;
+  }, {});
+};
 export const mainSlice = createSlice({
   name: 'main',
   initialState: MAIN_INITIAL_STATE,
@@ -46,17 +60,8 @@ export const mainSlice = createSlice({
       // })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
         state.board = board;
-        state.columns = board.columns.reduce((acc: ColumnsRecord, item: IColumn) => {
-          acc[item.id] = item;
-          return acc;
-        }, {});
-        state.tasks = board.columns.reduce((acc: TasksRecord, itemColumn: IColumn) => {
-          acc[itemColumn.id] = itemColumn.tasks.reduce((acc: TaskRecord, itemTask: ITask) => {
-            acc[itemTask.id] = itemTask;
-            return acc;
-          }, {});
-          return acc;
-        }, {});
+        state.columns = generateHashMapColumn(board.columns);
+        state.tasks = generateHashMapTasks(board.columns);
       })
       .addCase(deleteBoardThunk.fulfilled, (state, { payload: boardID }) => {
         delete state.boards[boardID];
@@ -76,15 +81,14 @@ export const mainSlice = createSlice({
       .addCase(DragNDropTaskThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         console.log(payload);
-        state.boards[payload.board.id] = payload.board;
+        state.tasks = generateHashMapTasks(payload.columns);
 
         // state.tasks[task.id] = task;
       })
       .addCase(DragNDropTaskInOneColumnThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         console.log(payload);
-        state.boards[payload.board.id] = payload.board;
-        state.tasks[payload.task.id] = payload.task;
+        state.tasks = generateHashMapTasks(payload.columns);
 
         // state.tasks[task.id] = task;
       })

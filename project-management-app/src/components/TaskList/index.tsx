@@ -1,10 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import TaskItem from 'components/TaskItem';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { PropsTask } from 'types';
 import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd';
 import { useParams } from 'react-router-dom';
 import './styles.css';
+import { getAllTasksThunk } from 'store/thunks';
 
 const TaskList = React.forwardRef((props: PropsTask, ref) => {
   const { tasks } = useAppSelector((state) => state.mainReducer);
@@ -16,14 +17,15 @@ const TaskList = React.forwardRef((props: PropsTask, ref) => {
     return Object.values(tasks[props.columnId]).sort((a, b) => Number(a.order) - Number(b.order));
   }, [tasks]);
 
-  // useEffect(() => {
-  //   dispatch(
-  //     getAllTasksThunk({
-  //       columnId: props.columnId as string,
-  //       boardId: boardId as string,
-  //     })
-  //   );
-  // }, [dispatch]);
+  useEffect(() => {
+    // dispatch(
+    //   getAllTasksThunk({
+    //     columnId: props.columnId as string,
+    //     boardId: boardId as string,
+    //   })
+    // );
+    console.log(tasks);
+  }, [tasks]);
 
   //const handleOnDragEnd = (result: DropResult) => {
   // if (result.destination) {
