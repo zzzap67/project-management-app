@@ -1,3 +1,6 @@
+import { ru } from 'components/locales/ru';
+import { ChangeEvent } from 'react';
+
 interface MainState {
   isLoading: boolean;
   boards: BoardsRecord;
@@ -34,12 +37,52 @@ interface ITask {
   title: string;
   description: string;
   key: string;
-  ref: any;
+  order: string;
 }
 
 interface PropsTask {
   columnId: string;
 }
+interface FormProps {
+  formData:
+    | typeof ru.REGISTER_FORM
+    | typeof ru.BOARD_FORM
+    | typeof ru.COLUMN_FORM
+    | typeof ru.LOGIN_FORM;
+  errorMessage?: string;
+  className: string;
+  onSubmit: (values: Record<string, string>) => void;
+}
+
+interface formBoardData {
+  inputsData: InputData[];
+  title: string;
+}
+
+interface formRegisterData {
+  inputsData: InputData[];
+  linkTo: string;
+  title: string;
+  buttonText: string;
+  text: string;
+  linkText: string;
+}
+interface InputData {
+  id: string;
+  label: string;
+  type: string;
+}
+interface InputProps {
+  inputData: InputData;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  errors: Record<string, string>;
+}
+interface ButtonProps {
+  className?: string;
+  buttonName?: string;
+  eventHandler?: () => void;
+}
+
 interface ITooltip {
   message: string;
   type: ETooltipType | undefined;
@@ -108,4 +151,10 @@ export {
   ColumnsRecord,
   TasksRecord,
   TaskRecord,
+  formBoardData,
+  FormProps,
+  formRegisterData,
+  InputProps,
+  InputData,
+  ButtonProps,
 };

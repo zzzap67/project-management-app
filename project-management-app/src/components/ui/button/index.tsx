@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonProps } from './Button-interface';
+import { ButtonProps } from 'types';
 import './style.css';
 
 export const Button: React.FunctionComponent<ButtonProps> = (props) => {

@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
-import './style.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOut } from '../../store/userSlice';
 import { ELocalStorage } from '../../types';
+import './style.css';
 
 const Header: React.FunctionComponent = () => {
   const [scrollEvent, setScrollEvent] = useState(false);

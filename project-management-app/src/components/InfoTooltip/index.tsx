@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from 'react';
 import okIcon from '../../assets/icons/icon-ok.svg';
 import errorIcon from '../../assets/icons/icon-error.svg';
-import './styles.css';
 import { ETooltipType, ITooltip } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { createPortal } from 'react-dom';
 import { selectAnyError } from '../../store/selectors';
+import './styles.css';
 
 const initialTooltip: ITooltip = {
   message: '',
