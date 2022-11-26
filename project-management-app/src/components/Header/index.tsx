@@ -7,7 +7,7 @@ import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
 import './style.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOut } from '../../store/userSlice';
-import { ELocalStorage } from '../../types';
+import { ELocalStorage, Languages } from '../../types';
 
 const Header: React.FunctionComponent = () => {
   const [scrollEvent, setScrollEvent] = useState(false);
@@ -19,14 +19,12 @@ const Header: React.FunctionComponent = () => {
   };
 
   window.addEventListener('scroll', () => changeHeaderColor());
-  const [language, setLanguage] = useState('en');
-  const changeLanguage = (language: string) => {
-    if (language === 'en') {
-      setLanguage('ru');
-      i18n.changeLanguage(language);
-    } else if (language === 'ru') {
-      setLanguage('en');
-      i18n.changeLanguage(language);
+  //const [language, setLanguage] = useState('en');
+  const changeLanguage = () => {
+    if (i18n.language === Languages.En) {
+      i18n.changeLanguage(Languages.Ru);
+    } else {
+      i18n.changeLanguage(Languages.En);
     }
   };
 
@@ -63,11 +61,18 @@ const Header: React.FunctionComponent = () => {
           buttonName={t('description.header.signOut')}
           eventHandler={onSignOut}
         />
-        <Button
-          className="change_language_button"
-          buttonName={'EN/RU'}
-          eventHandler={() => changeLanguage(language)}
-        />
+        <div className="language-switch">
+          <input
+            id="language-toggle"
+            className="language-toggle language-toggle-flat"
+            type="checkbox"
+            defaultChecked={i18n.language === Languages.Ru}
+            onClick={() => changeLanguage()}
+          />
+          <label htmlFor="language-toggle" />
+          <span className="on">EN</span>
+          <span className="off">RU</span>
+        </div>
       </div>
     </header>
   ) : (
@@ -88,11 +93,18 @@ const Header: React.FunctionComponent = () => {
         <Link to="/signin">
           <Button className="link-to-sign-in_button" buttonName={t('description.header.signIn')} />
         </Link>
-        <Button
-          className="change_language_button"
-          buttonName={'EN/RU'}
-          eventHandler={() => changeLanguage(language)}
-        />
+        <div className="language-switch">
+          <input
+            id="language-toggle"
+            className="language-toggle language-toggle-flat"
+            type="checkbox"
+            defaultChecked={i18n.language === Languages.Ru}
+            onClick={() => changeLanguage()}
+          />
+          <label htmlFor="language-toggle" />
+          <span className="on">EN</span>
+          <span className="off">RU</span>
+        </div>
       </div>
     </header>
   );

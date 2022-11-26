@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
+import { Languages } from 'types';
 
 i18n
   .use(LanguageDetector)
@@ -9,7 +10,8 @@ i18n
 
   .init({
     debug: true,
-    fallbackLng: 'en',
+    fallbackLng: Languages.En,
+    supportedLngs: [Languages.En, Languages.Ru],
     interpolation: {
       escapeValue: false,
     },
