@@ -17,9 +17,14 @@ const TaskItem = React.forwardRef((props: ITask, ref) => {
   const params = useParams();
   const boardId = params.id;
   const deleteTask = async () => {
-    if (props.columnId && boardId) {
-      await dispatch(deleteTaskThunk({ columnId: props.columnId, taskId: id, boardId }));
-    }
+    await dispatch(
+      deleteTaskThunk({
+        columnId: props.columnId as string,
+        taskId: id,
+        boardId: boardId as string,
+      })
+    );
+
     navigate(`/board/${boardId}`);
   };
 

@@ -7,7 +7,6 @@ import './styles.css';
 const ColumnList = () => {
   const { columns } = useAppSelector((state) => state.mainReducer);
   const columnList = useMemo(() => {
-    console.log(columns);
     return Object.values(columns).sort((a, b) => Number(a.order) - Number(b.order));
   }, [columns]);
 

@@ -88,6 +88,7 @@ export const deleteTaskThunk = createAsyncThunk(
   'main/deleteTaskThunk',
   async (values: Record<string, string>) => {
     return await api.deleteTask(values);
+    // return await api.getBoardId(values.boardId);
   }
 );
 

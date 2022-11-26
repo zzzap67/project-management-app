@@ -70,6 +70,7 @@ export const mainSlice = createSlice({
       .addCase(deleteTaskThunk.fulfilled, (state, { payload: values }) => {
         delete state.tasks[values.columnId][values.taskId];
         state.isLoading = false;
+        // state.tasks = generateHashMapTasks(values.columns);
       })
       .addCase(DragNDropTaskThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
