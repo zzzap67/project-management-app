@@ -32,7 +32,7 @@ i18n
               welcomeButtonName: 'Start doing',
               projectTitle: 'Welcome to Project Management App',
               aboutProject:
-                "Task management is the link between planning to do something and getting it done. This task management software allows you to centrally manage tasks and their timely completion and allow you to easily monitor all work processes and control the work of the team. Let's get organized together!",
+                "Task management is the link between planning to do something and getting it done. This task management software allows you to centrally manage tasks and their timely completion and allow you to easily monitor all work processes and control the work of the team. Let's get organized together! This app has been developed during education on React course of RS School",
             },
             forms: {
               welcome: 'Welcome!',
@@ -90,7 +90,7 @@ i18n
               welcomeButtonName: 'Начать',
               projectTitle: 'Добро пожаловать в Project Management App',
               aboutProject:
-                'Управление задачами — это связующее звено между планированием чего-то и его выполнением. Это программное обеспечение для управления задачами позволяет централизованно управлять задачами и их своевременным выполнением, а также позволяет легко контролировать все рабочие процессы и контролировать работу команды. Давайте организуемся вместе!',
+                'Управление задачами — это связующее звено между планированием чего-то и его выполнением. Это программное обеспечение для управления задачами позволяет централизованно управлять задачами и их своевременным выполнением, а также позволяет легко контролировать все рабочие процессы и контролировать работу команды. Давайте организуемся вместе! Данное приложение было реализовано в рамках обучения на курсе “React” в RS School',
             },
             forms: {
               welcome: 'Добро пожаловать!',
