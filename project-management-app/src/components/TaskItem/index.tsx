@@ -24,7 +24,6 @@ const TaskItem = React.forwardRef((props: ITask, ref) => {
         boardId: boardId as string,
       })
     );
-
     navigate(`/board/${boardId}`);
   };
 

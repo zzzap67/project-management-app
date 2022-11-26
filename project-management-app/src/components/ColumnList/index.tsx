@@ -14,7 +14,12 @@ const ColumnList = () => {
     <div className="columnList">
       {columnList.map((column, index: number) => {
         return (
-          <Droppable key={index + 1} droppableId={`column/${column.id}`} type="COLUMN">
+          <Droppable
+            key={index + 1}
+            droppableId={`column/${column.id}`}
+            type="COLUMN"
+            direction="vertical"
+          >
             {(provided: DroppableProvided) => {
               return (
                 <div ref={provided.innerRef} {...provided.droppableProps}>

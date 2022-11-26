@@ -1,24 +1,17 @@
 .board_page {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
-/* .column_list {
-  display: flex;
-  flex-wrap: wrap;
-  overflow-x: scroll;
-  flex: 1;
-} */
-.column_list::-webkit-scrollbar{
+
+.columnList::-webkit-scrollbar {
   display: none;
 }
 .columnList {
   display: flex;
   gap: 20px;
   padding: 20px 0;
-  overflow-x: auto;
+  overflow-x: scroll;
   flex: 1;
 }

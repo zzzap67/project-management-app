@@ -2,6 +2,15 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 30px;
+  padding: 10px;
   flex: 1;
+  height: 100%;
+}
+.main{
+  width: 100%;
+    margin: 0 auto;
+    flex: 1 1 auto;
+    position: relative;
+    display: flex;
+    overflow: hidden;
 }

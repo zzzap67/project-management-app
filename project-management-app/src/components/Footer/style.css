@@ -1,5 +1,4 @@
 .footer {
-  padding: 20px;
   text-align: center;
   font-size: 17px;
   color: #86a257;
@@ -8,7 +7,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 10px;
+  padding-top: 10px;
   gap: 70px;
 }
 .rss_link,

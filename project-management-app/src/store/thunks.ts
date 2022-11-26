@@ -43,7 +43,6 @@ export const updateTaskThunk = createAsyncThunk(
 export const DragNDropTaskThunk = createAsyncThunk(
   'main/updateTaskColumnThunk',
   async (values: Record<string, string>) => {
-    console.log('between columns');
     await api.addTaskToDestinationColumn(values);
     return await api.getBoardId(values.boardId);
   }
@@ -88,7 +87,6 @@ export const deleteTaskThunk = createAsyncThunk(
   'main/deleteTaskThunk',
   async (values: Record<string, string>) => {
     return await api.deleteTask(values);
-    // return await api.getBoardId(values.boardId);
   }
 );
 

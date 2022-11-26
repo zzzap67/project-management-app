@@ -38,7 +38,7 @@ const ColumnItem = (props: IColumn) => {
           }}
         />
       </div>
-      <Droppable droppableId={`column/${id}`} type="TASK">
+      <Droppable droppableId={`column/${id}`} type="TASK" direction="vertical">
         {(provided: DroppableProvided) => {
           return (
             <div ref={provided.innerRef} {...provided.droppableProps}>

@@ -1,7 +1,7 @@
 import ColumnList from 'components/ColumnList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -54,6 +54,7 @@ const Board = () => {
               userId,
             })
           );
+
           break;
 
         case fromColumn !== toColumn && result.type === 'TASK':
@@ -90,7 +91,7 @@ const Board = () => {
   return (
     <div className="board_page">
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId={`board/${id}`} type="BOARD">
+        <Droppable droppableId={`board/${id}`} type="BOARD" direction="horizontal">
           {(provided: DroppableProvided) => {
             return (
               <div ref={provided.innerRef} {...provided.droppableProps}>
