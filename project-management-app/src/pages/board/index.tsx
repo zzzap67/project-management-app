@@ -6,19 +6,16 @@ import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
+  DragNDropColumnThunk,
   DragNDropTaskInOneColumnThunk,
   DragNDropTaskThunk,
-  getAllBoardsThunk,
-  getAllTasksThunk,
   getBoardByIdThunk,
 } from 'store/thunks';
-import { ITask } from 'types';
 import './styles.css';
 
 const Board = () => {
   const { id } = useParams();
-  const { tasks } = useAppSelector((state) => state.mainReducer);
-  const state = useAppSelector((state) => state.mainReducer);
+  const { tasks, columns } = useAppSelector((state) => state.mainReducer);
   const user = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -31,24 +28,35 @@ const Board = () => {
   const getClearId = (str: string) => {
     return str.replace(/\w*\//, '');
   };
-  const compareDroppableContext = (str: string, compareStr: string) => {
-    return str.includes(compareStr);
-  };
   const onDragEnd = (result: DropResult) => {
-    console.log(result);
     if (result.destination && id) {
       const boardId = id;
       const fromColumn = getClearId(result.source.droppableId);
       const toColumn = getClearId(result.destination.droppableId);
       const taskId = getClearId(result.draggableId);
-      const title = tasks[fromColumn][taskId].title;
-      const description = tasks[fromColumn][taskId].description;
+      const title = tasks[fromColumn][taskId]?.title;
+      const description = tasks[fromColumn][taskId]?.description;
       const userId = user.id;
-      const order = tasks[fromColumn][taskId].order;
+      const order = tasks[fromColumn][taskId]?.order;
       const destinationOrder = String(result.destination.index);
+      const columnId = getClearId(result.draggableId);
+      const columnTitle = columns[columnId]?.title;
+      const columnDestinationOrder = String(result.destination.index);
+
       switch (true) {
-        case fromColumn !== toColumn &&
-          compareDroppableContext(result.destination.droppableId, 'column'):
+        case result.type === 'COLUMN':
+          dispatch(
+            DragNDropColumnThunk({
+              boardId,
+              columnId,
+              columnDestinationOrder,
+              columnTitle,
+              userId,
+            })
+          );
+          break;
+
+        case fromColumn !== toColumn && result.type === 'TASK':
           dispatch(
             DragNDropTaskThunk({
               boardId,
@@ -62,8 +70,7 @@ const Board = () => {
             })
           );
           break;
-        case fromColumn === toColumn &&
-          compareDroppableContext(result.destination.droppableId, 'column'):
+        case fromColumn === toColumn && result.type === 'TASK':
           dispatch(
             DragNDropTaskInOneColumnThunk({
               boardId,

@@ -1,10 +1,10 @@
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import ModalConfirmation from 'components/ModalConfirmation';
 import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useState } from 'react';
-import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
 import { deleteColumnThunk } from 'store/thunks';
 import { IColumn } from 'types';
@@ -38,7 +38,6 @@ const ColumnItem = (props: IColumn) => {
           }}
         />
       </div>
-      {/* <div className="task_list"> */}
       <Droppable droppableId={`column/${id}`} type="TASK">
         {(provided: DroppableProvided) => {
           return (
@@ -49,7 +48,6 @@ const ColumnItem = (props: IColumn) => {
           );
         }}
       </Droppable>
-      {/* </div> */}
       <Button
         className="create_task__button"
         buttonName={t('description.forms.createTask')}

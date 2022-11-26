@@ -9,6 +9,8 @@ import {
   DragNDropTaskThunk,
   getAllColumnsThunk,
   DragNDropTaskInOneColumnThunk,
+  DragNDropColumnThunk,
+  getAllTasksThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -53,11 +55,6 @@ export const mainSlice = createSlice({
           state.columns[column.id] = column;
         });
       })
-      // .addCase(getAllTasksThunk.fulfilled, (state, { payload: tasks }) => {
-      //   tasks.forEach((task) => {
-      //     state.tasks[task.id] = task;
-      //   });
-      // })
       .addCase(getBoardByIdThunk.fulfilled, (state, { payload: board }) => {
         state.board = board;
         state.columns = generateHashMapColumn(board.columns);
@@ -66,10 +63,6 @@ export const mainSlice = createSlice({
       .addCase(deleteBoardThunk.fulfilled, (state, { payload: boardID }) => {
         delete state.boards[boardID];
       })
-
-      // .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
-      //   state.isLoading = false;
-      // })
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {
         delete state.columns[columnID];
         state.isLoading = false;
@@ -80,21 +73,17 @@ export const mainSlice = createSlice({
       })
       .addCase(DragNDropTaskThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        console.log(payload);
         state.tasks = generateHashMapTasks(payload.columns);
-
-        // state.tasks[task.id] = task;
       })
       .addCase(DragNDropTaskInOneColumnThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        console.log(payload);
         state.tasks = generateHashMapTasks(payload.columns);
-
-        // state.tasks[task.id] = task;
       })
-      // .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {
-      //   state.isLoading = false;
-      // })
+      .addCase(DragNDropColumnThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        console.log(payload);
+        state.columns = generateHashMapColumn(payload.columns);
+      })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),
         (state) => ({

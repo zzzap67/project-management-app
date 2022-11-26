@@ -145,8 +145,7 @@ class Api implements IApi {
   }
 
   async getAllTasks(values: Record<string, string>) {
-    let foundData;
-    // : ITask[] = [];
+    let foundData: ITask[] = [];
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks`,
@@ -222,7 +221,6 @@ class Api implements IApi {
         this.setConfig({ method: EApiMethods.delete, body: values.taskId })
       );
       if (response.ok) {
-        console.log(values);
         return values;
       }
 
@@ -240,7 +238,6 @@ class Api implements IApi {
         this.setConfig({ method: EApiMethods.delete, body: values.taskId })
       );
       if (response.ok) {
-        console.log(values);
         return values;
       }
 
@@ -444,7 +441,30 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+  async updateColumnOrder(values: Record<string, string>) {
+    let updateColumn: IColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.columnTitle,
+            order: Number(values.columnDestinationOrder),
+          },
+        })
+      );
+      updateColumn = await response.json();
+      if (response.ok) {
+        return updateColumn;
+      }
 
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
   async editBoard(values: Record<string, string>) {
     let editBoard;
     try {

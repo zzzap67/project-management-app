@@ -1,18 +1,14 @@
 import ColumnItem from 'components/ColumnItem';
 import { useMemo } from 'react';
-import './styles.css';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
-import { useParams } from 'react-router-dom';
+import './styles.css';
 
 const ColumnList = () => {
   const { columns } = useAppSelector((state) => state.mainReducer);
-  const dispatch = useAppDispatch();
-  const params = useParams();
-  const boardId = params.id;
   const columnList = useMemo(() => {
     console.log(columns);
-    return Object.values(columns);
+    return Object.values(columns).sort((a, b) => Number(a.order) - Number(b.order));
   }, [columns]);
 
   return (
