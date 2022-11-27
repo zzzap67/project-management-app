@@ -46,32 +46,32 @@ export const ru = {
       },
     ],
   },
-  USER_PROFILE: {
-    title: 'editUser',
-    buttonText: 'save',
-    buttonBoardText: 'Сохранить',
-    cancelButtonText: 'Отменить',
-    text: '',
-    linkText: '',
-    linkTo: '',
-    inputsData: [
-      {
-        id: 'name',
-        label: 'Имя',
-        type: 'text',
-      },
-      {
-        id: 'login',
-        label: 'Логин',
-        type: 'text',
-      },
-      {
-        id: 'password',
-        label: 'Пароль',
-        type: 'password',
-      },
-    ],
-  },
+  // USER_PROFILE: {
+  //   title: 'editUser',
+  //   buttonText: 'save',
+  //   buttonBoardText: 'Сохранить',
+  //   cancelButtonText: 'Отменить',
+  //   text: '',
+  //   linkText: '',
+  //   linkTo: '',
+  //   inputsData: [
+  //     {
+  //       id: 'name',
+  //       label: 'Имя',
+  //       type: 'text',
+  //     },
+  //     {
+  //       id: 'login',
+  //       label: 'Логин',
+  //       type: 'text',
+  //     },
+  //     {
+  //       id: 'password',
+  //       label: 'Пароль',
+  //       type: 'password',
+  //     },
+  //   ],
+  // },
   BOARD_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',

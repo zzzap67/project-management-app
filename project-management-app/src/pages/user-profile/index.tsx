@@ -3,6 +3,7 @@ import './styles.css';
 import { useNavigate } from 'react-router-dom';
 import { useFormWithValidation } from '../../utils';
 import { useAppSelector } from '../../store/hooks';
+import { useTranslation } from 'react-i18next';
 
 function Profile() {
   const [isEditable, setIsEditable] = useState(false);
@@ -12,6 +13,7 @@ function Profile() {
   // const { setTooltip } = useContext(InfoTooltipContext);
   const navigate = useNavigate();
   const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { t } = useTranslation('translation');
 
   const handleEdit = () => {
     setIsEditable(true);
@@ -64,17 +66,17 @@ function Profile() {
   return (
     <div className="profile">
       <form className="profile-form" onSubmit={() => {}}>
-        <h2 className="profile-form__title">{`Привет, ${user.name}!`}</h2>
+        <h2 className="profile-form__title">{`${t(`description.forms.hello`)}, ${user.name}!`}</h2>
         <div className="profile-form__input-wrapper">
           <label htmlFor="name" className="profile-form__label">
-            Имя
+            {t(`description.forms.inputs.nameLabel`)}
           </label>
           <input
             type="text"
             className="profile-form__input"
             id="name"
             name="name"
-            placeholder="Введите имя"
+            placeholder={t(`description.forms.inputs.namePlaceholder`)}
             required
             onChange={handleChange}
             value={!isEditable ? user.name : undefined}
@@ -83,22 +85,39 @@ function Profile() {
         </div>
         {/*{errors.name && <p className="profile-form__input-error">{errors.name}</p>}*/}
         <div className="profile-form__input-wrapper">
-          <label htmlFor="email" className="profile-form__label">
-            E-mail
+          <label htmlFor="login" className="profile-form__label">
+            {t(`description.forms.inputs.loginLabel`)}
           </label>
           <input
-            type="email"
+            type="text"
             className="profile-form__input"
-            id="email"
-            name="email"
-            placeholder="Введите email"
+            id="login"
+            name="login"
+            placeholder={t(`description.forms.inputs.loginPlaceholder`)}
             required
             onChange={handleChange}
-            value={!isEditable ? 'user.email' : undefined}
+            value={!isEditable ? user.login : undefined}
             disabled={!isEditable}
           />
         </div>
-        {/*{errors.email && <p className="profile-form__input-error">{errors.email}</p>}*/}
+        {/*{errors.login && <p className="profile-form__input-error">{errors.login}</p>}*/}
+        <div className="profile-form__input-wrapper">
+          <label htmlFor="password" className="profile-form__label">
+            {t(`description.forms.inputs.passwordLabel`)}
+          </label>
+          <input
+            type="password"
+            className="profile-form__input"
+            id="password"
+            name="password"
+            placeholder={t(`description.forms.inputs.passwordPlaceholder`)}
+            required
+            onChange={handleChange}
+            value=""
+            disabled={!isEditable}
+          />
+        </div>
+        {/*{errors.login && <p className="profile-form__input-error">{errors.login}</p>}*/}
         <div className="profile-form__buttons-wrapper">
           {!isEditable && (
             <button
@@ -106,7 +125,7 @@ function Profile() {
               type="button"
               onClick={handleEdit}
             >
-              Редактировать
+              {t(`description.forms.edit`)}
             </button>
           )}
           {message && <p className="profile-form__error">{message}</p>}
@@ -116,7 +135,7 @@ function Profile() {
               type="submit"
               disabled={isValuesSame() || !isValid}
             >
-              Сохранить
+              {t(`description.forms.save`)}
             </button>
           )}
           {!isEditable && (
@@ -125,7 +144,7 @@ function Profile() {
               className="profile-form__button button profile-form__button_type_exit"
               onClick={handleExit}
             >
-              Выйти из аккаунта
+              {t(`description.forms.delete`)}
             </button>
           )}
         </div>
