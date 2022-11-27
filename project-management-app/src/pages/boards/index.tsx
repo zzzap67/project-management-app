@@ -5,6 +5,7 @@ import { getAllBoardsThunk } from '../../store/thunks';
 import Button from 'components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import { t } from 'i18next';
 
 const Boards = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,11 @@ const Boards = () => {
   return (
     <>
       <div className="boards">
+        <Button
+          className="go_back__button"
+          buttonName={t('description.forms.goBackButton')}
+          eventHandler={() => navigate(`/`)}
+        />
         <BoardsList />
         <Button
           className="create_board__button"

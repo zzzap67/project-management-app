@@ -1,7 +1,7 @@
 import ColumnList from 'components/ColumnList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -90,6 +90,11 @@ const Board = () => {
 
   return (
     <div className="board_page">
+      <Button
+        className="go_back__button"
+        buttonName={t('description.forms.goBackButton')}
+        eventHandler={() => navigate(`/boards`)}
+      />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={`board/${id}`} type="BOARD" direction="horizontal">
           {(provided: DroppableProvided) => {
