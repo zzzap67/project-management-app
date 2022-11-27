@@ -221,7 +221,6 @@ class Api implements IApi {
         this.setConfig({ method: EApiMethods.delete, body: values.taskId })
       );
       if (response.ok) {
-        console.log(values);
         return values;
       }
 
@@ -342,13 +341,12 @@ class Api implements IApi {
     let editBoard;
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${values.boardId}`,
+        `${this.baseUrl}/boards/${values.id}`,
         this.setConfig({
           method: 'PUT',
           body: {
             title: values.title,
             description: values.description,
-            userId: values.userId,
           },
         })
       );

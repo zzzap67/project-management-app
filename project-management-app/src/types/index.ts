@@ -94,6 +94,12 @@ enum ELocalStorage {
   userId = 'userId',
 }
 
+enum EItemType {
+  board = 'editBoard',
+  column = 'column',
+  task = 'task',
+}
+
 export {
   MainState,
   IBoard,
@@ -114,4 +120,5 @@ export {
   TasksRecord,
   TaskRecord,
   Languages,
+  EItemType,
 };

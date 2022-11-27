@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, Dispatch, SetStateAction } from 'react';
 import './styles.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Input, { InputData } from '../Input/';
@@ -15,6 +15,7 @@ export interface FormProps {
   errorMessage?: string;
   className: string;
   onSubmit: (values: Record<string, string>) => void;
+  onCancel?: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface formBoardData {
@@ -31,7 +32,7 @@ export interface formRegisterData {
   linkText: string;
 }
 
-const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
+const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsData, linkTo, title, buttonText, text, linkText } = formData;
   const { t } = useTranslation('translation');
@@ -48,6 +49,11 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
     onSubmit(values);
   };
 
+  const closeModal = (e: SyntheticEvent) => {
+    e.preventDefault();
+    onCancel?.(false);
+  };
+
   return (
     <form className={`form ${className}`} onSubmit={handleSubmit}>
       <h2 className={`form__title ${className}__title `}>{t(`description.forms.${title}`)!}</h2>
@@ -59,7 +65,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
       {(className.includes('register') || className.includes('login')) && (
         <>
           <div
-            className={`form__button-wrapper 
+            className={`form__button-wrapper
         ${
           inputsData.length === 3
             ? 'form__button-wrapper_type_near'
@@ -88,9 +94,13 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
           </button>
           <button
             className="cancel__button button"
-            onClick={() => {
-              navigate(linkTo), console.log('go to boards');
-            }}
+            onClick={
+              onCancel
+                ? closeModal
+                : () => {
+                    navigate(linkTo), console.log('go to boards');
+                  }
+            }
           >
             {t('description.forms.cancelButtonText')}
           </button>

@@ -1,14 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import BoardsList from 'components/BoardsList';
 import { useAppDispatch } from '../../store/hooks';
-import { getAllBoardsThunk } from '../../store/thunks';
+import { getAllBoardsThunk, createNewBoardThunk } from '../../store/thunks';
 import Button from 'components/ui/button';
-import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import ModalAction from 'components/ModalAction';
+import { EItemType } from 'types';
 
 const Boards = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const [showModalAction, setShowModalAction] = useState(false);
+
+  const handleModalAction = () => {
+    setShowModalAction(true);
+  };
+
+  const createBoard = async (values: Record<string, string>) => {
+    await dispatch(createNewBoardThunk(values));
+    setShowModalAction(false);
+  };
 
   useEffect(() => {
     dispatch(getAllBoardsThunk());
@@ -21,8 +31,22 @@ const Boards = () => {
         <Button
           className="create_board__button"
           buttonName="+"
-          eventHandler={() => navigate('/boards/create')}
+          eventHandler={() => {
+            handleModalAction();
+          }}
         />
+        {showModalAction && (
+          <ModalAction
+            id=""
+            title=""
+            description=""
+            itemType={EItemType.board}
+            isReadOnly={false}
+            isDescriptionNeeded={true}
+            setShowModalAction={setShowModalAction}
+            onSubmit={createBoard}
+          />
+        )}
       </div>
     </>
   );

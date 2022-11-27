@@ -6,6 +6,7 @@ import {
   deleteBoardThunk,
   deleteColumnThunk,
   createNewTaskThunk,
+  createNewBoardThunk,
   editBoardThunk,
   deleteTaskThunk,
 } from './thunks';
@@ -50,7 +51,10 @@ export const mainSlice = createSlice({
       .addCase(deleteBoardThunk.fulfilled, (state, { payload: boardID }) => {
         delete state.boards[boardID];
       })
-
+      .addCase(createNewBoardThunk.fulfilled, (state, { payload: board }) => {
+        state.boards[board.id] = board;
+        state.isLoading = false;
+      })
       .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
         state.isLoading = false;
       })
@@ -64,6 +68,8 @@ export const mainSlice = createSlice({
       })
       .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {
         state.isLoading = false;
+        state.boards[board.id].title = board.title;
+        state.boards[board.id].description = board.description;
       })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),

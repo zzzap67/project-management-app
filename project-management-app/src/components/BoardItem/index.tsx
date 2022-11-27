@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IBoard } from 'types';
+import { EItemType, IBoard } from 'types';
 import { Link, useNavigate } from 'react-router-dom';
 import ModalConfirmation from 'components/ModalConfirmation';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
@@ -9,17 +9,28 @@ import { deleteBoardThunk, editBoardThunk } from '../../store/thunks';
 import { useAppDispatch } from '../../store/hooks';
 import './styles.css';
 import { t } from 'i18next';
+import ModalEdit from 'components/ModalEdit';
 
 const BoardItem = (props: IBoard) => {
   const { id, title, description } = props;
   const [showModal, setShowModal] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+
   const dispatch = useAppDispatch();
   const deleteBoard = async () => {
     dispatch(deleteBoardThunk(id));
   };
 
+  const editBoard = async (newTitle: string, newDescription: string) => {
+    await dispatch(editBoardThunk({ id, title: newTitle, description: newDescription }));
+  };
+
   const handleModalQuestion = () => {
     setShowModal(true);
+  };
+
+  const handleModalEdit = () => {
+    setShowModalEdit(true);
   };
 
   return (
@@ -28,9 +39,13 @@ const BoardItem = (props: IBoard) => {
         <TaskBoard className="task-board" />
         <div className="info">
           <div className="change_board">
-            <Link className="edit_link" to={`/boards/${id}/edit`}>
-              <Edit className="edit_board" />
-            </Link>
+            <Edit
+              className="edit_board"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleModalEdit();
+              }}
+            />
             <Delete
               className="delete_board"
               onClick={(e) => {
@@ -48,6 +63,18 @@ const BoardItem = (props: IBoard) => {
               confirmQuestion={<span>{`${t('description.forms.deleteQuestion')} ${title}?`}</span>}
               setShowModal={setShowModal}
               onConfirm={deleteBoard}
+            />
+          )}
+          {showModalEdit && (
+            <ModalEdit
+              id={`${id}`}
+              title={`${title}`}
+              description={`${description}`}
+              itemType={EItemType.board}
+              isReadOnly={false}
+              isDescriptionNeeded={true}
+              setShowModalEdit={setShowModalEdit}
+              onConfirm={editBoard}
             />
           )}
         </div>
