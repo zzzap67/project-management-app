@@ -8,9 +8,8 @@
   border: 2px solid rgb(212, 218, 200);
   border-radius: 15px;
   box-shadow: 5px 3px 10px 5px rgb(212, 218, 200);
-  /* height: fit-content; */
   min-height: 100px;
- max-height: 400px;
+  max-height: 400px;
 }
 .column_info {
   display: flex;
@@ -19,4 +18,14 @@
 }
 .column_title {
   font-size: 30px;
+}
+@media (max-width: 440px) {
+  .column_item {
+    width: 300px;
+    padding: 7px 7px;
+  }
+  .task_list {
+    padding: 0 ;
+  }
+  
 }
