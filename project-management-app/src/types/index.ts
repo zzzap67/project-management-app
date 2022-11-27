@@ -1,3 +1,8 @@
+enum Languages {
+  En = 'en',
+  Ru = 'ru',
+}
+
 interface MainState {
   isLoading: boolean;
   boards: BoardsRecord;
@@ -9,6 +14,7 @@ interface MainState {
   error: string | null;
   userId: string | null;
 }
+
 type ColumnsRecord = Record<IColumn['id'], IColumn>;
 type BoardsRecord = Record<IBoard['id'], IBoard>;
 type TasksRecord = Record<IColumn['id'], TaskRecord>;
@@ -34,7 +40,6 @@ interface ITask {
   title: string;
   description: string;
   key: string;
-  ref: any;
 }
 
 interface PropsTask {
@@ -108,4 +113,5 @@ export {
   ColumnsRecord,
   TasksRecord,
   TaskRecord,
+  Languages,
 };
