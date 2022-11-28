@@ -93,6 +93,29 @@ class Api implements IApi {
     }
   }
 
+  async putUser(body: ICreateUser & Record<'id', string>) {
+    let foundData: IUser | null = null;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/users/${body.id}`,
+        this.setConfig({
+          method: EApiMethods.put,
+          body: { name: body.name, login: body.login, password: body.password },
+        })
+      );
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async getUserById(id: string) {
     let foundData: IUser | null = null;
     try {
@@ -198,6 +221,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async deleteColumn(values: Record<string, string>) {
     try {
       const response = await fetch(
@@ -214,6 +238,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async deleteTask(values: Record<string, string>) {
     try {
       const response = await fetch(
@@ -231,6 +256,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {
@@ -270,6 +296,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewBoard(values: Record<string, string>) {
     let newBoard: IBoard;
     try {
@@ -291,6 +318,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewColumn(values: Record<string, string>) {
     let newColumn: IColumn;
     try {
@@ -312,6 +340,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewTask(values: Record<string, string>) {
     let newTask;
     //: ITask;
@@ -338,6 +367,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async editBoard(values: Record<string, string>) {
     let editBoard;
     try {

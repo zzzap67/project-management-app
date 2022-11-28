@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserState } from '../types';
-import { signIn, signUp, userById } from './thunks';
+import { signIn, signUp, updateUser, userById } from './thunks';
 
 const initialState: IUserState = {
   isAuth: false,
@@ -28,6 +28,11 @@ export const userSlice = createSlice({
       }))
       .addCase(signIn.fulfilled, (state) => ({
         ...state,
+        isAuth: true,
+      }))
+      .addCase(updateUser.fulfilled, (state, { payload }) => ({
+        ...state,
+        ...payload,
         isAuth: true,
       }))
       .addCase(userById.fulfilled, (state, { payload }) => ({

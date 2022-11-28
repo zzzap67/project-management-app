@@ -13,6 +13,13 @@ export const signIn = createAsyncThunk('user/signIn', async (body: Omit<ICreateU
   return await api.postSignIn(body);
 });
 
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (body: ICreateUser & Record<'id', string>) => {
+    return await api.putUser(body);
+  }
+);
+
 export const userById = createAsyncThunk('user/userById', async (id: string) => {
   return await api.getUserById(id);
 });
