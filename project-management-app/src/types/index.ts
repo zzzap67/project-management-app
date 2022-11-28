@@ -1,6 +1,11 @@
 import { ru } from 'components/locales/ru';
 import { ChangeEvent } from 'react';
 
+enum Languages {
+  En = 'en',
+  Ru = 'ru',
+}
+
 interface MainState {
   isLoading: boolean;
   boards: BoardsRecord;
@@ -12,6 +17,7 @@ interface MainState {
   error: string | null;
   userId: string | null;
 }
+
 type ColumnsRecord = Record<IColumn['id'], IColumn>;
 type BoardsRecord = Record<IBoard['id'], IBoard>;
 type TasksRecord = Record<IColumn['id'], TaskRecord>;
@@ -158,4 +164,5 @@ export {
   InputProps,
   InputData,
   ButtonProps,
+  Languages,
 };
