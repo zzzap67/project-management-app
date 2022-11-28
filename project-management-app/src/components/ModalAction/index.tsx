@@ -42,9 +42,12 @@ function ModalAction({
       registerData = ru.COLUMN_FORM;
       className = 'form_column';
       break;
+    case EItemType.createTask:
+      registerData = ru.TASK_FORM;
+      className = 'form_task';
+      break;
   }
 
-  ru.BOARD_FORM;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

@@ -100,6 +100,7 @@ enum EItemType {
   task = 'task',
   createBoard = 'createBoard',
   createColumn = 'createColumn',
+  createTask = 'createTask',
 }
 
 interface IEditColumn {

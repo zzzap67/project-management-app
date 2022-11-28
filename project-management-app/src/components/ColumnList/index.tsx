@@ -13,6 +13,7 @@ const ColumnList = () => {
     console.log('bbb', c);
     return c;
   }, [columns]);
+
   /*
   const [list, setList] = useState(columnList);
 
@@ -29,7 +30,6 @@ const ColumnList = () => {
   return (
     <div className="columnList">
       {columnList.map((column) => {
-        console.log(column);
         return <ColumnItem {...column} key={column.id} />;
       })}
     </div>

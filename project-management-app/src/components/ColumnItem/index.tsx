@@ -6,9 +6,11 @@ import React from 'react';
 import { useState, createRef, ChangeEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks';
-import { deleteColumnThunk, editColumnThunk } from 'store/thunks';
+import { deleteColumnThunk, editColumnThunk, createNewTaskThunk } from 'store/thunks';
 import { IColumn, IEditColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
+import ModalAction from 'components/ModalAction';
+import { EItemType, ELocalStorage } from 'types';
 import './styles.css';
 
 const ColumnItem = (props: IColumn) => {
@@ -21,6 +23,28 @@ const ColumnItem = (props: IColumn) => {
   const navigate = useNavigate();
   const params = useParams();
   const boardId = params.id;
+
+  const [showModalActionTask, setShowModalActionTask] = useState(false);
+
+  const handleModalActionTask = () => {
+    setShowModalActionTask(true);
+  };
+
+  const createTask = async (values: Record<string, string>) => {
+    const uID = localStorage.getItem(ELocalStorage.userId);
+    if (boardId && uID) {
+      await dispatch(
+        createNewTaskThunk({
+          title: values.title,
+          description: values.description,
+          columnId: id,
+          boardId,
+          userId: uID,
+        })
+      );
+    }
+    setShowModalActionTask(false);
+  };
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewTitle(event.target.value);
@@ -97,13 +121,25 @@ const ColumnItem = (props: IColumn) => {
       <Button
         className="create_task__button"
         buttonName={t('description.forms.createTask')}
-        eventHandler={() => navigate(`/board/${boardId}/column/${id}/task`)}
+        eventHandler={() => handleModalActionTask()}
       />
       {showModal && (
         <ModalConfirmation
           confirmQuestion={<span>{`${t('description.forms.deleteQuestion')} ${title}?`}</span>}
           setShowModal={setShowModal}
           onConfirm={deleteColumn}
+        />
+      )}
+      {showModalActionTask && (
+        <ModalAction
+          id=""
+          title=""
+          description=""
+          formType={EItemType.createTask}
+          isReadOnly={false}
+          isDescriptionNeeded={true}
+          setShowModalAction={setShowModalActionTask}
+          onSubmit={createTask}
         />
       )}
     </div>

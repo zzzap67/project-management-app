@@ -9,6 +9,9 @@ const TaskList = React.forwardRef((props: PropsTask, ref) => {
   const { tasks } = useAppSelector((state) => state.mainReducer);
 
   const taskList = useMemo(() => {
+    console.log('memo', tasks);
+    console.log(props.columnId);
+    console.log(tasks[props.columnId]);
     return Object.values(tasks[props.columnId]);
   }, [tasks]);
   const [list, setList] = useState(taskList);
@@ -32,7 +35,7 @@ const TaskList = React.forwardRef((props: PropsTask, ref) => {
       <Droppable droppableId="task">
         {(provided) => (
           <div className="taskList" {...provided.droppableProps} ref={provided.innerRef}>
-            {list.map((task, index) => (
+            {taskList.map((task, index) => (
               <Draggable key={task.id} draggableId={task.id} index={index}>
                 {(provided) => (
                   <div
