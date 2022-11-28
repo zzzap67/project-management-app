@@ -10,16 +10,20 @@ import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
 
 const TaskItem = React.forwardRef((props: ITask, ref) => {
-  const { id, title, description } = props;
+  const { id, title } = props;
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
   const boardId = params.id;
   const deleteTask = async () => {
-    if (props.columnId && boardId) {
-      await dispatch(deleteTaskThunk({ columnId: props.columnId, taskId: id, boardId }));
-    }
+    await dispatch(
+      deleteTaskThunk({
+        columnId: props.columnId as string,
+        taskId: id,
+        boardId: boardId as string,
+      })
+    );
     navigate(`/board/${boardId}`);
   };
 

@@ -9,7 +9,6 @@
   background-color: #b2e94465;
   border: 1px dashed #9fdf2198;
   border-radius: 15px;
-  cursor: move;
 
   transition: background-color 0.5s;
 }

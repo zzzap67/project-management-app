@@ -37,7 +37,7 @@ a {
   gap: 15px;
   padding: 5px;
 }
-@media (max-width: 500px) {
+@media (max-width: 690px) {
   .header_white,
   .header_color {
     justify-content: center;
