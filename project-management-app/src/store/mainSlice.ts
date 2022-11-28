@@ -62,12 +62,7 @@ export const mainSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
-        console.log(task);
-        console.log(state.tasks);
         state.tasks[task.columnId][task.id] = task;
-        console.log('after');
-        console.log(task);
-        console.log(state.tasks);
         state.isLoading = false;
       })
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {
