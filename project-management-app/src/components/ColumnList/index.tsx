@@ -8,8 +8,12 @@ const ColumnList = () => {
   const { columns } = useAppSelector((state) => state.mainReducer);
 
   const columnList = useMemo(() => {
-    return Object.values(columns);
+    console.log('usememo', columns);
+    const c = Object.values(columns);
+    console.log('bbb', c);
+    return c;
   }, [columns]);
+  /*
   const [list, setList] = useState(columnList);
 
   function handleOnDragEnd(result) {
@@ -21,12 +25,15 @@ const ColumnList = () => {
       setList(items);
     }
   }
+  */
   return (
     <div className="columnList">
       {columnList.map((column) => {
+        console.log(column);
         return <ColumnItem {...column} key={column.id} />;
       })}
     </div>
+
     // <DragDropContext onDragEnd={handleOnDragEnd}>
     //   <Droppable droppableId="column">
     //     {(provided) => (

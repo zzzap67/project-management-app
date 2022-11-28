@@ -8,7 +8,9 @@ import {
   createNewTaskThunk,
   createNewBoardThunk,
   editBoardThunk,
+  editColumnThunk,
   deleteTaskThunk,
+  createNewColumnThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -55,6 +57,10 @@ export const mainSlice = createSlice({
         state.boards[board.id] = board;
         state.isLoading = false;
       })
+      .addCase(createNewColumnThunk.fulfilled, (state, { payload: column }) => {
+        state.columns[column.id] = column;
+        state.isLoading = false;
+      })
       .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
         state.isLoading = false;
       })
@@ -70,6 +76,10 @@ export const mainSlice = createSlice({
         state.isLoading = false;
         state.boards[board.id].title = board.title;
         state.boards[board.id].description = board.description;
+      })
+      .addCase(editColumnThunk.fulfilled, (state, { payload: column }) => {
+        state.isLoading = false;
+        state.columns[column.id].title = column.title;
       })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),

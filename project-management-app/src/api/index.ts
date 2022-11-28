@@ -1,5 +1,14 @@
 import { API_URL } from 'const';
-import { EApiMethods, IBoard, IColumn, ICreateUser, ISignIn, ITask, IUser } from 'types';
+import {
+  EApiMethods,
+  IBoard,
+  IColumn,
+  ICreateUser,
+  IEditColumn,
+  ISignIn,
+  ITask,
+  IUser,
+} from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -301,6 +310,7 @@ class Api implements IApi {
         })
       );
       newColumn = await response.json();
+      newColumn.tasks = [];
       if (response.ok) {
         return newColumn;
       }
@@ -353,6 +363,30 @@ class Api implements IApi {
       editBoard = await response.json();
       if (response.ok) {
         return editBoard;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async editColumn(values: IEditColumn) {
+    let editColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.id}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            order: values.order,
+          },
+        })
+      );
+      editColumn = await response.json();
+      if (response.ok) {
+        return editColumn;
       }
 
       throw response.body;

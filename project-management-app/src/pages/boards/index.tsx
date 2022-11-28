@@ -40,7 +40,7 @@ const Boards = () => {
             id=""
             title=""
             description=""
-            itemType={EItemType.board}
+            formType={EItemType.createBoard}
             isReadOnly={false}
             isDescriptionNeeded={true}
             setShowModalAction={setShowModalAction}

@@ -29,8 +29,8 @@ interface IBoard {
 interface IColumn {
   id: string;
   title: string;
-  description: string;
   key: string;
+  order: number;
   tasks: ITask[];
 }
 interface ITask {
@@ -98,6 +98,15 @@ enum EItemType {
   board = 'editBoard',
   column = 'column',
   task = 'task',
+  createBoard = 'createBoard',
+  createColumn = 'createColumn',
+}
+
+interface IEditColumn {
+  title: string;
+  boardId: string;
+  id: string;
+  order: number;
 }
 
 export {
@@ -121,4 +130,5 @@ export {
   TaskRecord,
   Languages,
   EItemType,
+  IEditColumn,
 };

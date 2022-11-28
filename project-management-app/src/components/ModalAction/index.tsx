@@ -10,7 +10,7 @@ import { useAppDispatch } from 'store/hooks';
 import { createNewBoardThunk } from 'store/thunks';
 
 interface IModalAction {
-  itemType: EItemType;
+  formType: EItemType;
   isReadOnly: boolean;
   isDescriptionNeeded: boolean;
   id: string;
@@ -21,7 +21,7 @@ interface IModalAction {
 }
 
 function ModalAction({
-  itemType,
+  formType,
   isReadOnly,
   isDescriptionNeeded,
   id,
@@ -30,7 +30,21 @@ function ModalAction({
   setShowModalAction,
   onSubmit,
 }: IModalAction) {
-  const registerData = ru.BOARD_FORM;
+  let registerData = ru.BOARD_FORM || ru.COLUMN_FORM;
+  let className = '';
+
+  switch (formType) {
+    case EItemType.createBoard:
+      registerData = ru.BOARD_FORM;
+      className = 'form_board';
+      break;
+    case EItemType.createColumn:
+      registerData = ru.COLUMN_FORM;
+      className = 'form_column';
+      break;
+  }
+
+  ru.BOARD_FORM;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -45,7 +59,7 @@ function ModalAction({
         <Form
           formData={registerData}
           errorMessage={''}
-          className={'form_board'}
+          className={className}
           onSubmit={handleCallback}
           onCancel={setShowModalAction}
         />
