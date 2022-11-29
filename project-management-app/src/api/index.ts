@@ -429,6 +429,34 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+  async updateColumn(values: Record<string, string>) {
+    let updateTask: IColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+            order: values.order,
+            boardId: values.boardId,
+            columnId: values.columnId,
+          },
+        })
+      );
+      updateTask = await response.json();
+      if (response.ok) {
+        return updateTask;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
   async addTaskToDestinationColumn(values: Record<string, string>) {
     let updateTask: ITask;
     try {

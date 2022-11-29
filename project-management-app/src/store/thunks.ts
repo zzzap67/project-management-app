@@ -50,6 +50,12 @@ export const updateTaskThunk = createAsyncThunk(
     return await api.updateTask(values);
   }
 );
+export const updateColumnThunk = createAsyncThunk(
+  'main/updateColumnThunk',
+  async (values: Record<string, string>) => {
+    return await api.updateColumn(values);
+  }
+);
 
 export const DragNDropTaskThunk = createAsyncThunk(
   'main/updateTaskColumnThunk',

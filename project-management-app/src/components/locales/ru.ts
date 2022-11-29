@@ -105,6 +105,22 @@ export const ru = {
       },
     ],
   },
+  COLUMN_EDIT_FORM: {
+    buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
+    linkText: '',
+    text: '',
+    buttonText: '',
+    linkTo: `/board/`,
+    title: 'createColumn',
+    inputsData: [
+      {
+        id: 'title',
+        label: 'Заголовок',
+        type: 'text',
+      },
+    ],
+  },
   TASK_FORM: {
     buttonBoardText: 'Сохранить',
     cancelButtonText: 'Отменить',

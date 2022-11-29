@@ -5,20 +5,27 @@ import ModalConfirmation from 'components/ModalConfirmation';
 import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useAppDispatch } from 'store/hooks';
-import { deleteColumnThunk } from 'store/thunks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { deleteColumnThunk, updateColumnThunk } from 'store/thunks';
 import { IColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import './styles.css';
+import { ru } from 'components/locales/ru';
+import Form from 'components/Form';
 
 const ColumnItem = (props: IColumn) => {
-  const { id, title } = props;
+  const { id, title, order } = props;
+  const user = useAppSelector((state) => state.userReducer);
   const [showModal, setShowModal] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const boardId = params.id;
-
+  const registerData = ru.COLUMN_EDIT_FORM;
+  const [showEditForm, setShowEditForm] = useState(false);
+  const handleShowInput = () => {
+    setShowEditForm(true);
+  };
   const handleModalQuestion = () => {
     setShowModal(true);
   };
@@ -27,10 +34,36 @@ const ColumnItem = (props: IColumn) => {
       dispatch(deleteColumnThunk({ columnId: id, boardId }));
     }
   };
+  const onSubmit = async (values: Record<string, string>) => {
+    if (boardId) {
+      await dispatch(
+        updateColumnThunk({
+          boardId,
+          columnId: id,
+          title: values.title,
+          userId: user.id,
+          order: String(order),
+        })
+      );
+    }
+    // navigate(`/boards/${boardId}`);
+  };
   return (
     <div className="column_item">
       <div className="column_info">
-        <h2 className="column_title">{title}</h2>
+        <div className="column_title__wrapper">
+          <h2 className="column_title" onClick={handleShowInput}>
+            {title}
+          </h2>
+          {showEditForm ? (
+            <Form
+              formData={registerData}
+              errorMessage={''}
+              className={`update_column`}
+              onSubmit={onSubmit}
+            />
+          ) : null}
+        </div>
         <Delete
           className="delete_board"
           onClick={(e) => {

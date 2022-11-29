@@ -10,7 +10,8 @@ const ColumnList = () => {
     return Object.values(columns).sort((a, b) => Number(a.order) - Number(b.order));
   }, [columns]);
   return (
-    <div className="columnList">
+    // <div className="columnList">
+    <>
       {columnList.map((column, index: number) => {
         return (
           <Droppable
@@ -40,7 +41,8 @@ const ColumnList = () => {
           </Droppable>
         );
       })}
-    </div>
+    </>
+    // </div>
   );
 };
 export default ColumnList;

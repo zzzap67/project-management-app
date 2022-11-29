@@ -108,10 +108,10 @@ const Board = () => {
         eventHandler={() => navigate(`/boards`)}
       />
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId={`board/${id}`} type="BOARD" direction="horizontal">
+        <Droppable droppableId={`board/${id}`} type="BOARD">
           {(provided: DroppableProvided) => {
             return (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
+              <div className="columnList" ref={provided.innerRef} {...provided.droppableProps}>
                 <ColumnList />
                 {provided.placeholder}
               </div>

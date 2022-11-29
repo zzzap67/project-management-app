@@ -18,6 +18,7 @@
 }
 .column_title {
   font-size: 30px;
+  height: fit-content;
 }
 @media (max-width: 440px) {
   .column_item {
@@ -25,7 +26,19 @@
     padding: 7px 7px;
   }
   .task_list {
-    padding: 0 ;
+    padding: 0;
   }
-  
+}
+.update_column__title,
+.input__label {
+  display: none;
+}
+.update_column__inputs-wrapper {
+  margin: 0 0 5px;
+}
+.column_title__wrapper {
+  width: 100%;
+}
+.update_column {
+  margin-left: 15px;
 }
