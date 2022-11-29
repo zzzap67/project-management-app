@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { EItemType, IBoard } from 'types';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ModalConfirmation from 'components/ModalConfirmation';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
@@ -67,7 +67,6 @@ const BoardItem = (props: IBoard) => {
           )}
           {showModalEdit && (
             <ModalEdit
-              id={`${id}`}
               title={`${title}`}
               description={`${description}`}
               itemType={EItemType.board}

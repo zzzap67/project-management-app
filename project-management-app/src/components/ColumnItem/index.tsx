@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState, createRef, ChangeEvent } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState, ChangeEvent } from 'react';
+import { useParams } from 'react-router-dom';
 import { Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import ModalConfirmation from 'components/ModalConfirmation';
 import ModalAction from 'components/ModalAction';
@@ -20,7 +20,6 @@ const ColumnItem = (props: IColumn) => {
   const [showTitleEditor, setShowTitleEditor] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const params = useParams();
   const boardId = params.id;
 
@@ -140,12 +139,7 @@ const ColumnItem = (props: IColumn) => {
       )}
       {showModalActionTask && (
         <ModalAction
-          id=""
-          title=""
-          description=""
           formType={EItemType.createTask}
-          isReadOnly={false}
-          isDescriptionNeeded={true}
           setShowModalAction={setShowModalActionTask}
           onSubmit={createTask}
         />

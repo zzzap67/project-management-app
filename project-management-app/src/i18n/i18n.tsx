@@ -29,6 +29,7 @@ i18n
               signOut: 'Sign Out',
               editProfile: 'Edit Profile',
               newBoard: 'New Board',
+              boardList: 'Your Boards',
             },
             welcomePage: {
               welcomeButtonName: 'Start doing',
@@ -96,6 +97,7 @@ i18n
               signOut: 'Выйти',
               editProfile: 'Редактировать профиль',
               newBoard: 'Новая доска',
+              boardList: 'Твои доски',
             },
             welcomePage: {
               welcomeButtonName: 'Начать',

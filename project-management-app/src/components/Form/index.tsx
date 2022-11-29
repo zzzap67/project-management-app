@@ -1,4 +1,4 @@
-import { SyntheticEvent, Dispatch, SetStateAction } from 'react';
+import { SyntheticEvent } from 'react';
 import './styles.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Input from '../Input/';
@@ -90,7 +90,7 @@ const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormPro
               onCancel
                 ? closeModal
                 : () => {
-                    navigate(linkTo), console.log('go to boards');
+                    navigate(linkTo);
                   }
             }
           >

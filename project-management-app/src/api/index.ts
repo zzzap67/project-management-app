@@ -416,7 +416,7 @@ class Api implements IApi {
     let updateTask: ITask;
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.taskId}`,
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.id}`,
         this.setConfig({
           method: 'PUT',
           body: {
@@ -546,6 +546,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async editColumn(values: IEditColumn) {
     let editColumn;
     try {

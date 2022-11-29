@@ -131,12 +131,7 @@ const Board = () => {
       />
       {showModalAction && (
         <ModalAction
-          id=""
-          title=""
-          description=""
           formType={EItemType.createColumn}
-          isReadOnly={false}
-          isDescriptionNeeded={true}
           setShowModalAction={setShowModalAction}
           onSubmit={createColumn}
         />

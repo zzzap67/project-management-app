@@ -8,7 +8,6 @@ interface IModalEdit {
   itemType: EItemType;
   isReadOnly: boolean;
   isDescriptionNeeded: boolean;
-  id: string;
   title: string;
   description: string;
   setShowModalEdit: Dispatch<SetStateAction<boolean>>;
@@ -19,7 +18,6 @@ function ModalEdit({
   itemType,
   isReadOnly,
   isDescriptionNeeded,
-  id,
   title,
   description,
   setShowModalEdit,

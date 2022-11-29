@@ -143,7 +143,7 @@ enum ELocalStorage {
 enum EItemType {
   board = 'editBoard',
   column = 'column',
-  task = 'task',
+  task = 'editTask',
   createBoard = 'createBoard',
   createColumn = 'createColumn',
   createTask = 'createTask',

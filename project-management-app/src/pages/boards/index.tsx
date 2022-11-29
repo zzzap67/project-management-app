@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BoardsList from 'components/BoardsList';
 import { useAppDispatch } from '../../store/hooks';
 import { getAllBoardsThunk, createNewBoardThunk } from '../../store/thunks';
@@ -45,12 +45,7 @@ const Boards = () => {
         />
         {showModalAction && (
           <ModalAction
-            id=""
-            title=""
-            description=""
             formType={EItemType.createBoard}
-            isReadOnly={false}
-            isDescriptionNeeded={true}
             setShowModalAction={setShowModalAction}
             onSubmit={createBoard}
           />
