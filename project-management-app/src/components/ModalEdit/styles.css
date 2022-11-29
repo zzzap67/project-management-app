@@ -22,7 +22,8 @@
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 60%;
+  max-width: 400px;
   text-align: center;
 }
 
@@ -46,4 +47,38 @@
 }
 .cancel:hover {
   background-color: rgb(167, 167, 167);
+}
+
+.modal-input {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding-top: 10px;
+}
+
+.modal-input__label {
+  line-height: 1.2;
+  color: #A0A0A0;
+}
+
+.modal-input__field {
+  font-size: 13px;
+  line-height: 1.23;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #F9F9F9;
+}
+
+.modal-input__field::placeholder {
+    font-weight: bold;
+    opacity: .5;
+    color: red;
+}
+
+.modal-input__error {
+  font-size: 10px;
+  line-height: 1.2;
+  margin: 0;
+  color: #EE3465;
 }

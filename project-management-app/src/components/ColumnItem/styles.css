@@ -21,6 +21,12 @@
   width: 70%;
 }
 
+.column_title::placeholder {
+    font-weight: bold;
+    opacity: .5;
+    color: red;
+}
+
 .titleButton {
   border: none;
   border-radius: 10px;

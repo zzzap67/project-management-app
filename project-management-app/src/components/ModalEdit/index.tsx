@@ -41,6 +41,11 @@ function ModalEdit({
   };
 
   const handleCallback = () => {
+    if (!newTitle.trim()) {
+      setNewTitle('');
+      return;
+    }
+
     onConfirm(newTitle, newDescription);
     closeModal();
   };
@@ -49,24 +54,27 @@ function ModalEdit({
     <div className="modal">
       <div className="modalContent">
         <div>{t(`description.forms.${itemType}`)}</div>
-        <div>
-          <label htmlFor="titleInput">{t('description.forms.inputs.titleLabel')}</label>
+        <div className="modal-input">
+          <label className="modal-input__label" htmlFor="titleInput">
+            {t('description.forms.inputs.titleLabel')}
+          </label>
           <input
             id="titleInput"
-            className="title-input"
+            className="title-input modal-input__field"
             onChange={handleTitleChange}
             value={newTitle}
             readOnly={isReadOnly}
+            placeholder={t('description.forms.inputs.titlePlaceholder')}
           />
         </div>
         {isDescriptionNeeded && (
-          <div>
-            <label htmlFor="descriptionInput">
+          <div className="modal-input">
+            <label className="modal-input__label" htmlFor="descriptionInput">
               {t('description.forms.inputs.descriptionLabel')}
             </label>
             <input
               id="descriptionInput"
-              className="title-input"
+              className="title-input modal-input__field"
               onChange={handleDescriptionChange}
               value={newDescription}
               readOnly={isReadOnly}

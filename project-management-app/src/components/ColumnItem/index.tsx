@@ -54,6 +54,7 @@ const ColumnItem = (props: IColumn) => {
     e.preventDefault();
 
     if (!newTitle.trim()) {
+      setNewTitle('');
       return;
     }
 

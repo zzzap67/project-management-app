@@ -98,16 +98,16 @@ export const mainSlice = createSlice({
         state.columns[column.id].title = column.title;
       })
       .addCase(DragNDropTaskThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
         state.tasks = generateHashMapTasks(payload.columns);
+        state.isLoading = false;
       })
       .addCase(DragNDropTaskInOneColumnThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
         state.tasks = generateHashMapTasks(payload.columns);
+        state.isLoading = false;
       })
       .addCase(DragNDropColumnThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
         state.columns = generateHashMapColumn(payload.columns);
+        state.isLoading = false;
       })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),
