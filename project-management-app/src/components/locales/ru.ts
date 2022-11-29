@@ -95,7 +95,7 @@ export const ru = {
     linkText: '',
     text: '',
     buttonText: '',
-    linkTo: '/board/:id',
+    linkTo: `/board/`,
     title: 'createColumn',
     inputsData: [
       {
@@ -112,7 +112,7 @@ export const ru = {
     text: '',
     buttonText: '',
     title: 'createTask',
-    linkTo: '/board/:id',
+    linkTo: '/board/',
     inputsData: [
       {
         id: 'title',

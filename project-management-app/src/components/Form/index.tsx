@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import Input from '../Input/';
 import { useFormWithValidation } from '../../utils';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,8 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsData, linkTo, title, buttonText, text, linkText } = formData;
   const { t } = useTranslation('translation');
+  const params = useParams();
+  const boardId = params.id;
   const navigate = useNavigate();
 
   const renderInputs = (inputs: InputData[]) => {
@@ -64,7 +66,8 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
           <button
             className="cancel__button button"
             onClick={() => {
-              navigate(linkTo);
+              if (className === 'form_column' || className === 'form_task')
+                navigate(`${linkTo}${boardId}`);
             }}
           >
             {t('description.forms.cancelButtonText')}
