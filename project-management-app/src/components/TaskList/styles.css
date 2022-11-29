@@ -2,3 +2,12 @@
   display: flex;
   flex-direction: column;
 }
+.task_list {
+  padding: 0 10px;
+  min-height: 40px;
+  max-height: 170px;
+  overflow-x: scroll;
+}
+.task_list::-webkit-scrollbar {
+  display: none;
+}

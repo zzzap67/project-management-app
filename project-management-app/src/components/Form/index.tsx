@@ -1,35 +1,10 @@
 import { SyntheticEvent } from 'react';
-import './styles.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Input, { InputData } from '../Input/';
+import Input from '../Input/';
 import { useFormWithValidation } from '../../utils';
-import { ru } from '../locales/ru';
 import { useTranslation } from 'react-i18next';
-
-export interface FormProps {
-  formData:
-    | typeof ru.REGISTER_FORM
-    | typeof ru.BOARD_FORM
-    | typeof ru.COLUMN_FORM
-    | typeof ru.LOGIN_FORM;
-  errorMessage?: string;
-  className: string;
-  onSubmit: (values: Record<string, string>) => void;
-}
-
-export interface formBoardData {
-  inputsData: InputData[];
-  title: string;
-}
-
-export interface formRegisterData {
-  inputsData: InputData[];
-  linkTo: string;
-  title: string;
-  buttonText: string;
-  text: string;
-  linkText: string;
-}
+import { FormProps, InputData } from 'types';
+import './styles.css';
 
 const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
@@ -93,7 +68,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
           <button
             className="cancel__button button"
             onClick={() => {
-              navigate(linkTo), console.log('go to boards');
+              navigate(linkTo);
             }}
           >
             {t('description.forms.cancelButtonText')}

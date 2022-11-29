@@ -1,17 +1,6 @@
-import { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { InputProps } from 'types';
 import './styles.css';
-
-export interface InputData {
-  id: string;
-  label: string;
-  type: string;
-}
-export interface InputProps {
-  inputData: InputData;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  errors: Record<string, string>;
-}
 
 const Input = ({ inputData, onChange, errors }: InputProps) => {
   const { id, type } = inputData;
