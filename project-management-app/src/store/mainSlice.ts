@@ -10,6 +10,7 @@ import {
   getAllColumnsThunk,
   DragNDropTaskInOneColumnThunk,
   DragNDropColumnThunk,
+  createNewColumnThunk,
 } from './thunks';
 
 const MAIN_INITIAL_STATE: MainState = {
@@ -81,6 +82,12 @@ export const mainSlice = createSlice({
       .addCase(DragNDropColumnThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.columns = generateHashMapColumn(payload.columns);
+      })
+      .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.isLoading = false;
+        state.boards[payload.id] = payload;
+        // state.columns = generateHashMapColumn(payload.columns);
       })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),

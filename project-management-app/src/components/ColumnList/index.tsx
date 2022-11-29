@@ -9,7 +9,6 @@ const ColumnList = () => {
   const columnList = useMemo(() => {
     return Object.values(columns).sort((a, b) => Number(a.order) - Number(b.order));
   }, [columns]);
-
   return (
     <div className="columnList">
       {columnList.map((column, index: number) => {

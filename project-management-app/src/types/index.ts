@@ -1,5 +1,5 @@
 import { ru } from 'components/locales/ru';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 enum Languages {
   En = 'en',
@@ -59,6 +59,7 @@ interface FormProps {
   errorMessage?: string;
   className: string;
   onSubmit: (values: Record<string, string>) => void;
+  onCancel?: Dispatch<SetStateAction<boolean>>;
 }
 
 interface formBoardData {
@@ -138,7 +139,11 @@ enum ELocalStorage {
   token = 'token',
   userId = 'userId',
 }
-
+enum EItemType {
+  board = 'editBoard',
+  column = 'column',
+  task = 'task',
+}
 export {
   MainState,
   IBoard,
@@ -165,4 +170,5 @@ export {
   InputData,
   ButtonProps,
   Languages,
+  EItemType,
 };

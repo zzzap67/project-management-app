@@ -18,6 +18,7 @@ const ColumnItem = (props: IColumn) => {
   const navigate = useNavigate();
   const params = useParams();
   const boardId = params.id;
+
   const handleModalQuestion = () => {
     setShowModal(true);
   };

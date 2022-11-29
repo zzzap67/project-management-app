@@ -16,6 +16,10 @@ const TaskItem = React.forwardRef((props: ITask, ref) => {
   const dispatch = useAppDispatch();
   const params = useParams();
   const boardId = params.id;
+  const [showModalAction, setShowModalAction] = useState(false);
+  const handleModalAction = () => {
+    setShowModalAction(true);
+  };
   const deleteTask = async () => {
     await dispatch(
       deleteTaskThunk({
@@ -33,7 +37,9 @@ const TaskItem = React.forwardRef((props: ITask, ref) => {
   return (
     <div className="task_item">
       <div className="task_info">
-        <h2 className="task_title">{title}</h2>
+        <h2 className="task_title" onClick={handleModalAction}>
+          {title}
+        </h2>
         <Delete
           className="delete_task"
           onClick={(e) => {

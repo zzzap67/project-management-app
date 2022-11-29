@@ -1,16 +1,19 @@
 import ColumnList from 'components/ColumnList';
+import ModalAction from 'components/ModalAction';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
+  createNewColumnThunk,
   DragNDropColumnThunk,
   DragNDropTaskInOneColumnThunk,
   DragNDropTaskThunk,
   getBoardByIdThunk,
 } from 'store/thunks';
+import { EItemType } from 'types';
 import './styles.css';
 
 const Board = () => {
@@ -19,12 +22,21 @@ const Board = () => {
   const user = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [showModalAction, setShowModalAction] = useState(false);
   useEffect(() => {
     if (id) {
       dispatch(getBoardByIdThunk(id));
     }
   }, [dispatch, id]);
-
+  const handleModalAction = () => {
+    setShowModalAction(true);
+  };
+  const createColumn = async (values: Record<string, string>) => {
+    if (id) {
+      await dispatch(createNewColumnThunk({ title: values.title, id, userId: user.id }));
+      setShowModalAction(false);
+    }
+  };
   const getClearId = (str: string) => {
     return str.replace(/\w*\//, '');
   };
@@ -110,8 +122,21 @@ const Board = () => {
       <Button
         className="create_column__button"
         buttonName={t('description.forms.createColumn')}
-        eventHandler={() => navigate(`/board/${id}/column`)}
+        eventHandler={() => handleModalAction()}
       />
+      {showModalAction && (
+        <ModalAction
+          id={id as string}
+          userId={user.id}
+          title=""
+          description=""
+          itemType={EItemType.column}
+          isReadOnly={false}
+          isDescriptionNeeded={true}
+          setShowModalAction={setShowModalAction}
+          onSubmit={createColumn}
+        />
+      )}
     </div>
   );
 };

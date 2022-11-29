@@ -166,7 +166,6 @@ class Api implements IApi {
 
   async getBoardId(id: string) {
     let foundData;
-    // : IBoard;
     try {
       const response = await fetch(`${this.baseUrl}/boards/${id}`, this.setConfig({}));
       foundData = await response.json();
