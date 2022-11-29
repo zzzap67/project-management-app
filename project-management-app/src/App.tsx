@@ -21,6 +21,7 @@ import CreateNewTaskForm from 'components/Create-new-task';
 import Preloader from './components/Preloader';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './hooks/useAuth';
+import Profile from './pages/user-profile';
 
 function Layout() {
   useAuth();
@@ -58,6 +59,7 @@ function App() {
               <Route path="/board/:boardId/column/:columnId/task" element={<CreateNewTaskForm />} />
               <Route path="/board/:id" element={<Board />} />
               <Route path="/boards/:boardId/edit" element={<EditBoardForm />} />
+              <Route path="/user-profile" element={<Profile />} />
             </Route>
           </Route>
         </Routes>

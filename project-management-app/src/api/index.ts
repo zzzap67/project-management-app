@@ -1,4 +1,4 @@
-import { API_URL } from 'const';
+import { API_URL } from 'constants/constants';
 import { EApiMethods, IBoard, IColumn, ICreateUser, ISignIn, ITask, IUser } from 'types';
 
 interface IApi {
@@ -93,6 +93,29 @@ class Api implements IApi {
     }
   }
 
+  async putUser(body: ICreateUser & Record<'id', string>) {
+    let foundData: IUser | null = null;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/users/${body.id}`,
+        this.setConfig({
+          method: EApiMethods.put,
+          body: { name: body.name, login: body.login, password: body.password },
+        })
+      );
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async getUserById(id: string) {
     let foundData: IUser | null = null;
     try {
@@ -104,6 +127,24 @@ class Api implements IApi {
       }
 
       throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
+  async deleteUserById(id: string) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/users/${id}`,
+        this.setConfig({ method: EApiMethods.delete })
+      );
+
+      if (response.status === 204) {
+        return;
+      }
+
+      throw response.status;
     } catch (e) {
       const err = e as Error;
       return Promise.reject(err.message ? err.message : err);
@@ -198,6 +239,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async deleteColumn(values: Record<string, string>) {
     try {
       const response = await fetch(
@@ -214,6 +256,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async deleteTask(values: Record<string, string>) {
     try {
       const response = await fetch(
@@ -287,6 +330,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewBoard(values: Record<string, string>) {
     let newBoard: IBoard;
     try {
@@ -308,6 +352,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewColumn(values: Record<string, string>) {
     let newColumn: IColumn;
     try {
@@ -329,9 +374,10 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewTask(values: Record<string, string>) {
     let newTask;
-    //: ITask;
+
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks`,
@@ -465,6 +511,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async editBoard(values: Record<string, string>) {
     let editBoard;
     try {

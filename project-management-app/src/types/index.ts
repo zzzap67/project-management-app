@@ -126,6 +126,7 @@ enum EApiMethods {
   get = 'GET',
   post = 'POST',
   delete = 'DELETE',
+  put = 'put',
 }
 
 interface IApiConfig {
