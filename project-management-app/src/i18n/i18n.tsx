@@ -38,6 +38,9 @@ i18n
             },
             forms: {
               welcome: 'Welcome!',
+              editUser: 'Edit user profile',
+              hello: 'Hello',
+              save: 'Save profile',
               signUp: 'Sign Up!',
               createBoard: 'Create board',
               editBoard: 'Edit board',
@@ -54,6 +57,8 @@ i18n
               gladToSee: 'Glad to see you again!',
               notRegistered: 'Have not registered yet?',
               register: 'Register',
+              edit: 'Edit',
+              delete: 'Delete account',
               inputs: {
                 nameLabel: 'Name',
                 emailLabel: 'E-mail',
@@ -97,6 +102,9 @@ i18n
             },
             forms: {
               welcome: 'Добро пожаловать!',
+              editUser: 'Редактировать профиль',
+              hello: 'Привет',
+              save: 'Сохранить профиль',
               signUp: 'Зарегистрироваться',
               createBoard: 'Создать доску',
               editBoard: 'Редактировать доску',
@@ -113,6 +121,8 @@ i18n
               gladToSee: 'Рады видеть!',
               notRegistered: 'Ещё не зарегистрированы?',
               register: 'Регистрация',
+              edit: 'Редактировать',
+              delete: 'Удалить аккаунт',
               inputs: {
                 nameLabel: 'Имя',
                 emailLabel: 'E-mail',

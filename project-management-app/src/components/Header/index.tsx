@@ -50,11 +50,8 @@ const Header: React.FunctionComponent = () => {
             buttonName={t('description.header.mainPage')}
           />
         </Link>
-        <Link to="/">
-          <Button
-            className="link-to-edit-profile_button"
-            buttonName={t('description.header.editProfile')}
-          />
+        <Link to="/user-profile" className="link-to-edit-profile_button">
+          {t('description.header.editProfile')}
         </Link>
         <Button
           className="link-to-sign-out_button"

@@ -11,16 +11,14 @@ export const useAuth = () => {
 
   useEffect(() => {
     (async () => {
-      if (!isAuth) {
-        const userId = localStorage.getItem(ELocalStorage.userId);
-        const token = localStorage.getItem(ELocalStorage.token);
+      const userId = localStorage.getItem(ELocalStorage.userId);
+      const token = localStorage.getItem(ELocalStorage.token);
 
-        if (userId && token) {
-          api.setToken(token);
-          await dispatch(userById(userId));
-        }
-        setLoading(false);
+      if (userId && token) {
+        api.setToken(token);
+        await dispatch(userById(userId));
       }
+      setLoading(false);
     })();
   }, [isAuth]);
 

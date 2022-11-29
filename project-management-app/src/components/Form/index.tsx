@@ -33,7 +33,9 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
       </div>
 
       {errorMessage && <p className="form__error">{errorMessage}</p>}
-      {(className.includes('register') || className.includes('login')) && (
+      {(className.includes('register') ||
+        className.includes('login') ||
+        className.includes('user-profile')) && (
         <>
           <div
             className={`form__button-wrapper 
@@ -50,12 +52,14 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
           >
             {t(`description.forms.${buttonText}`)}
           </button>
-          <p className="form__text">
-            {t(`description.forms.${text}`)}
-            <NavLink to={linkTo} className="form__link link">
-              {t(`description.forms.${linkText}`)}
-            </NavLink>
-          </p>
+          {!className.includes('user-profile') && (
+            <p className="form__text">
+              {t(`description.forms.${text}`)}
+              <NavLink to={linkTo} className="form__link link">
+                {t(`description.forms.${linkText}`)}
+              </NavLink>
+            </p>
+          )}
         </>
       )}
       {className === 'form_board' || className === 'form_task' || className === 'form_column' ? (
