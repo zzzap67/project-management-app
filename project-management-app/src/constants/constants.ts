@@ -1,1 +1,1 @@
-export const API_URL = 'https://rs-kanban-be.herokuapp.com';
+export const API_URL = 'https://rs-school-kanban-api-shq1.onrender.com';
