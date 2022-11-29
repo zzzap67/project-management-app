@@ -35,7 +35,7 @@ interface IColumn {
   description: string;
   key: string;
   tasks: ITask[];
-  order?: number;
+  order: string;
 }
 interface ITask {
   userId?: string;

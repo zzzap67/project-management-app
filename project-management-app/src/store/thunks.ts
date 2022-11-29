@@ -53,7 +53,8 @@ export const updateTaskThunk = createAsyncThunk(
 export const updateColumnThunk = createAsyncThunk(
   'main/updateColumnThunk',
   async (values: Record<string, string>) => {
-    return await api.updateColumn(values);
+    await api.updateColumn(values);
+    return await api.getBoardId(values.boardId);
   }
 );
 

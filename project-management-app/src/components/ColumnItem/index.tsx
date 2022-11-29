@@ -42,11 +42,11 @@ const ColumnItem = (props: IColumn) => {
           columnId: id,
           title: values.title,
           userId: user.id,
-          order: String(order),
+          order: order,
         })
       );
     }
-    // navigate(`/boards/${boardId}`);
+    setShowEditForm(false);
   };
   return (
     <div className="column_item">

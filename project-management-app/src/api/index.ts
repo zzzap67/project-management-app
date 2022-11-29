@@ -438,11 +438,7 @@ class Api implements IApi {
           method: 'PUT',
           body: {
             title: values.title,
-            description: values.description,
-            userId: values.userId,
             order: values.order,
-            boardId: values.boardId,
-            columnId: values.columnId,
           },
         })
       );

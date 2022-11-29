@@ -91,10 +91,8 @@ export const mainSlice = createSlice({
         state.tasks = generateHashMapTasks(payload.columns);
       })
       .addCase(updateColumnThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.isLoading = false;
-        // state.columns = generateHashMapColumn(payload.columns);
-        // state.tasks = generateHashMapTasks(payload.columns);
+        state.columns = generateHashMapColumn(payload.columns);
       })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),
