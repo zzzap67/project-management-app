@@ -10,13 +10,14 @@ const TaskList = React.forwardRef((props: PropsTask, ref) => {
 
   const taskList = useMemo(() => {
     console.log('memo', tasks);
-    console.log(props.columnId);
+    console.log('columnId: ', props.columnId);
     console.log(tasks[props.columnId]);
     return Object.values(tasks[props.columnId]);
   }, [tasks]);
   const [list, setList] = useState(taskList);
-
-  function handleOnDragEnd(result) {
+  // TODO Update parameter type
+  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+  function handleOnDragEnd(result: any) {
     if (result.destination) {
       const items = Array.from(list);
       const reorderedItem = items.splice(result.source.index, 1);
