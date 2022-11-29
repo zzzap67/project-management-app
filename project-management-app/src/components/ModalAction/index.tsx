@@ -33,12 +33,10 @@ function ModalAction({ itemType, setShowModalAction, onSubmit }: IModalAction) {
     onSubmit(values);
     setShowModalAction(false);
     navigate(`/board/${boardId}`);
-    if (boardId) dispatch(getBoardByIdThunk(boardId));
   };
   const closeModal = () => {
     setShowModalAction(false);
     navigate(`/board/${boardId}`);
-    if (boardId) dispatch(getBoardByIdThunk(boardId));
   };
   return createPortal(
     <div className="modalAction">

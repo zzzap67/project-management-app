@@ -66,8 +66,9 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
           <button
             className="cancel__button button"
             onClick={() => {
-              if (className === 'form_column' || className === 'form_task')
-                navigate(`${linkTo}${boardId}`);
+              className === 'form_column' || className === 'form_task'
+                ? navigate(`${linkTo}${boardId}`)
+                : navigate(linkTo);
             }}
           >
             {t('description.forms.cancelButtonText')}
