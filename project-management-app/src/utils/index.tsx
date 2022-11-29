@@ -5,7 +5,7 @@ const initValues = { name: '', login: '', password: '' };
 
 export function useFormWithValidation() {
   const [values, setValues] = useState<Record<string, string>>(initValues);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isValid, setIsValid] = useState(false);
   const nameRegExp = /[^a-z\- а-яё]/gi;
   const emailRegExp =

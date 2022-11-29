@@ -1,22 +1,10 @@
 import { SyntheticEvent, Dispatch, SetStateAction } from 'react';
 import './styles.css';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Input, { InputData } from '../Input/';
+import Input from '../Input/';
+import { FormProps, InputData } from 'types';
 import { useFormWithValidation } from '../../utils';
-import { ru } from '../locales/ru';
 import { useTranslation } from 'react-i18next';
-
-export interface FormProps {
-  formData:
-    | typeof ru.REGISTER_FORM
-    | typeof ru.BOARD_FORM
-    | typeof ru.COLUMN_FORM
-    | typeof ru.LOGIN_FORM;
-  errorMessage?: string;
-  className: string;
-  onSubmit: (values: Record<string, string>) => void;
-  onCancel?: Dispatch<SetStateAction<boolean>>;
-}
 
 export interface formBoardData {
   inputsData: InputData[];
@@ -62,7 +50,9 @@ const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormPro
       </div>
 
       {errorMessage && <p className="form__error">{errorMessage}</p>}
-      {(className.includes('register') || className.includes('login')) && (
+      {(className.includes('register') ||
+        className.includes('login') ||
+        className.includes('user-profile')) && (
         <>
           <div
             className={`form__button-wrapper
@@ -79,12 +69,14 @@ const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormPro
           >
             {t(`description.forms.${buttonText}`)}
           </button>
-          <p className="form__text">
-            {t(`description.forms.${text}`)}
-            <NavLink to={linkTo} className="form__link link">
-              {t(`description.forms.${linkText}`)}
-            </NavLink>
-          </p>
+          {!className.includes('user-profile') && (
+            <p className="form__text">
+              {t(`description.forms.${text}`)}
+              <NavLink to={linkTo} className="form__link link">
+                {t(`description.forms.${linkText}`)}
+              </NavLink>
+            </p>
+          )}
         </>
       )}
       {className === 'form_board' || className === 'form_task' || className === 'form_column' ? (

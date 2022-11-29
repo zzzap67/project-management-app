@@ -3,3 +3,8 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+@media (max-width: 600px) {
+  .boards {
+    justify-content: center;
+  }
+}

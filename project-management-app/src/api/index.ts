@@ -1,4 +1,4 @@
-import { API_URL } from 'const';
+import { API_URL } from 'constants/constants';
 import {
   EApiMethods,
   IBoard,
@@ -102,6 +102,29 @@ class Api implements IApi {
     }
   }
 
+  async putUser(body: ICreateUser & Record<'id', string>) {
+    let foundData: IUser | null = null;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/users/${body.id}`,
+        this.setConfig({
+          method: EApiMethods.put,
+          body: { name: body.name, login: body.login, password: body.password },
+        })
+      );
+      foundData = await response.json();
+
+      if (response.ok) {
+        return foundData;
+      }
+
+      throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async getUserById(id: string) {
     let foundData: IUser | null = null;
     try {
@@ -113,6 +136,24 @@ class Api implements IApi {
       }
 
       throw foundData;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
+  async deleteUserById(id: string) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/users/${id}`,
+        this.setConfig({ method: EApiMethods.delete })
+      );
+
+      if (response.status === 204) {
+        return;
+      }
+
+      throw response.status;
     } catch (e) {
       const err = e as Error;
       return Promise.reject(err.message ? err.message : err);
@@ -153,11 +194,11 @@ class Api implements IApi {
     }
   }
 
-  async getAllTasks(id: string) {
+  async getAllTasks(values: Record<string, string>) {
     let foundData: ITask[] = [];
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${id}/columns/${id}/tasks`,
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks`,
         this.setConfig({})
       );
       foundData = await response.json();
@@ -207,6 +248,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async deleteColumn(values: Record<string, string>) {
     try {
       const response = await fetch(
@@ -223,6 +265,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async deleteTask(values: Record<string, string>) {
     try {
       const response = await fetch(
@@ -239,6 +282,24 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
+  async deleteTaskFromSourceColumn(values: Record<string, string>) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.fromColumn}/tasks/${values.taskId}`,
+        this.setConfig({ method: EApiMethods.delete, body: values.taskId })
+      );
+      if (response.ok) {
+        return values;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async getColumnId(id: string) {
     let foundData: IColumn;
     try {
@@ -278,6 +339,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewBoard(values: Record<string, string>) {
     let newBoard: IBoard;
     try {
@@ -299,6 +361,7 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewColumn(values: Record<string, string>) {
     let newColumn: IColumn;
     try {
@@ -321,9 +384,10 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
   async createNewTask(values: Record<string, string>) {
     let newTask;
-    //: ITask;
+
     try {
       const response = await fetch(
         `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks`,
@@ -347,6 +411,117 @@ class Api implements IApi {
       return Promise.reject(err.message ? err.message : err);
     }
   }
+
+  async updateTask(values: Record<string, string>) {
+    let updateTask: ITask;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.taskId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+            order: values.order,
+            boardId: values.boardId,
+            columnId: values.columnId,
+          },
+        })
+      );
+      updateTask = await response.json();
+      if (response.ok) {
+        return updateTask;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async addTaskToDestinationColumn(values: Record<string, string>) {
+    let updateTask: ITask;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.fromColumn}/tasks/${values.taskId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+            order: 1,
+            boardId: values.boardId,
+            columnId: values.toColumn,
+          },
+        })
+      );
+      updateTask = await response.json();
+      if (response.ok) {
+        return updateTask;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async moveTaskToDestinationOrder(values: Record<string, string>) {
+    let updateTask;
+    // : ITask;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.fromColumn}/tasks/${values.taskId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            description: values.description,
+            userId: values.userId,
+            order: Number(values.destinationOrder),
+            boardId: values.boardId,
+            columnId: values.fromColumn,
+          },
+        })
+      );
+      updateTask = await response.json();
+      if (response.ok) {
+        return updateTask;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async updateColumnOrder(values: Record<string, string>) {
+    let updateColumn: IColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.columnTitle,
+            order: Number(values.columnDestinationOrder),
+          },
+        })
+      );
+      updateColumn = await response.json();
+      if (response.ok) {
+        return updateColumn;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async editBoard(values: Record<string, string>) {
     let editBoard;
     try {

@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
-import './style.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOut } from '../../store/userSlice';
 import { ELocalStorage, Languages } from '../../types';
+import './style.css';
 
 const Header: React.FunctionComponent = () => {
   const [scrollEvent, setScrollEvent] = useState(false);
@@ -50,11 +50,8 @@ const Header: React.FunctionComponent = () => {
             buttonName={t('description.header.mainPage')}
           />
         </Link>
-        <Link to="/">
-          <Button
-            className="link-to-edit-profile_button"
-            buttonName={t('description.header.editProfile')}
-          />
+        <Link to="/user-profile" className="link-to-edit-profile_button">
+          {t('description.header.editProfile')}
         </Link>
         <Button
           className="link-to-sign-out_button"

@@ -13,8 +13,19 @@ export const signIn = createAsyncThunk('user/signIn', async (body: Omit<ICreateU
   return await api.postSignIn(body);
 });
 
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (body: ICreateUser & Record<'id', string>) => {
+    return await api.putUser(body);
+  }
+);
+
 export const userById = createAsyncThunk('user/userById', async (id: string) => {
   return await api.getUserById(id);
+});
+
+export const deleteUser = createAsyncThunk('user/deleteUser', async (id: string) => {
+  return await api.deleteUserById(id);
 });
 
 export const getAllBoardsThunk = createAsyncThunk('main/getAllBoardsThunk', async () => {
@@ -27,9 +38,40 @@ export const getAllColumnsThunk = createAsyncThunk(
     return await api.getAllColumns(id);
   }
 );
-export const getAllTasksThunk = createAsyncThunk('main/getAllTasksThunk', async (id: string) => {
-  return await api.getAllTasks(id);
-});
+export const getAllTasksThunk = createAsyncThunk(
+  'main/getAllTasksThunk',
+  async (values: Record<string, string>) => {
+    return await api.getAllTasks(values);
+  }
+);
+export const updateTaskThunk = createAsyncThunk(
+  'main/updateTaskThunk',
+  async (values: Record<string, string>) => {
+    return await api.updateTask(values);
+  }
+);
+
+export const DragNDropTaskThunk = createAsyncThunk(
+  'main/updateTaskColumnThunk',
+  async (values: Record<string, string>) => {
+    await api.addTaskToDestinationColumn(values);
+    return await api.getBoardId(values.boardId);
+  }
+);
+export const DragNDropTaskInOneColumnThunk = createAsyncThunk(
+  'main/updateTaskOrderInColumnThunk',
+  async (values: Record<string, string>) => {
+    await api.moveTaskToDestinationOrder(values);
+    return await api.getBoardId(values.boardId);
+  }
+);
+export const DragNDropColumnThunk = createAsyncThunk(
+  'main/updateColumnOrderThunk',
+  async (values: Record<string, string>) => {
+    await api.updateColumnOrder(values);
+    return await api.getBoardId(values.boardId);
+  }
+);
 export const getBoardByIdThunk = createAsyncThunk('main/getBoardByIdThunk', async (id: string) => {
   return await api.getBoardId(id);
 });

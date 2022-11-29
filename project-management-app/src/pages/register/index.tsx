@@ -1,4 +1,3 @@
-import './styles.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
 import logo from '../../assets/icons/logo.svg';
@@ -7,6 +6,7 @@ import { useAppDispatch } from '../../store/hooks';
 import { signIn, signUp } from '../../store/thunks';
 import { ELocalStorage } from '../../types';
 import { api } from '../../api';
+import './styles.css';
 
 const Register = () => {
   const navigate = useNavigate();

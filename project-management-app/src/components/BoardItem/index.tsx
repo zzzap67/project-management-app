@@ -7,9 +7,9 @@ import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as TaskBoard } from '../../assets/icons/task-board.svg';
 import { deleteBoardThunk, editBoardThunk } from '../../store/thunks';
 import { useAppDispatch } from '../../store/hooks';
-import './styles.css';
 import { t } from 'i18next';
 import ModalEdit from 'components/ModalEdit';
+import './styles.css';
 
 const BoardItem = (props: IBoard) => {
   const { id, title, description } = props;

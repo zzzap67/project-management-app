@@ -1,20 +1,20 @@
-import ModalConfirmation from 'components/ModalConfirmation';
-import TaskList from 'components/TaskList';
-import Button from 'components/ui/button';
-import { t } from 'i18next';
 import React from 'react';
 import { useState, createRef, ChangeEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Droppable, DroppableProvided } from 'react-beautiful-dnd';
+import ModalConfirmation from 'components/ModalConfirmation';
+import ModalAction from 'components/ModalAction';
+import TaskList from 'components/TaskList';
+import Button from 'components/ui/button';
+import { t } from 'i18next';
 import { useAppDispatch } from 'store/hooks';
 import { deleteColumnThunk, editColumnThunk, createNewTaskThunk } from 'store/thunks';
 import { IColumn, IEditColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
-import ModalAction from 'components/ModalAction';
 import { EItemType, ELocalStorage } from 'types';
 import './styles.css';
 
 const ColumnItem = (props: IColumn) => {
-  // const ColumnItem = React.forwardRef((props: IColumn, ref) => {
   const { id, title, order } = props;
   const [showModal, setShowModal] = useState(false);
   const [showTitleEditor, setShowTitleEditor] = useState(false);
@@ -115,9 +115,16 @@ const ColumnItem = (props: IColumn) => {
           }}
         />
       </div>
-      <div className="task_list">
-        <TaskList columnId={id} />
-      </div>
+      <Droppable droppableId={`column/${id}`} type="TASK" direction="vertical">
+        {(provided: DroppableProvided) => {
+          return (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <TaskList columnId={id} {...props} />
+              {provided.placeholder}
+            </div>
+          );
+        }}
+      </Droppable>
       <Button
         className="create_task__button"
         buttonName={t('description.forms.createTask')}

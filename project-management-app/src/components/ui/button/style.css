@@ -88,3 +88,15 @@
   border: 1px dashed #c4fb5798;
   box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
 }
+@media (max-width: 440px) {
+ .create_board__button {
+  font-size: 50px;
+  padding: 30px 121px
+ }
+ .create_task__button{
+  font-size: 17px;
+ }
+ .create_column__button{
+  font-size: 21px;
+ }
+}

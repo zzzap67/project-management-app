@@ -36,8 +36,9 @@ a {
   align-self: flex-start;
   gap: 15px;
   padding: 5px;
+  line-height: 1.2;
 }
-@media (max-width: 500px) {
+@media (max-width: 690px) {
   .header_white,
   .header_color {
     justify-content: center;

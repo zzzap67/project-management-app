@@ -49,6 +49,17 @@
   box-shadow: 3px 1px 3px 1 px rgb(200, 224, 168);
   cursor: pointer;
 }
+.go_back__button {
+  font-size: 14px;
+  padding: 5px 15px;
+  border-radius: 15px;
+  width: 121px;
+  color: white;
+  background-color: #b2e94465;
+  border: 1px dashed #9fdf2198;
+  box-shadow: 3px 1px 3px 1px rgb(207 232 175);
+  cursor: pointer;
+}
 .confirm__button:hover {
   color: white;
   background-color: #bfff00cf;
