@@ -24,6 +24,10 @@ export const userById = createAsyncThunk('user/userById', async (id: string) => 
   return await api.getUserById(id);
 });
 
+export const deleteUser = createAsyncThunk('user/deleteUser', async (id: string) => {
+  return await api.deleteUserById(id);
+});
+
 export const getAllBoardsThunk = createAsyncThunk('main/getAllBoardsThunk', async () => {
   return await api.getAllBoards();
 });

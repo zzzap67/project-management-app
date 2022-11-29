@@ -133,6 +133,24 @@ class Api implements IApi {
     }
   }
 
+  async deleteUserById(id: string) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/users/${id}`,
+        this.setConfig({ method: EApiMethods.delete })
+      );
+
+      if (response.status === 204) {
+        return;
+      }
+
+      throw response.status;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
   async getAllBoards() {
     let foundData: IBoard[] = [];
     try {

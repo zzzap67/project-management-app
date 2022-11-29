@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useFormWithValidation } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useTranslation } from 'react-i18next';
-import { signOut } from '../../store/userSlice';
 import { ELocalStorage, ICreateUser } from '../../types';
-import { updateUser } from '../../store/thunks';
+import { deleteUser, updateUser } from '../../store/thunks';
 
 function Profile() {
   const [isEditable, setIsEditable] = useState(false);
@@ -32,45 +31,13 @@ function Profile() {
     setIsEditable(false);
   };
 
-  const handleDelete = () => {
-    dispatch(signOut());
+  const handleDelete = async (e: SyntheticEvent) => {
+    e.preventDefault();
     localStorage.removeItem(ELocalStorage.token);
     localStorage.removeItem(ELocalStorage.userId);
-    navigate('/');
+    await dispatch(deleteUser(user.id));
+    navigate('/', { replace: true });
   };
-
-  // const handleSubmit = async (evt: ChangeEvent) => {
-  //   try {
-  //     evt.preventDefault();
-  //     const token = localStorage.getItem(constants.STORAGE.JWT);
-  //     const newUser = {
-  //       name: values.name || user.name,
-  //       email: values.email || user.email,
-  //     };
-  //     const userData = await mainApi.patchCurrentUser(token, newUser);
-  //     setUser(userData);
-  //     setMessage('');
-  //     setIsEditable(false);
-  //     setTooltip({
-  //       message: constants.MESSAGE.EDIT_PROFILE,
-  //       type: constants.MESSAGE_TYPE.OK,
-  //     });
-  //   } catch (e) {
-  //     switch (e.message) {
-  //       case '409': {
-  //         setMessage(constants.MESSAGE.CONFLICT_USER);
-  //         break;
-  //       }
-  //       case '400': {
-  //         setMessage(constants.MESSAGE.REGISTER_ERR);
-  //         break;
-  //       }
-  //       default: {
-  //         setMessage(constants.MESSAGE.SERVER_ERR);
-  //       }
-  //     }
-  //   }
-  // };
 
   return (
     <div className="profile">
