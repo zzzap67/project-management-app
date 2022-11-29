@@ -89,7 +89,7 @@ function Profile() {
             placeholder={t(`description.forms.inputs.passwordPlaceholder`)}
             required
             onChange={handleChange}
-            value={!isEditable ? '' : values.password}
+            value={!isEditable ? '*****' : values.password}
             disabled={!isEditable}
           />
         </div>
