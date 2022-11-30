@@ -1,5 +1,14 @@
 import { API_URL } from 'constants/constants';
-import { EApiMethods, IBoard, IColumn, ICreateUser, ISignIn, ITask, IUser } from 'types';
+import {
+  EApiMethods,
+  IBoard,
+  IColumn,
+  ICreateUser,
+  IEditColumn,
+  ISignIn,
+  ITask,
+  IUser,
+} from 'types';
 
 interface IApi {
   baseUrl: string;
@@ -364,6 +373,7 @@ class Api implements IApi {
         })
       );
       newColumn = await response.json();
+      newColumn.tasks = [];
       if (response.ok) {
         return newColumn;
       }
@@ -406,7 +416,7 @@ class Api implements IApi {
     let updateTask: ITask;
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.taskId}`,
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}/tasks/${values.id}`,
         this.setConfig({
           method: 'PUT',
           body: {
@@ -516,19 +526,43 @@ class Api implements IApi {
     let editBoard;
     try {
       const response = await fetch(
-        `${this.baseUrl}/boards/${values.boardId}`,
+        `${this.baseUrl}/boards/${values.id}`,
         this.setConfig({
           method: 'PUT',
           body: {
             title: values.title,
             description: values.description,
-            userId: values.userId,
           },
         })
       );
       editBoard = await response.json();
       if (response.ok) {
         return editBoard;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+
+  async editColumn(values: IEditColumn) {
+    let editColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.id}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            order: values.order,
+          },
+        })
+      );
+      editColumn = await response.json();
+      if (response.ok) {
+        return editColumn;
       }
 
       throw response.body;

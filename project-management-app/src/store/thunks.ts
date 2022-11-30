@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../api';
-import { ICreateUser } from '../types';
+import { ICreateUser, IEditColumn } from '../types';
 
 export const signUp = createAsyncThunk(
   'user/signUp',
@@ -121,8 +121,14 @@ export const createNewTaskThunk = createAsyncThunk(
   }
 );
 export const editBoardThunk = createAsyncThunk(
-  'main/editBoardThunkThunk',
+  'main/editBoardThunk',
   async (values: Record<string, string>) => {
     return await api.editBoard(values);
+  }
+);
+export const editColumnThunk = createAsyncThunk(
+  'main/editColumnThunk',
+  async (values: IEditColumn) => {
+    return await api.editColumn(values);
   }
 );

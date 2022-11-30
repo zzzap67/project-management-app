@@ -1,5 +1,5 @@
 import { ru } from 'components/locales/ru';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 enum Languages {
   En = 'en',
@@ -32,10 +32,9 @@ interface IBoard {
 interface IColumn {
   id: string;
   title: string;
-  description: string;
   key: string;
+  order: number;
   tasks: ITask[];
-  order?: number;
 }
 interface ITask {
   userId?: string;
@@ -59,6 +58,7 @@ interface FormProps {
   errorMessage?: string;
   className: string;
   onSubmit: (values: Record<string, string>) => void;
+  onCancel?: Dispatch<SetStateAction<boolean>>;
 }
 
 interface formBoardData {
@@ -140,6 +140,22 @@ enum ELocalStorage {
   userId = 'userId',
 }
 
+enum EItemType {
+  board = 'editBoard',
+  column = 'column',
+  task = 'editTask',
+  createBoard = 'createBoard',
+  createColumn = 'createColumn',
+  createTask = 'createTask',
+}
+
+interface IEditColumn {
+  title: string;
+  boardId: string;
+  id: string;
+  order: number;
+}
+
 export {
   MainState,
   IBoard,
@@ -166,4 +182,6 @@ export {
   InputData,
   ButtonProps,
   Languages,
+  EItemType,
+  IEditColumn,
 };
