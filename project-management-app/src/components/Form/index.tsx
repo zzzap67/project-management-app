@@ -16,7 +16,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
 
   const renderInputs = (inputs: InputData[]) => {
     return inputs.map((input) => (
-      <Input inputData={input} key={input.id} onChange={handleChange} errors={errors} />
+      <Input inputData={input} key={input.id} onChange={handleChange} errors={errors}/>
     ));
   };
 
@@ -68,7 +68,8 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
       {className === 'form_board' ||
       className === 'form_task' ||
       className === 'form_column' ||
-      className === 'update_column' ? (
+      className === 'update_column' ||
+      className === 'form_edit__task' ? (
         <>
           <button className="confirm__button button" type="submit" disabled={!isValid}>
             {t('description.forms.confirmButtonText')}

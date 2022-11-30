@@ -29,8 +29,7 @@
     padding: 0;
   }
 }
-.update_column__title,
-.input__label {
+.update_column__title {
   display: none;
 }
 .update_column__inputs-wrapper {

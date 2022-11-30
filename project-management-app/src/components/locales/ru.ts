@@ -142,4 +142,25 @@ export const ru = {
       },
     ],
   },
+  TASK_EDIT_FORM: {
+    buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
+    linkText: '',
+    text: '',
+    buttonText: '',
+    title: 'createTask',
+    linkTo: '/board/',
+    inputsData: [
+      {
+        id: 'title',
+        label: 'Заголовок',
+        type: 'text',
+      },
+      {
+        id: 'description',
+        label: 'Описание',
+        type: 'text',
+      },
+    ],
+  },
 };

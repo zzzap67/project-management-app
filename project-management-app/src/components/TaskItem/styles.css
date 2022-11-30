@@ -27,3 +27,8 @@
   height: 15px;
   align-self: center;
 }
+.edit_task__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
