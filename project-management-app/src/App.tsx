@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 
 import './App.css';
-
 import Main from 'pages/main';
 import Error404 from 'pages/error404';
 import SignIn from 'pages/signIn';
