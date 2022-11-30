@@ -41,15 +41,15 @@ const Board = () => {
     return str.replace(/\w*\//, '');
   };
   const onDragEnd = (result: DropResult) => {
+    console.log(result);
     if (result.destination && id) {
       const boardId = id;
       const fromColumn = getClearId(result.source.droppableId);
       const toColumn = getClearId(result.destination.droppableId);
       const taskId = getClearId(result.draggableId);
-      const title = tasks[fromColumn][taskId]?.title;
-      const description = tasks[fromColumn][taskId]?.description;
+
       const userId = user.id;
-      const order = tasks[fromColumn][taskId]?.order;
+
       const destinationOrder = String(result.destination.index);
       const columnId = getClearId(result.draggableId);
       const columnTitle = columns[columnId]?.title;
@@ -70,6 +70,9 @@ const Board = () => {
           break;
 
         case fromColumn !== toColumn && result.type === 'TASK':
+          const title = tasks[fromColumn][taskId]?.title;
+          const description = tasks[fromColumn][taskId]?.description;
+          const order = tasks[fromColumn][taskId]?.order;
           dispatch(
             DragNDropTaskThunk({
               boardId,
@@ -84,14 +87,16 @@ const Board = () => {
           );
           break;
         case fromColumn === toColumn && result.type === 'TASK':
+          const titleTask = tasks[fromColumn][taskId]?.title;
+          const descriptionTask = tasks[fromColumn][taskId]?.description;
           dispatch(
             DragNDropTaskInOneColumnThunk({
               boardId,
               fromColumn,
               destinationOrder,
               taskId,
-              title,
-              description,
+              title: titleTask,
+              description: descriptionTask,
               userId,
             })
           );
@@ -108,7 +113,7 @@ const Board = () => {
         eventHandler={() => navigate(`/boards`)}
       />
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId={`board/${id}`} type="BOARD">
+        <Droppable droppableId={`board/${id}`} type="COLUMN" direction="horizontal">
           {(provided: DroppableProvided) => {
             return (
               <div className="columnList" ref={provided.innerRef} {...provided.droppableProps}>
