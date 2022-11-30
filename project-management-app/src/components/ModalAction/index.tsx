@@ -1,13 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
-
-import './styles.css';
 import { EItemType } from 'types';
 import Form from 'components/Form';
 import { ru } from 'components/locales/ru';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getBoardByIdThunk } from 'store/thunks';
-import { useAppDispatch } from 'store/hooks';
+import './styles.css';
 
 interface IModalAction {
   itemType: EItemType;
@@ -28,7 +25,6 @@ function ModalAction({ itemType, setShowModalAction, onSubmit }: IModalAction) {
   const params = useParams();
   console.log(params);
   const boardId = params.id;
-  const dispatch = useAppDispatch();
   const handleCallback = (values: Record<string, string>) => {
     onSubmit(values);
     setShowModalAction(false);

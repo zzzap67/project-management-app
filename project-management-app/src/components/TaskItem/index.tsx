@@ -1,5 +1,3 @@
-import Form from 'components/Form';
-import { ru } from 'components/locales/ru';
 import ModalConfirmation from 'components/ModalConfirmation';
 import { t } from 'i18next';
 import React, { SyntheticEvent } from 'react';
@@ -16,7 +14,7 @@ import './styles.css';
 const TaskItem = React.forwardRef((props: ITask, ref) => {
   const { id, title, description, order } = props;
   const user = useAppSelector((state) => state.userReducer);
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, isValid } = useFormWithValidation();
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
