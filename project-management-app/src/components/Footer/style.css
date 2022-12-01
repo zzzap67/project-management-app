@@ -1,12 +1,13 @@
 .footer {
   text-align: center;
-  font-size: 17px;
+  font-size: 10px;
   color: #86a257;
 }
 .developer_links {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 10px;
   gap: 70px;
 }
 .rss_link,
@@ -14,7 +15,7 @@
   text-decoration: none;
   color: #86a257;
 }
-@media (max-width: 4500px) {
+@media (max-width: 450px) {
   .developer_links {
     gap: 0;
   }

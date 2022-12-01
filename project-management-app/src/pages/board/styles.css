@@ -10,10 +10,16 @@
   display: flex;
   flex-wrap: nowrap;
   gap: 20px;
-  padding: 20px 0;
-  overflow:auto;
-  /* flex: 1; */
+  padding: 20px 0 50px;
+  overflow: auto;
+  flex: 1;
 }
+.columnList-invisible {
+  visibility: collapse;
+  flex: 1;
+  height: 100%;
+}
+
 .columnList::-webkit-scrollbar {
   position: absolute;
   width: 3px;
@@ -22,7 +28,7 @@
 }
 .columnList::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color:  #b2e94441;
+  background-color: #b2e94441;
 }
 
 .columnList::-webkit-scrollbar-track {

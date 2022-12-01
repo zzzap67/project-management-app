@@ -3,7 +3,6 @@ import i18n from 'i18n/i18n';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/image/logo2.svg';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { signOut } from '../../store/userSlice';
 import { ELocalStorage, Languages, EItemType } from '../../types';
@@ -35,7 +34,6 @@ const Header: React.FunctionComponent = () => {
   };
 
   window.addEventListener('scroll', () => changeHeaderColor());
-  //const [language, setLanguage] = useState('en');
   const changeLanguage = () => {
     if (i18n.language === Languages.En) {
       i18n.changeLanguage(Languages.Ru);
@@ -108,9 +106,6 @@ const Header: React.FunctionComponent = () => {
     </>
   ) : (
     <header className={scrollEvent ? 'header_color' : 'header_white'}>
-      <Link to="/" className="logo_link">
-        <Logo className="logo" />
-      </Link>
       <div className="nav">
         <Link to="/">
           <Button
