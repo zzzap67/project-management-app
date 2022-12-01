@@ -43,7 +43,6 @@ const Board = () => {
     return str.replace(/\w*\//, '');
   };
   const onDragEnd = (result: DropResult) => {
-    console.log(result);
     if (result.destination && id) {
       const boardId = id;
       const fromColumn = getClearId(result.source.droppableId);

@@ -56,6 +56,7 @@
   font-size: 80px;
   padding: 30px 166px;
   border-radius: 15px;
+  width: 390px;
   color: white;
   background-color: #b2e94465;
   border: 1px dashed #9fdf2198;
@@ -89,14 +90,15 @@
   box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
 }
 @media (max-width: 440px) {
- .create_board__button {
-  font-size: 50px;
-  padding: 30px 121px
- }
- .create_task__button{
-  font-size: 17px;
- }
- .create_column__button{
-  font-size: 21px;
- }
+  .create_board__button {
+    font-size: 50px;
+    padding: 30px 121px;
+    width: 270px;
+  }
+  .create_task__button {
+    font-size: 17px;
+  }
+  .create_column__button {
+    font-size: 21px;
+  }
 }

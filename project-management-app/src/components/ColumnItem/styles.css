@@ -18,7 +18,8 @@
 }
 .column_title {
   font-size: 30px;
-  width: 70%;
+  padding-left: 10px;
+  width: 80%;
   height: fit-content;
 }
 .column_title::placeholder {
@@ -26,11 +27,17 @@
   opacity: .5;
   color: red;
 }
-
+.column_title__input{
+  font-size: 21px;
+  width: 70%;
+  border: 2px solid rgb(212, 218, 200);
+  border-radius: 10px;
+  
+}
 .titleButton {
 border: none;
 border-radius: 10px;
-font-size: 30px;
+font-size: 23px;
 font-weight: bold;
 padding: 5px;
 margin-top: 0px;
@@ -40,11 +47,11 @@ text-align: center;
 }
 
 .confirmTitle {
-background-color: rgb(166, 250, 143);
+background-color: #b2e94465;
 margin-right: 5px;
 }
 .confirmTitle:hover {
-background-color: rgb(68, 161, 71);
+background-color:  #bfff00cf;;
 }
 .cancelTitle:hover {
 background-color: rgb(167, 167, 167);

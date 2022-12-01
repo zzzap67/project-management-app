@@ -80,7 +80,7 @@ const ColumnItem = (props: IColumn) => {
           <>
             <form onSubmit={submitChange}>
               <input
-                className="column_title"
+                className="column_title__input"
                 value={newTitle}
                 placeholder={t('description.forms.enterTitle')}
                 onChange={handleTitleChange}
