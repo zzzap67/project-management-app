@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 15px 10px;
+  padding: 5px 10px 10px;
   width: 390px;
   color: #556737;
   border: 2px solid rgb(212, 218, 200);
   border-radius: 15px;
   box-shadow: 5px 3px 10px 5px rgb(212, 218, 200);
   min-height: 100px;
-  max-height: 400px;
+  max-height: 300px;
 }
 .column_title_change__form{
   display: flex;

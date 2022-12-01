@@ -8,10 +8,11 @@
 
 .columnList {
   display: flex;
+  flex-wrap: nowrap;
   gap: 20px;
   padding: 20px 0;
   overflow:auto;
-  flex: 1;
+  /* flex: 1; */
 }
 .columnList::-webkit-scrollbar {
   position: absolute;

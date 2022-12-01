@@ -30,11 +30,6 @@ const Boards = () => {
   return (
     <>
       <div className="boards">
-        <Button
-          className="go_back__button"
-          buttonName={t('description.forms.goBackButton')}
-          eventHandler={() => navigate(`/`)}
-        />
         <BoardsList />
         <Button
           className="create_board__button"

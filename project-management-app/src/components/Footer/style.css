@@ -7,7 +7,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 10px;
   gap: 70px;
 }
 .rss_link,
