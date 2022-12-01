@@ -1,31 +1,69 @@
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { useState, ChangeEvent } from 'react';
+import { useParams } from 'react-router-dom';
 import { Droppable, DroppableProvided } from 'react-beautiful-dnd';
 import ModalConfirmation from 'components/ModalConfirmation';
+import ModalAction from 'components/ModalAction';
 import TaskList from 'components/TaskList';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { deleteColumnThunk, updateColumnThunk } from 'store/thunks';
-import { IColumn } from 'types';
+import { useAppDispatch } from 'store/hooks';
+import { deleteColumnThunk, editColumnThunk, createNewTaskThunk } from 'store/thunks';
+import { IColumn, IEditColumn } from 'types';
 import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
+import { EItemType, ELocalStorage } from 'types';
 import './styles.css';
-import { ru } from 'components/locales/ru';
-import Form from 'components/Form';
 
 const ColumnItem = (props: IColumn) => {
   const { id, title, order } = props;
-  const user = useAppSelector((state) => state.userReducer);
   const [showModal, setShowModal] = useState(false);
+  const [showTitleEditor, setShowTitleEditor] = useState(false);
+  const [newTitle, setNewTitle] = useState(title);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const params = useParams();
   const boardId = params.id;
-  const registerData = ru.COLUMN_EDIT_FORM;
-  const [showEditForm, setShowEditForm] = useState(false);
-  const handleShowInput = () => {
-    setShowEditForm(true);
+
+  const [showModalActionTask, setShowModalActionTask] = useState(false);
+
+  const handleModalActionTask = () => {
+    setShowModalActionTask(true);
   };
+
+  const createTask = async (values: Record<string, string>) => {
+    const uID = localStorage.getItem(ELocalStorage.userId);
+    if (boardId && uID) {
+      await dispatch(
+        createNewTaskThunk({
+          title: values.title,
+          description: values.description,
+          columnId: id,
+          boardId,
+          userId: uID,
+        })
+      );
+    }
+    setShowModalActionTask(false);
+  };
+
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setNewTitle(event.target.value);
+  };
+
+  const submitChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!newTitle.trim()) {
+      setNewTitle('');
+      return;
+    }
+
+    if (boardId) {
+      const newColumn: IEditColumn = { title: newTitle, id, boardId, order };
+      await dispatch(editColumnThunk(newColumn));
+    }
+    setShowTitleEditor(false);
+  };
+
   const handleModalQuestion = () => {
     setShowModal(true);
   };
@@ -34,36 +72,42 @@ const ColumnItem = (props: IColumn) => {
       dispatch(deleteColumnThunk({ columnId: id, boardId }));
     }
   };
-  const onSubmit = async (values: Record<string, string>) => {
-    if (boardId) {
-      await dispatch(
-        updateColumnThunk({
-          boardId,
-          columnId: id,
-          title: values.title,
-          userId: user.id,
-          order: order,
-        })
-      );
-    }
-    setShowEditForm(false);
-  };
+
   return (
     <div className="column_item">
       <div className="column_info">
-        <div className="column_title__wrapper">
-          <h2 className="column_title" onClick={handleShowInput}>
+        {showTitleEditor ? (
+          <>
+            <form onSubmit={submitChange}>
+              <input
+                className="column_title"
+                value={newTitle}
+                placeholder={t('description.forms.enterTitle')}
+                onChange={handleTitleChange}
+              />
+              <button className="titleButton confirmTitle" type="submit">
+                &#10003;
+              </button>
+              <button
+                className="titleButton cancelTitle"
+                type="button"
+                onClick={() => setShowTitleEditor(false)}
+              >
+                &#10005;
+              </button>
+            </form>
+          </>
+        ) : (
+          <h2
+            className="column_title"
+            onClick={() => {
+              setNewTitle(title);
+              setShowTitleEditor(true);
+            }}
+          >
             {title}
           </h2>
-          {showEditForm ? (
-            <Form
-              formData={registerData}
-              errorMessage={''}
-              className={`update_column`}
-              onSubmit={onSubmit}
-            />
-          ) : null}
-        </div>
+        )}
         <Delete
           className="delete_board"
           onClick={(e) => {
@@ -85,13 +129,20 @@ const ColumnItem = (props: IColumn) => {
       <Button
         className="create_task__button"
         buttonName={t('description.forms.createTask')}
-        eventHandler={() => navigate(`/board/${boardId}/column/${id}/task`)}
+        eventHandler={() => handleModalActionTask()}
       />
       {showModal && (
         <ModalConfirmation
           confirmQuestion={<span>{`${t('description.forms.deleteQuestion')} ${title}?`}</span>}
           setShowModal={setShowModal}
           onConfirm={deleteColumn}
+        />
+      )}
+      {showModalActionTask && (
+        <ModalAction
+          formType={EItemType.createTask}
+          setShowModalAction={setShowModalActionTask}
+          onSubmit={createTask}
         />
       )}
     </div>

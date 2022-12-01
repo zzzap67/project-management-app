@@ -40,7 +40,7 @@ const Header: React.FunctionComponent = () => {
       <Link to="/boards">
         <Button
           className="link-to-add-new-board_button"
-          buttonName={t('description.header.newBoard')}
+          buttonName={t('description.header.boardList')}
         />
       </Link>
       <div className="nav">

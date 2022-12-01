@@ -143,8 +143,19 @@ enum ELocalStorage {
 enum EItemType {
   board = 'editBoard',
   column = 'column',
-  task = 'task',
+  task = 'editTask',
+  createBoard = 'createBoard',
+  createColumn = 'createColumn',
+  createTask = 'createTask',
 }
+
+interface IEditColumn {
+  title: string;
+  boardId: string;
+  id: string;
+  order: number | string;
+}
+
 export {
   MainState,
   IBoard,
@@ -172,4 +183,5 @@ export {
   ButtonProps,
   Languages,
   EItemType,
+  IEditColumn,
 };

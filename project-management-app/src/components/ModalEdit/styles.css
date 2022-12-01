@@ -1,0 +1,84 @@
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modalContent {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #fefefe;
+  border-radius: 4px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modalContent button {
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.confirm {
+  background-color: rgb(166, 250, 143);
+  margin-right: 20px;
+}
+.confirm:hover {
+  background-color: rgb(68, 161, 71);
+}
+.cancel:hover {
+  background-color: rgb(167, 167, 167);
+}
+
+.modal-input {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding-top: 10px;
+}
+
+.modal-input__label {
+  line-height: 1.2;
+  color: #A0A0A0;
+}
+
+.modal-input__field {
+  font-size: 13px;
+  line-height: 1.23;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #F9F9F9;
+}
+
+.modal-input__field::placeholder {
+    font-weight: bold;
+    opacity: .5;
+    color: red;
+}
+
+.modal-input__error {
+  font-size: 10px;
+  line-height: 1.2;
+  margin: 0;
+  color: #EE3465;
+}

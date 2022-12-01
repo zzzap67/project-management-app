@@ -1,12 +1,26 @@
 import { SyntheticEvent } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import Input from '../Input/';
+import { FormProps, InputData } from 'types';
 import { useFormWithValidation } from '../../utils';
 import { useTranslation } from 'react-i18next';
-import { FormProps, InputData } from 'types';
 import './styles.css';
 
-const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
+export interface formBoardData {
+  inputsData: InputData[];
+  title: string;
+}
+
+export interface formRegisterData {
+  inputsData: InputData[];
+  linkTo: string;
+  title: string;
+  buttonText: string;
+  text: string;
+  linkText: string;
+}
+
+const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormProps) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsData, linkTo, title, buttonText, text, linkText } = formData;
   const { t } = useTranslation('translation');
@@ -16,13 +30,18 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
 
   const renderInputs = (inputs: InputData[]) => {
     return inputs.map((input) => (
-      <Input inputData={input} key={input.id} onChange={handleChange} errors={errors}/>
+      <Input inputData={input} key={input.id} onChange={handleChange} errors={errors} />
     ));
   };
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     onSubmit(values);
+  };
+
+  const closeModal = (e: SyntheticEvent) => {
+    e.preventDefault();
+    onCancel?.(false);
   };
 
   return (
@@ -41,7 +60,7 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
         className.includes('user-profile')) && (
         <>
           <div
-            className={`form__button-wrapper 
+            className={`form__button-wrapper
         ${
           inputsData.length === 3
             ? 'form__button-wrapper_type_near'
@@ -76,13 +95,18 @@ const Form = ({ formData, errorMessage, className, onSubmit }: FormProps) => {
           </button>
           <button
             className="cancel__button button"
-            onClick={() => {
-              className === 'form_column' ||
-              className === 'form_task' ||
-              className === 'update_column'
-                ? navigate(`${linkTo}${boardId}`)
-                : navigate(linkTo);
-            }}
+            onClick={
+              onCancel
+                ? closeModal
+                : () => {
+                    className === 'form_column' ||
+                    className === 'form_task' ||
+                    className === 'update_column'
+                      ? navigate(`${linkTo}${boardId}`)
+                      : navigate(linkTo);
+                    navigate(linkTo);
+                  }
+            }
           >
             {t('description.forms.cancelButtonText')}
           </button>

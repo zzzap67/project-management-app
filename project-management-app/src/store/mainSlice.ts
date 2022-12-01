@@ -5,12 +5,16 @@ import {
   getBoardByIdThunk,
   deleteBoardThunk,
   deleteColumnThunk,
+  createNewTaskThunk,
+  createNewBoardThunk,
+  editBoardThunk,
+  editColumnThunk,
   deleteTaskThunk,
+  createNewColumnThunk,
   DragNDropTaskThunk,
   getAllColumnsThunk,
   DragNDropTaskInOneColumnThunk,
   DragNDropColumnThunk,
-  createNewColumnThunk,
   updateColumnThunk,
   updateTaskThunk,
 } from './thunks';
@@ -65,6 +69,19 @@ export const mainSlice = createSlice({
       .addCase(deleteBoardThunk.fulfilled, (state, { payload: boardID }) => {
         delete state.boards[boardID];
       })
+      .addCase(createNewBoardThunk.fulfilled, (state, { payload: board }) => {
+        state.boards[board.id] = board;
+        state.isLoading = false;
+      })
+      .addCase(createNewColumnThunk.fulfilled, (state, { payload: column }) => {
+        state.columns[column.id] = column;
+        state.tasks[column.id] = {};
+        state.isLoading = false;
+      })
+      .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
+        state.tasks[task.columnId][task.id] = task;
+        state.isLoading = false;
+      })
       .addCase(deleteColumnThunk.fulfilled, (state, { payload: columnID }) => {
         delete state.columns[columnID];
         state.isLoading = false;
@@ -73,27 +90,32 @@ export const mainSlice = createSlice({
         delete state.tasks[values.columnId][values.taskId];
         state.isLoading = false;
       })
-      .addCase(DragNDropTaskThunk.fulfilled, (state, { payload }) => {
+      .addCase(editBoardThunk.fulfilled, (state, { payload: board }) => {
         state.isLoading = false;
+        state.boards[board.id].title = board.title;
+        state.boards[board.id].description = board.description;
+      })
+      .addCase(editColumnThunk.fulfilled, (state, { payload: column }) => {
+        state.isLoading = false;
+        state.columns[column.id].title = column.title;
+      })
+      .addCase(DragNDropTaskThunk.fulfilled, (state, { payload }) => {
         state.tasks = generateHashMapTasks(payload.columns);
+        state.isLoading = false;
       })
       .addCase(DragNDropTaskInOneColumnThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
         state.tasks = generateHashMapTasks(payload.columns);
+        state.isLoading = false;
       })
       .addCase(DragNDropColumnThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
         state.columns = generateHashMapColumn(payload.columns);
-      })
-      .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.isLoading = false;
-        state.columns = generateHashMapColumn(payload.columns);
-        state.tasks = generateHashMapTasks(payload.columns);
       })
+
       .addCase(updateColumnThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.columns = generateHashMapColumn(payload.columns);
+        state.isLoading = false;
       })
       .addCase(updateTaskThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;

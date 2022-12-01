@@ -1,19 +1,19 @@
 import ColumnList from 'components/ColumnList';
-import ModalAction from 'components/ModalAction';
 import Button from 'components/ui/button';
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
-import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
 import { useNavigate, useParams } from 'react-router-dom';
+import ModalAction from 'components/ModalAction';
+import { EItemType } from 'types';
+import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
-  createNewColumnThunk,
   DragNDropColumnThunk,
   DragNDropTaskInOneColumnThunk,
   DragNDropTaskThunk,
   getBoardByIdThunk,
+  createNewColumnThunk,
 } from 'store/thunks';
-import { EItemType } from 'types';
 import './styles.css';
 
 const Board = () => {
@@ -31,12 +31,14 @@ const Board = () => {
   const handleModalAction = () => {
     setShowModalAction(true);
   };
+
   const createColumn = async (values: Record<string, string>) => {
     if (id) {
-      await dispatch(createNewColumnThunk({ title: values.title, id, userId: user.id }));
-      setShowModalAction(false);
+      await dispatch(createNewColumnThunk({ title: values.title, id }));
     }
+    setShowModalAction(false);
   };
+
   const getClearId = (str: string) => {
     return str.replace(/\w*\//, '');
   };
@@ -131,13 +133,7 @@ const Board = () => {
       />
       {showModalAction && (
         <ModalAction
-          id={id as string}
-          userId={user.id}
-          title=""
-          description=""
-          itemType={EItemType.column}
-          isReadOnly={false}
-          isDescriptionNeeded={true}
+          formType={EItemType.createColumn}
           setShowModalAction={setShowModalAction}
           onSubmit={createColumn}
         />

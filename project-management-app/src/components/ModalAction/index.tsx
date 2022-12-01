@@ -1,59 +1,50 @@
 import { Dispatch, SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
+import './styles.css';
 import { EItemType } from 'types';
 import Form from 'components/Form';
 import { ru } from 'components/locales/ru';
-import { useNavigate, useParams } from 'react-router-dom';
-import './styles.css';
 
 interface IModalAction {
-  itemType: EItemType;
-  isReadOnly: boolean;
-  isDescriptionNeeded: boolean;
-  id: string;
-  title: string;
-  description: string;
-  userId: string;
+  formType: EItemType;
   setShowModalAction: Dispatch<SetStateAction<boolean>>;
   onSubmit: (values: Record<string, string>) => Promise<void>;
 }
 
-function ModalAction({ itemType, setShowModalAction, onSubmit }: IModalAction) {
-  const registerData = ru.BOARD_FORM;
-  const registerDataColumn = ru.COLUMN_FORM;
-  const navigate = useNavigate();
-  const params = useParams();
-  console.log(params);
-  const boardId = params.id;
+function ModalAction({ formType, setShowModalAction, onSubmit }: IModalAction) {
+  let registerData = ru.BOARD_FORM || ru.COLUMN_FORM;
+  let className = '';
+
+  switch (formType) {
+    case EItemType.createBoard:
+      registerData = ru.BOARD_FORM;
+      className = 'form_board';
+      break;
+    case EItemType.createColumn:
+      registerData = ru.COLUMN_FORM;
+      className = 'form_column';
+      break;
+    case EItemType.createTask:
+      registerData = ru.TASK_FORM;
+      className = 'form_task';
+      break;
+  }
+
   const handleCallback = (values: Record<string, string>) => {
     onSubmit(values);
     setShowModalAction(false);
-    navigate(`/board/${boardId}`);
   };
-  const closeModal = () => {
-    setShowModalAction(false);
-    navigate(`/board/${boardId}`);
-  };
+
   return createPortal(
     <div className="modalAction">
       <div className="modalActionContent">
-        {itemType === 'column' ? (
-          <Form
-            formData={registerDataColumn}
-            errorMessage={''}
-            className={'form_column'}
-            onSubmit={handleCallback}
-            onCancel={closeModal}
-          />
-        ) : (
-          <Form
-            formData={registerData}
-            errorMessage={''}
-            className={'form_board'}
-            onSubmit={handleCallback}
-            onCancel={closeModal}
-          />
-        )}
+        <Form
+          formData={registerData}
+          errorMessage={''}
+          className={className}
+          onSubmit={handleCallback}
+          onCancel={setShowModalAction}
+        />
       </div>
     </div>,
     document.getElementById('modal') as Element

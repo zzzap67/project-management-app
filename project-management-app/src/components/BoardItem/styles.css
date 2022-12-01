@@ -30,6 +30,7 @@
 .edit_board,
 .delete_board {
   width: 21px;
+  cursor: pointer;
 }
 .board_link {
   text-decoration: none;

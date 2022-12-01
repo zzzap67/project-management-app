@@ -18,7 +18,36 @@
 }
 .column_title {
   font-size: 30px;
+  width: 70%;
   height: fit-content;
+}
+.column_title::placeholder {
+  font-weight: bold;
+  opacity: .5;
+  color: red;
+}
+
+.titleButton {
+border: none;
+border-radius: 10px;
+font-size: 30px;
+font-weight: bold;
+padding: 5px;
+margin-top: 0px;
+margin-left: 10px;
+cursor: pointer;
+text-align: center;
+}
+
+.confirmTitle {
+background-color: rgb(166, 250, 143);
+margin-right: 5px;
+}
+.confirmTitle:hover {
+background-color: rgb(68, 161, 71);
+}
+.cancelTitle:hover {
+background-color: rgb(167, 167, 167);
 }
 @media (max-width: 440px) {
   .column_item {
@@ -28,6 +57,7 @@
   .task_list {
     padding: 0;
   }
+ 
 }
 .update_column__title {
   display: none;

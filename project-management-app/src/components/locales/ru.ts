@@ -52,7 +52,6 @@ export const ru = {
     linkText: '',
     buttonText: '',
     text: '',
-    EditTitle: 'editBoard',
     linkTo: '/boards',
     title: 'createBoard',
     inputsData: [
