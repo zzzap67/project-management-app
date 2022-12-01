@@ -5,8 +5,10 @@ import DeveloperCard from 'components/ui/developer-card';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './style.css';
+import { useAppSelector } from 'store/hooks';
 
 export const WelcomePage: React.FunctionComponent = () => {
+  const isAuth = useAppSelector((state) => state.userReducer.isAuth);
   const { t } = useTranslation('translation');
   return (
     <div className="welcome_page">
@@ -18,7 +20,7 @@ export const WelcomePage: React.FunctionComponent = () => {
           </article>
           <WelcomeImage className="welcome_image" />
         </div>
-        <Link className="welcome_button__link" to="/register">
+        <Link className="welcome_button__link" to={isAuth ? '/boards' : '/register'}>
           <Button
             className="welcome_button"
             buttonName={t('description.welcomePage.welcomeButtonName')}

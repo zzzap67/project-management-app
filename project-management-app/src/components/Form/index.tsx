@@ -1,10 +1,10 @@
 import { SyntheticEvent } from 'react';
-import './styles.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import Input from '../Input/';
 import { FormProps, InputData } from 'types';
 import { useFormWithValidation } from '../../utils';
 import { useTranslation } from 'react-i18next';
+import './styles.css';
 
 export interface formBoardData {
   inputsData: InputData[];
@@ -24,6 +24,8 @@ const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormPro
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const { inputsData, linkTo, title, buttonText, text, linkText } = formData;
   const { t } = useTranslation('translation');
+  const params = useParams();
+  const boardId = params.id;
   const navigate = useNavigate();
 
   const renderInputs = (inputs: InputData[]) => {
@@ -44,7 +46,10 @@ const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormPro
 
   return (
     <form className={`form ${className}`} onSubmit={handleSubmit}>
-      <h2 className={`form__title ${className}__title `}>{t(`description.forms.${title}`)!}</h2>
+      {className === 'update_column' ? null : (
+        <h2 className={`form__title ${className}__title `}>{t(`description.forms.${title}`)!}</h2>
+      )}
+
       <div className={`form__inputs-wrapper ${className}__inputs-wrapper`}>
         {renderInputs(inputsData)}
       </div>
@@ -79,7 +84,11 @@ const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormPro
           )}
         </>
       )}
-      {className === 'form_board' || className === 'form_task' || className === 'form_column' ? (
+      {className === 'form_board' ||
+      className === 'form_task' ||
+      className === 'form_column' ||
+      className === 'update_column' ||
+      className === 'form_edit__task' ? (
         <>
           <button className="confirm__button button" type="submit" disabled={!isValid}>
             {t('description.forms.confirmButtonText')}
@@ -90,6 +99,11 @@ const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormPro
               onCancel
                 ? closeModal
                 : () => {
+                    className === 'form_column' ||
+                    className === 'form_task' ||
+                    className === 'update_column'
+                      ? navigate(`${linkTo}${boardId}`)
+                      : navigate(linkTo);
                     navigate(linkTo);
                   }
             }

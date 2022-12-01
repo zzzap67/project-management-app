@@ -15,6 +15,7 @@ import {
   getAllColumnsThunk,
   DragNDropTaskInOneColumnThunk,
   DragNDropColumnThunk,
+  updateColumnThunk,
   updateTaskThunk,
 } from './thunks';
 
@@ -98,11 +99,6 @@ export const mainSlice = createSlice({
         state.isLoading = false;
         state.columns[column.id].title = column.title;
       })
-      .addCase(updateTaskThunk.fulfilled, (state, { payload: task }) => {
-        state.isLoading = false;
-        state.tasks[task.columnId as string][task.id].title = task.title;
-        state.tasks[task.columnId as string][task.id].description = task.description;
-      })
       .addCase(DragNDropTaskThunk.fulfilled, (state, { payload }) => {
         state.tasks = generateHashMapTasks(payload.columns);
         state.isLoading = false;
@@ -114,6 +110,17 @@ export const mainSlice = createSlice({
       .addCase(DragNDropColumnThunk.fulfilled, (state, { payload }) => {
         state.columns = generateHashMapColumn(payload.columns);
         state.isLoading = false;
+      })
+
+      .addCase(updateColumnThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.columns = generateHashMapColumn(payload.columns);
+        state.isLoading = false;
+      })
+      .addCase(updateTaskThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.columns = generateHashMapColumn(payload.columns);
+        state.tasks = generateHashMapTasks(payload.columns);
       })
       .addMatcher(
         ({ type }) => type.includes('main') && type.endsWith('/pending'),

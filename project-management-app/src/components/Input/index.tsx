@@ -8,7 +8,7 @@ const Input = ({ inputData, onChange, errors }: InputProps) => {
 
   return (
     <div className="input">
-      <label htmlFor={id} className={`input__labeаl  ${id}_input__label`}>
+      <label htmlFor={id} className={`input__label  ${id}_input__label`}>
         {t(`description.forms.inputs.${id}Label`)}
       </label>
       <input

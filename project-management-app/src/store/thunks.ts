@@ -47,7 +47,15 @@ export const getAllTasksThunk = createAsyncThunk(
 export const updateTaskThunk = createAsyncThunk(
   'main/updateTaskThunk',
   async (values: Record<string, string>) => {
-    return await api.updateTask(values);
+    await api.updateTask(values);
+    return await api.getBoardId(values.boardId);
+  }
+);
+export const updateColumnThunk = createAsyncThunk(
+  'main/updateColumnThunk',
+  async (values: Record<string, string>) => {
+    await api.updateColumn(values);
+    return await api.getBoardId(values.boardId);
   }
 );
 
@@ -111,7 +119,8 @@ export const createNewBoardThunk = createAsyncThunk(
 export const createNewColumnThunk = createAsyncThunk(
   'main/createNewColumnThunk',
   async (values: Record<string, string>) => {
-    return await api.createNewColumn(values);
+    await api.createNewColumn(values);
+    return await api.getBoardId(values.id);
   }
 );
 export const createNewTaskThunk = createAsyncThunk(

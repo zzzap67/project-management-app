@@ -32,9 +32,10 @@ interface IBoard {
 interface IColumn {
   id: string;
   title: string;
+  description: string;
   key: string;
-  order: number;
   tasks: ITask[];
+  order: string;
 }
 interface ITask {
   userId?: string;
@@ -139,7 +140,6 @@ enum ELocalStorage {
   token = 'token',
   userId = 'userId',
 }
-
 enum EItemType {
   board = 'editBoard',
   column = 'column',
@@ -153,7 +153,7 @@ interface IEditColumn {
   title: string;
   boardId: string;
   id: string;
-  order: number;
+  order: number | string;
 }
 
 export {

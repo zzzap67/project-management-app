@@ -6,9 +6,6 @@
   gap: 10px;
   width: 270px;
   padding: 30px;
-  border: 2px solid rgb(212, 218, 200);
-  border-radius: 15px;
-  box-shadow: 5px 3px 10px 5px rgb(212, 218, 200);
 }
 .form_board__title {
   font-size: 17px;
@@ -54,13 +51,15 @@
   padding: 5px 15px;
   border-radius: 15px;
   width: 121px;
+  height: 30px;
   color: white;
   background-color: #b2e94465;
   border: 1px dashed #9fdf2198;
   box-shadow: 3px 1px 3px 1px rgb(207 232 175);
   cursor: pointer;
 }
-.confirm__button:hover {
+.confirm__button:hover,
+.go_back__button:hover {
   color: white;
   background-color: #bfff00cf;
   border: 1px solid #bfff00cf;

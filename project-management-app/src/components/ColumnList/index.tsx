@@ -1,7 +1,7 @@
 import ColumnItem from 'components/ColumnItem';
 import { useMemo } from 'react';
 import { useAppSelector } from '../../store/hooks';
-import { Draggable, Droppable, DroppableProvided } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 import './styles.css';
 
 const ColumnList = () => {
@@ -9,39 +9,24 @@ const ColumnList = () => {
   const columnList = useMemo(() => {
     return Object.values(columns).sort((a, b) => Number(a.order) - Number(b.order));
   }, [columns]);
-
   return (
-    <div className="columnList">
+    <>
       {columnList.map((column, index: number) => {
         return (
-          <Droppable
-            key={index + 1}
-            droppableId={`column/${column.id}`}
-            type="COLUMN"
-            direction="vertical"
-          >
-            {(provided: DroppableProvided) => {
-              return (
-                <div ref={provided.innerRef} {...provided.droppableProps}>
-                  <Draggable key={column.id} draggableId={`column/${column.id}`} index={index + 1}>
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <ColumnItem {...column} key={column.id} />
-                      </div>
-                    )}
-                  </Draggable>
-                  {provided.placeholder}
-                </div>
-              );
-            }}
-          </Droppable>
+          <Draggable key={column.id} draggableId={`column/${column.id}`} index={index + 1}>
+            {(provided) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+              >
+                <ColumnItem {...column} key={column.id} />
+              </div>
+            )}
+          </Draggable>
         );
       })}
-    </div>
+    </>
   );
 };
 export default ColumnList;

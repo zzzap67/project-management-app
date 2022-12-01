@@ -94,7 +94,23 @@ export const ru = {
     linkText: '',
     text: '',
     buttonText: '',
-    linkTo: '/board/:id',
+    linkTo: `/board/`,
+    title: 'createColumn',
+    inputsData: [
+      {
+        id: 'title',
+        label: 'Заголовок',
+        type: 'text',
+      },
+    ],
+  },
+  COLUMN_EDIT_FORM: {
+    buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
+    linkText: '',
+    text: '',
+    buttonText: '',
+    linkTo: `/board/`,
     title: 'createColumn',
     inputsData: [
       {
@@ -111,7 +127,28 @@ export const ru = {
     text: '',
     buttonText: '',
     title: 'createTask',
-    linkTo: '/board/:id',
+    linkTo: '/board/',
+    inputsData: [
+      {
+        id: 'title',
+        label: 'Заголовок',
+        type: 'text',
+      },
+      {
+        id: 'description',
+        label: 'Описание',
+        type: 'text',
+      },
+    ],
+  },
+  TASK_EDIT_FORM: {
+    buttonBoardText: 'Сохранить',
+    cancelButtonText: 'Отменить',
+    linkText: '',
+    text: '',
+    buttonText: '',
+    title: 'createTask',
+    linkTo: '/board/',
     inputsData: [
       {
         id: 'title',

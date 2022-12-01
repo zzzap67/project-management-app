@@ -23,11 +23,11 @@ function ModalConfirmation({ confirmQuestion, setShowModal, onConfirm }: IModalC
     <div className="modal">
       <div className="modalContent">
         <div>{confirmQuestion}</div>
-        <div>
-          <button className="confirm" onClick={handleCallback}>
+        <div className="question_button__wrapper">
+          <button className="confirm_delete" onClick={handleCallback}>
             {t('description.forms.okButtonText')}
           </button>
-          <button className="cancel" onClick={closeModal}>
+          <button className="cancel_delete" onClick={closeModal}>
             {t('description.forms.cancelButtonText')}
           </button>
         </div>

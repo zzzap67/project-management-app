@@ -51,7 +51,7 @@ function ModalEdit({
   return createPortal(
     <div className="modal">
       <div className="modalContent">
-        <div>{t(`description.forms.${itemType}`)}</div>
+        <div className="modal_title">{t(`description.forms.${itemType}`)}</div>
         <div className="modal-input">
           <label className="modal-input__label" htmlFor="titleInput">
             {t('description.forms.inputs.titleLabel')}
@@ -79,7 +79,7 @@ function ModalEdit({
             />
           </div>
         )}
-        <div>
+        <div className="modal_button__wrapper">
           <button className="confirm" onClick={handleCallback}>
             {t('description.forms.confirmButtonText')}
           </button>

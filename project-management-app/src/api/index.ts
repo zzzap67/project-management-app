@@ -216,7 +216,6 @@ class Api implements IApi {
 
   async getBoardId(id: string) {
     let foundData;
-    // : IBoard;
     try {
       const response = await fetch(`${this.baseUrl}/boards/${id}`, this.setConfig({}));
       foundData = await response.json();
@@ -426,6 +425,30 @@ class Api implements IApi {
             order: values.order,
             boardId: values.boardId,
             columnId: values.columnId,
+          },
+        })
+      );
+      updateTask = await response.json();
+      if (response.ok) {
+        return updateTask;
+      }
+
+      throw response.body;
+    } catch (e) {
+      const err = e as Error;
+      return Promise.reject(err.message ? err.message : err);
+    }
+  }
+  async updateColumn(values: Record<string, string>) {
+    let updateTask: IColumn;
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/boards/${values.boardId}/columns/${values.columnId}`,
+        this.setConfig({
+          method: 'PUT',
+          body: {
+            title: values.title,
+            order: values.order,
           },
         })
       );
