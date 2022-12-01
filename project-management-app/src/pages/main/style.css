@@ -2,16 +2,21 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding:0  10px;
+  padding: 0 10px;
   flex: 1;
 
   /* height: 100%; */
 }
-.main{
+.layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.main {
   width: 100%;
-    margin: 0 auto;
-    flex: 1 1 auto;
-    position: relative;
-    display: flex;
-     overflow: hidden;
+  margin: 0 auto;
+  flex: 1 1 auto;
+  position: relative;
+  display: flex;
+  overflow: hidden;
 }
