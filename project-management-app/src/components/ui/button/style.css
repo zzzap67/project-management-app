@@ -80,6 +80,7 @@
 .create_column__button {
   width: fit-content;
   align-self: center;
+  margin-top: 10px;
 }
 
 .create_board__button:hover,
