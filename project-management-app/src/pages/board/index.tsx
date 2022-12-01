@@ -18,7 +18,7 @@ import './styles.css';
 
 const Board = () => {
   const { id } = useParams();
-  const { tasks, columns } = useAppSelector((state) => state.mainReducer);
+  const { tasks, columns, isLoading } = useAppSelector((state) => state.mainReducer);
   const user = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -117,7 +117,11 @@ const Board = () => {
         <Droppable droppableId={`board/${id}`} type="COLUMN" direction="horizontal">
           {(provided: DroppableProvided) => {
             return (
-              <div className="columnList" ref={provided.innerRef} {...provided.droppableProps}>
+              <div
+                className={isLoading ? 'columnList columnList-invisible' : 'columnList'}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
                 <ColumnList />
                 {provided.placeholder}
               </div>

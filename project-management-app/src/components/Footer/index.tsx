@@ -14,7 +14,7 @@ const Footer: React.FunctionComponent = () => {
         ))}
       </div>
       <a className="rss_link" href="https://rs.school/react/">
-        <img src={rsLogo} alt="RS School logo" width={80} /> © 2022 The Rolling Scopes
+        <img src={rsLogo} alt="RS School logo" width={61} /> © 2022 The Rolling Scopes
       </a>
     </footer>
   );

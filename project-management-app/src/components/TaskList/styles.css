@@ -5,7 +5,7 @@
 .task_list {
   padding: 0 10px;
   min-height: 40px;
-  max-height: 150px;
+  max-height: 120px;
   overflow: hidden auto;
 }
 .task_list::-webkit-scrollbar {
