@@ -54,19 +54,21 @@ const Header: React.FunctionComponent = () => {
   return isAuth ? (
     <>
       <header className={scrollEvent ? 'header_color' : 'header_white'}>
-        <Link to="/boards">
+        <div className="leftNav">
+          <Link to="/boards">
+            <Button
+              className="link-to-add-new-board_button"
+              buttonName={t('description.header.boardList')}
+            />
+          </Link>
           <Button
             className="link-to-add-new-board_button"
-            buttonName={t('description.header.boardList')}
+            buttonName={t('description.header.newBoard')}
+            eventHandler={() => {
+              handleModalAction();
+            }}
           />
-        </Link>
-        <Button
-          className="link-to-add-new-board_button"
-          buttonName={t('description.header.newBoard')}
-          eventHandler={() => {
-            handleModalAction();
-          }}
-        />
+        </div>
         <div className="nav">
           <Link to="/">
             <Button

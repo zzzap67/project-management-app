@@ -5,7 +5,7 @@ import { useAppSelector } from '../../store/hooks';
 import { PropsTask } from 'types';
 import './styles.css';
 
-const TaskList = React.forwardRef((props: PropsTask) => {
+const TaskList = React.forwardRef((props: PropsTask, ref) => {
   const { tasks } = useAppSelector((state) => state.mainReducer);
   const taskList = useMemo(() => {
     return Object.values(tasks[props.columnId]).sort((a, b) => Number(a.order) - Number(b.order));
