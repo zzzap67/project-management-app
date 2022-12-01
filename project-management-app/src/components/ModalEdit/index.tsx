@@ -44,6 +44,11 @@ function ModalEdit({
       return;
     }
 
+    if (!newDescription.trim()) {
+      setNewDescription('');
+      return;
+    }
+
     onConfirm(newTitle, newDescription);
     closeModal();
   };
@@ -76,6 +81,7 @@ function ModalEdit({
               onChange={handleDescriptionChange}
               value={newDescription}
               readOnly={isReadOnly}
+              placeholder={t('description.forms.inputs.descriptionPlaceholder')}
             />
           </div>
         )}
