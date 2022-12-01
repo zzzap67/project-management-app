@@ -78,7 +78,7 @@ const ColumnItem = (props: IColumn) => {
       <div className="column_info">
         {showTitleEditor ? (
           <>
-            <form onSubmit={submitChange}>
+            <form className="column_title_change__form" onSubmit={submitChange}>
               <input
                 className="column_title__input"
                 value={newTitle}

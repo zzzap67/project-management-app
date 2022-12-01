@@ -53,3 +53,11 @@
   gap: 30px;
   padding: 100px 0;
 }
+@media (max-width: 680px) {
+  .welcome_page {
+    justify-content: space-around;
+  }
+  .developer_section {
+    padding: 0;
+  }
+}

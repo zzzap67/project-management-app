@@ -11,6 +11,9 @@
   min-height: 100px;
   max-height: 400px;
 }
+.column_title_change__form{
+  display: flex;
+}
 .column_info {
   display: flex;
   flex-direction: row;
@@ -49,6 +52,9 @@ text-align: center;
 .confirmTitle {
 background-color: #b2e94465;
 margin-right: 5px;
+}
+.cancelTitle{
+  margin-right: 5px;
 }
 .confirmTitle:hover {
 background-color:  #bfff00cf;;

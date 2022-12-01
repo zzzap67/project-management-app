@@ -15,3 +15,8 @@
   text-decoration: none;
   color: #86a257;
 }
+@media (max-width: 4500px) {
+  .developer_links {
+    gap: 0;
+  }
+}
