@@ -29,6 +29,7 @@ interface IBoard {
   description: string;
   key: string;
 }
+
 interface IColumn {
   id: string;
   title: string;
@@ -37,6 +38,7 @@ interface IColumn {
   tasks: ITask[];
   order: string;
 }
+
 interface ITask {
   userId?: string;
   columnId?: string;
@@ -50,6 +52,7 @@ interface ITask {
 interface PropsTask {
   columnId: string;
 }
+
 interface FormProps {
   formData:
     | typeof ru.REGISTER_FORM
@@ -75,16 +78,19 @@ interface formRegisterData {
   text: string;
   linkText: string;
 }
+
 interface InputData {
   id: string;
   label: string;
   type: string;
 }
+
 interface InputProps {
   inputData: InputData;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   errors: Record<string, string>;
 }
+
 interface ButtonProps {
   className?: string;
   buttonName?: string;
@@ -99,6 +105,18 @@ interface ITooltip {
 enum ETooltipType {
   ok = 'ok',
   error = 'error',
+}
+
+interface ITooltipVariant {
+  variant: ETooltipVariant;
+  text: string;
+  onClick: () => void;
+  onClose: () => void;
+}
+
+enum ETooltipVariant {
+  plain = 'plain',
+  yesNo = 'yesNo',
 }
 
 interface IUser {
@@ -140,6 +158,7 @@ enum ELocalStorage {
   token = 'token',
   userId = 'userId',
 }
+
 enum EItemType {
   board = 'editBoard',
   column = 'column',
@@ -163,6 +182,8 @@ export {
   ITask,
   ITooltip,
   ETooltipType,
+  ITooltipVariant,
+  ETooltipVariant,
   IUserState,
   EApiMethods,
   ICreateUser,
