@@ -8,11 +8,17 @@ import { useAppDispatch } from '../../store/hooks';
 import { signIn } from '../../store/thunks';
 import { ELocalStorage } from '../../types';
 import { api } from '../../api';
+import { useAuth } from '../../hooks/useAuth';
 
 function SignIn() {
   const navigate = useNavigate();
   const formData = ru.LOGIN_FORM;
   const dispatch = useAppDispatch();
+  const { isAuth } = useAuth();
+
+  if (isAuth) {
+    navigate('/boards');
+  }
 
   const onSubmit = async (values: Record<string, string>) => {
     const signInRes = await dispatch(

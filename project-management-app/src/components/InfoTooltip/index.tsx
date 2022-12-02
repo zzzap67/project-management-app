@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { createPortal } from 'react-dom';
 import { selectAnyError } from '../../store/selectors';
 import './styles.css';
+import { useTranslation } from 'react-i18next';
 
 const initialTooltip: ITooltip = {
   message: '',
@@ -17,6 +18,7 @@ const InfoTooltip: FC<Partial<ITooltipVariant>> = ({ variant, text, onClick, onC
   const [visible, setVisible] = useState<boolean>(false);
   const error = useAppSelector(selectAnyError);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('translation');
 
   const { message, type } = tooltip;
 
@@ -78,7 +80,7 @@ const InfoTooltip: FC<Partial<ITooltipVariant>> = ({ variant, text, onClick, onC
               }
             }}
           >
-            Да
+            {t('description.forms.okButtonText')}
           </button>
         )}
       </div>
