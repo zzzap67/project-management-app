@@ -90,7 +90,11 @@ const Form = ({ formData, errorMessage, className, onSubmit, onCancel }: FormPro
       className === 'update_column' ||
       className === 'form_edit__task' ? (
         <>
-          <button className="confirm__button button" type="submit" disabled={!isValid}>
+          <button
+            className="confirm__button button"
+            type="submit"
+            disabled={!isValid || !Object.values(errors).every((error) => error === '')}
+          >
             {t('description.forms.confirmButtonText')}
           </button>
           <button
