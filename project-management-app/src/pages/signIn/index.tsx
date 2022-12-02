@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Form from '../../components/Form';
@@ -8,12 +8,19 @@ import { useAppDispatch } from '../../store/hooks';
 import { signIn } from '../../store/thunks';
 import { ELocalStorage } from '../../types';
 import { api } from '../../api';
+import { useAuth } from '../../hooks/useAuth';
 
 function SignIn() {
   const navigate = useNavigate();
   const formData = ru.LOGIN_FORM;
   const dispatch = useAppDispatch();
+  const { isAuth } = useAuth();
 
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/boards');
+    }
+  });
   const onSubmit = async (values: Record<string, string>) => {
     const signInRes = await dispatch(
       signIn({
@@ -24,11 +31,11 @@ function SignIn() {
     const token = (signInRes.payload as Record<string, string>).token;
 
     if (token) {
+      api.setToken(token);
       localStorage.setItem(ELocalStorage.token, token);
       localStorage.setItem(ELocalStorage.userId, (signInRes.payload as Record<string, string>).id);
-      api.setToken(token);
+      navigate('/boards', { replace: true });
     }
-    navigate('/boards', { replace: true });
   };
 
   return (

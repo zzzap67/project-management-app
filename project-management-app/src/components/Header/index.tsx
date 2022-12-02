@@ -68,12 +68,6 @@ const Header: React.FunctionComponent = () => {
           />
         </div>
         <div className="nav">
-          <Link to="/">
-            <Button
-              className="link-to-main-page_button"
-              buttonName={t('description.header.mainPage')}
-            />
-          </Link>
           <Link to="/user-profile" className="link-to-edit-profile_button">
             {t('description.header.editProfile')}
           </Link>

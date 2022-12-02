@@ -7,11 +7,20 @@ import { signIn, signUp } from '../../store/thunks';
 import { ELocalStorage } from '../../types';
 import { api } from '../../api';
 import './styles.css';
+import { useAuth } from '../../hooks/useAuth';
+import { useEffect } from 'react';
 
 const Register = () => {
   const navigate = useNavigate();
   const registerData = ru.REGISTER_FORM;
   const dispatch = useAppDispatch();
+  const { isAuth } = useAuth();
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/boards');
+    }
+  });
 
   const onSubmit = async (values: Record<string, string>) => {
     const signUpRes = await dispatch(signUp(values));

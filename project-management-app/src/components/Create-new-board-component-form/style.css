@@ -7,28 +7,34 @@
   width: 270px;
   padding: 30px;
 }
+
 .form_board__title {
   font-size: 17px;
   font-weight: 570;
   color: #86a257;
   align-self: center;
 }
+
 .form_board__inputs-wrapper {
   margin: 0;
 }
+
 .title_input,
 .description_input {
   background-color: rgba(187, 255, 127, 0.123);
   text-align: start;
   color: #86a257;
 }
+
 .title_input::placeholder,
 .description_input::placeholder {
   color: #86a257;
 }
+
 .description_input {
   height: 70px;
 }
+
 .title_input__label,
 .description_input__label {
   color: #86a257;
@@ -36,6 +42,7 @@
   font-weight: 500;
   padding-top: 5px;
 }
+
 .confirm__button {
   font-size: 14px;
   padding: 5px 15px;
@@ -43,9 +50,16 @@
   color: white;
   background-color: #b2e944;
   border: 1px solid #b2e944;
-  box-shadow: 3px 1px 3px 1 px rgb(200, 224, 168);
+  box-shadow: 3px 1px 3px 1px rgb(200, 224, 168);
   cursor: pointer;
 }
+
+.confirm__button:disabled {
+  opacity: 50%;
+  cursor: none;
+  pointer-events: none;
+}
+
 .go_back__button {
   font-size: 14px;
   padding: 5px 15px;
@@ -58,6 +72,7 @@
   box-shadow: 3px 1px 3px 1px rgb(207 232 175);
   cursor: pointer;
 }
+
 .confirm__button:hover,
 .go_back__button:hover {
   color: white;
@@ -65,6 +80,7 @@
   border: 1px solid #bfff00cf;
   box-shadow: 3px 1px 3px 1px rgb(219, 238, 151);
 }
+
 .cancel__button {
   font-size: 14px;
   padding: 5px 15px;
@@ -72,11 +88,12 @@
   color: white;
   background-color: #c8ccbfb7;
   border: 1px solid #c8ccbf7e;
-  box-shadow: 3px 1px 3px 1 px rgb(216, 225, 205);
+  box-shadow: 3px 1px 3px 1px rgb(216, 225, 205);
   cursor: pointer;
 }
+
 .cancel__button:hover {
   background-color: #c8ccbf5a;
   border: 1px solid #c8ccbf6c;
-  box-shadow: 3px 1px 3px 1 px rgba(216, 225, 205, 0.543);
+  box-shadow: 3px 1px 3px 1px rgba(216, 225, 205, 0.543);
 }

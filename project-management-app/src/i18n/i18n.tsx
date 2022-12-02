@@ -9,7 +9,7 @@ i18n
   .use(initReactI18next)
 
   .init({
-    debug: true,
+    debug: false,
     fallbackLng: Languages.En,
     supportedLngs: [Languages.En, Languages.Ru],
     interpolation: {
@@ -83,6 +83,7 @@ i18n
               emailError: 'Email format is invalid',
               passwordError: 'Password should contain min 4 symbols',
               validationMessage: 'Please fill out this field.',
+              youSure: 'Are you sure?',
             },
           },
         },
@@ -151,6 +152,7 @@ i18n
               emailError: 'Неверный формат email',
               passwordError: 'Пароль должен быть больше 4 символов',
               validationMessage: 'Пожалуйста, заполните это поле.',
+              youSure: 'Вы уверены?',
             },
           },
         },
