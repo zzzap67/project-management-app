@@ -9,7 +9,7 @@ i18n
   .use(initReactI18next)
 
   .init({
-    debug: true,
+    debug: false,
     fallbackLng: Languages.En,
     supportedLngs: [Languages.En, Languages.Ru],
     interpolation: {

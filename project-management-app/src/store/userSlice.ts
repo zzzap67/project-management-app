@@ -24,7 +24,6 @@ export const userSlice = createSlice({
       .addCase(signUp.fulfilled, (state, { payload }) => ({
         ...state,
         ...payload,
-        isAuth: true,
       }))
       .addCase(signIn.fulfilled, (state) => ({
         ...state,

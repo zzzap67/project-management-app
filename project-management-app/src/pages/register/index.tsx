@@ -8,6 +8,7 @@ import { ELocalStorage } from '../../types';
 import { api } from '../../api';
 import './styles.css';
 import { useAuth } from '../../hooks/useAuth';
+import { useEffect } from 'react';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,9 +16,11 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const { isAuth } = useAuth();
 
-  if (isAuth) {
-    navigate('/boards');
-  }
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/boards');
+    }
+  });
 
   const onSubmit = async (values: Record<string, string>) => {
     const signUpRes = await dispatch(signUp(values));
