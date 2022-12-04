@@ -73,9 +73,9 @@ export const mainSlice = createSlice({
         state.boards[board.id] = board;
         state.isLoading = false;
       })
-      .addCase(createNewColumnThunk.fulfilled, (state, { payload: column }) => {
-        state.columns[column.id] = column;
-        state.tasks[column.id] = {};
+      .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
+        state.columns = generateHashMapColumn(payload.columns);
+        state.tasks = generateHashMapTasks(payload.columns);
         state.isLoading = false;
       })
       .addCase(createNewTaskThunk.fulfilled, (state, { payload: task }) => {
