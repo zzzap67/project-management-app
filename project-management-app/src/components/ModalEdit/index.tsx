@@ -5,6 +5,7 @@ import './styles.css';
 import { EItemType } from 'types';
 
 interface IModalEdit {
+  ref?: unknown;
   itemType: EItemType;
   isReadOnly: boolean;
   isDescriptionNeeded: boolean;
