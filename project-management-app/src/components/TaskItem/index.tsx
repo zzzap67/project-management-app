@@ -11,7 +11,7 @@ import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import './styles.css';
 
-const TaskItem = React.forwardRef((props: ITask, ref) => {
+const TaskItem = React.forwardRef((props: ITask) => {
   const { id, title, description, order } = props;
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
