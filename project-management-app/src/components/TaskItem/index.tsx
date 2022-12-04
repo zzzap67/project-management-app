@@ -53,7 +53,6 @@ const TaskItem = React.forwardRef((props: ITask, ref) => {
   const handleModalEdit = () => {
     setShowModalEdit(true);
   };
-  console.log(ref);
   return (
     <div className="task_item">
       <div className="task_info">
@@ -82,6 +81,7 @@ const TaskItem = React.forwardRef((props: ITask, ref) => {
       )}
       {showModalEdit && (
         <ModalEdit
+          ref={ref}
           title={`${title}`}
           description={`${description}`}
           itemType={EItemType.task}
