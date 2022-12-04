@@ -20,7 +20,7 @@ export const useAuth = () => {
       }
       setLoading(false);
     })();
-  }, [isAuth]);
+  }, [dispatch, isAuth]);
 
   return { isAuth, loading };
 };

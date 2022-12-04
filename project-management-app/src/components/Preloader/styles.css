@@ -48,7 +48,7 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(240, 240, 240);
+  background-color: rgba(240, 240, 240, 0.63);
 }
 
 .preloader__container {
