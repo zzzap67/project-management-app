@@ -30,7 +30,7 @@ a {
   width: 30px;
 }
 
-.leftNav  {
+.leftNav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -48,6 +48,9 @@ a {
   gap: 15px;
   padding: 5px;
   line-height: 1.2;
+}
+.link_to_main_page {
+  align-self: center;
 }
 @media (max-width: 1000px) {
   .header_white,
@@ -68,7 +71,7 @@ a {
   pointer-events: none;
   font-size: 14px;
   text-transform: uppercase;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   width: 50%;
   text-align: center;
 }
@@ -114,10 +117,11 @@ input.language-toggle-flat + label {
   border-radius: 60px;
   box-shadow: 3px 1px 3px 1px rgb(200, 224, 168);
 }
-input.language-toggle-flat + label:before, input.language-toggle-flat + label:after {
+input.language-toggle-flat + label:before,
+input.language-toggle-flat + label:after {
   display: block;
   position: absolute;
-  content: "";
+  content: '';
 }
 
 input.language-toggle-flat + label:before {

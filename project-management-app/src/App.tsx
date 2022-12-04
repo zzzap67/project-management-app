@@ -21,6 +21,7 @@ import Preloader from './components/Preloader';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './hooks/useAuth';
 import Profile from './pages/user-profile';
+import WelcomePage from 'pages/welcome-page';
 
 function Layout() {
   useAuth();
@@ -52,6 +53,7 @@ function App() {
             <Route path="/404" element={<Error404 />} />
             <Route path="*" element={<Navigate to="/404" />} />
             <Route element={<ProtectedRoute />}>
+              <Route path="/generalPage" element={<WelcomePage />} />
               <Route path="/boards" element={<Boards />} />
               <Route path="/boards/create" element={<CreateNewBoardComponentForm />} />
               <Route path="/board/:id/column" element={<CreateNewColumnForm />} />

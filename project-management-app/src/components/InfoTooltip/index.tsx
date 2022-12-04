@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import okIcon from '../../assets/icons/icon-ok.svg';
 import errorIcon from '../../assets/icons/icon-error.svg';
 import { ETooltipType, ETooltipVariant, ITooltip, ITooltipVariant } from '../../types';
@@ -22,11 +22,11 @@ const InfoTooltip: FC<Partial<ITooltipVariant>> = ({ variant, text, onClick, onC
 
   const { message, type } = tooltip;
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setVisible(false);
     setTooltip(initialTooltip);
     onClose && onClose();
-  };
+  }, [onClose]);
 
   useEffect(() => {
     if (variant === ETooltipVariant.yesNo) {
@@ -44,7 +44,7 @@ const InfoTooltip: FC<Partial<ITooltipVariant>> = ({ variant, text, onClick, onC
         handleClose();
       }, 2000);
     }
-  }, [visible, dispatch]);
+  }, [visible, dispatch, variant, handleClose]);
 
   useEffect(() => {
     if (error) {
