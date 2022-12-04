@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useFormWithValidation } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useTranslation } from 'react-i18next';
-import { ELocalStorage, ICreateUser } from '../../types';
+import { ELocalStorage, ETooltipVariant, ICreateUser, ITooltipVariant } from '../../types';
 import { deleteUser, updateUser } from '../../store/thunks';
+import InfoTooltip from '../../components/InfoTooltip';
 
 function Profile() {
   const [isEditable, setIsEditable] = useState(false);
+  const [tooltip, setTooltip] = useState<ITooltipVariant | null>(null);
   const user = useAppSelector((state) => state.userReducer);
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const navigate = useNavigate();
@@ -31,8 +33,16 @@ function Profile() {
     setIsEditable(false);
   };
 
-  const handleDelete = async (e: SyntheticEvent) => {
-    e.preventDefault();
+  const onDelete = () => {
+    setTooltip({
+      variant: ETooltipVariant.yesNo,
+      text: t(`description.message.youSure`),
+      onClick: handleDelete,
+      onClose: () => setTooltip(null),
+    });
+  };
+
+  const handleDelete = async () => {
     localStorage.removeItem(ELocalStorage.token);
     localStorage.removeItem(ELocalStorage.userId);
     await dispatch(deleteUser(user.id));
@@ -120,15 +130,16 @@ function Profile() {
           )}
           {!isEditable && (
             <button
-              type="submit"
+              type="button"
               className="profile-form__button button profile-form__button_type_exit"
-              onClick={handleDelete}
+              onClick={onDelete}
             >
               {t(`description.forms.delete`)}
             </button>
           )}
         </div>
       </form>
+      <InfoTooltip {...tooltip} />
     </div>
   );
 }
