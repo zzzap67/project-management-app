@@ -11,7 +11,7 @@ import { ReactComponent as Delete } from '../../assets/icons/delete.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import './styles.css';
 
-const TaskItem = React.forwardRef((props: ITask) => {
+const TaskItem = React.forwardRef((props: ITask, ref) => {
   const { id, title, description, order } = props;
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
@@ -53,16 +53,11 @@ const TaskItem = React.forwardRef((props: ITask) => {
   const handleModalEdit = () => {
     setShowModalEdit(true);
   };
-
+  console.log(ref);
   return (
     <div className="task_item">
       <div className="task_info">
-        <h2
-          className="task_title"
-          //  onClick={handleModalAction}
-        >
-          {title}
-        </h2>
+        <h2 className="task_title">{title}</h2>
         <Edit
           className="edit_task"
           onClick={(e) => {
