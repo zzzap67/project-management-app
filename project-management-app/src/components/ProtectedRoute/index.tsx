@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import Preloader from '../Preloader';
 import { useAuth } from '../../hooks/useAuth';
 
-function ProtectedRoute({ redirectPath = '/signin' }) {
+function ProtectedRoute({ redirectPath = '/' }) {
   const { isAuth, loading } = useAuth();
 
   if (isAuth) {
