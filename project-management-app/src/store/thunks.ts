@@ -119,8 +119,7 @@ export const createNewBoardThunk = createAsyncThunk(
 export const createNewColumnThunk = createAsyncThunk(
   'main/createNewColumnThunk',
   async (values: Record<string, string>) => {
-    await api.createNewColumn(values);
-    return await api.getBoardId(values.id);
+    return await api.createNewColumn(values);
   }
 );
 export const createNewTaskThunk = createAsyncThunk(
