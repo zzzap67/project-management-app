@@ -1,0 +1,43 @@
+.task_item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 3px 0;
+  padding: 5px 10px;
+  color: #556737;
+  border: 2px solid rgb(212, 218, 200);
+  background-color: #b2e94465;
+  border: 1px dashed #9fdf2198;
+  border-radius: 15px;
+
+  transition: background-color 0.5s;
+}
+
+.task_info {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+.task_title {
+  font-size: 15px;
+  align-self: center;
+  width: 100%;
+}
+.delete_task {
+  width: 25px;
+  height: 15px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.edit_task {
+  width: 25px;
+  height: 15px;
+  align-self: center;
+  cursor: pointer;
+}
+.edit_task__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

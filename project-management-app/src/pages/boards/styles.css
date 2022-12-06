@@ -1,0 +1,12 @@
+.boards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 600px) {
+  .boards {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,162 @@
+import i18n from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
+import { Languages } from 'types';
+
+i18n
+  .use(LanguageDetector)
+
+  .use(initReactI18next)
+
+  .init({
+    debug: false,
+    fallbackLng: Languages.En,
+    supportedLngs: [Languages.En, Languages.Ru],
+    interpolation: {
+      escapeValue: false,
+    },
+    backend: {
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
+    },
+    resources: {
+      en: {
+        translation: {
+          description: {
+            header: {
+              mainPage: 'Main Page',
+              signUp: 'Sign Up',
+              signIn: 'Sign In',
+              signOut: 'Sign Out',
+              editProfile: 'Edit Profile',
+              newBoard: 'New Board',
+              boardList: 'Your Boards',
+            },
+            welcomePage: {
+              welcomeButtonName: 'Start doing',
+              projectTitle: 'Welcome to Project Management App',
+              aboutProject:
+                "Task management is the link between planning to do something and getting it done. This task management software allows you to centrally manage tasks and their timely completion and allow you to easily monitor all work processes and control the work of the team. Let's get organized together! This app has been developed during education on React course of RS School",
+            },
+            forms: {
+              welcome: 'Welcome!',
+              editUser: 'Edit user profile',
+              hello: 'Hello',
+              save: 'Save profile',
+              signUp: 'Sign Up!',
+              createBoard: 'Create board',
+              editBoard: 'Edit board',
+              editColumn: 'Edit column',
+              enterTitle: 'Enter titlе',
+              editTask: 'Edit task',
+              createColumn: 'Add сolumn',
+              createTask: 'Add task',
+              okButtonText: 'Ok',
+              goBackButton: 'Go back',
+              cancelButtonText: 'Cancel',
+              confirmButtonText: 'Confirm',
+              deleteQuestion: 'Do You Really Want To Delete',
+              alreadyRegistered: 'Already registered?',
+              signin: 'Sign In',
+              linkTo: '/signin',
+              gladToSee: 'Glad to see you again!',
+              notRegistered: 'Have not registered yet?',
+              register: 'Register',
+              edit: 'Edit',
+              delete: 'Delete account',
+              inputs: {
+                nameLabel: 'Name',
+                emailLabel: 'E-mail',
+                passwordLabel: 'Password',
+                descriptionLabel: 'Description',
+                titleLabel: 'Title',
+                namePlaceholder: 'Enter name',
+                emailPlaceholder: 'Enter E-mail',
+                passwordPlaceholder: 'Enter password',
+                descriptionPlaceholder: 'Enter description',
+                titlePlaceholder: 'Enter title',
+                loginLabel: 'Login',
+                loginPlaceholder: 'Enter login',
+              },
+            },
+            message: {
+              nameError: 'Name can only contain Latin, Cyrillic, space or hyphen',
+              emailError: 'Email format is invalid',
+              passwordError: 'Password should contain min 4 symbols',
+              validationMessage: 'Please fill out this field.',
+              youSure: 'Are you sure?',
+            },
+          },
+        },
+      },
+      ru: {
+        translation: {
+          description: {
+            header: {
+              mainPage: 'Главная страница',
+              signUp: 'Регистрация',
+              signIn: 'Войти',
+              signOut: 'Выйти',
+              editProfile: 'Редактировать профиль',
+              newBoard: 'Новая доска',
+              boardList: 'Твои доски',
+            },
+            welcomePage: {
+              welcomeButtonName: 'Начать',
+              projectTitle: 'Добро пожаловать в Project Management App',
+              aboutProject:
+                'Управление задачами — это связующее звено между планированием чего-то и его выполнением. Это программное обеспечение для управления задачами позволяет централизованно управлять задачами и их своевременным выполнением, а также позволяет легко контролировать все рабочие процессы и контролировать работу команды. Давайте организуемся вместе! Данное приложение было реализовано в рамках обучения на курсе “React” в RS School',
+            },
+            forms: {
+              welcome: 'Добро пожаловать!',
+              editUser: 'Редактировать профиль',
+              hello: 'Привет',
+              save: 'Сохранить профиль',
+              signUp: 'Зарегистрироваться',
+              createBoard: 'Создать доску',
+              editBoard: 'Редактировать доску',
+              editColumn: 'Редактировать колонку',
+              enterTitle: 'Введите название',
+              editTask: 'Редактировать карточку',
+              createTask: 'Добавить карточку',
+              createColumn: 'Добавить колонку',
+              okButtonText: 'Да',
+              goBackButton: 'Назад',
+              cancelButtonText: 'Отменить',
+              confirmButtonText: 'Сохранить',
+              deleteQuestion: 'Вы уверены что хотите удалить',
+              alreadyRegistered: 'Уже зарегистрированы?',
+              signin: 'Войти',
+              linkTo: '/signin',
+              gladToSee: 'Рады видеть!',
+              notRegistered: 'Ещё не зарегистрированы?',
+              register: 'Регистрация',
+              edit: 'Редактировать',
+              delete: 'Удалить аккаунт',
+              inputs: {
+                nameLabel: 'Имя',
+                emailLabel: 'E-mail',
+                passwordLabel: 'Пароль',
+                descriptionLabel: 'Описание',
+                titleLabel: 'Заголовок',
+                namePlaceholder: 'Введите имя',
+                emailPlaceholder: 'Введите E-mail',
+                passwordPlaceholder: 'Введите пароль',
+                descriptionPlaceholder: 'Введите описание',
+                titlePlaceholder: 'Введите заголовок',
+                loginLabel: 'Логин',
+                loginPlaceholder: 'Введите логин',
+              },
+            },
+            message: {
+              nameError: 'Имя может содержать только латиницу, кириллицу, пробел или дефис',
+              emailError: 'Неверный формат email',
+              passwordError: 'Пароль должен быть больше 4 символов',
+              validationMessage: 'Пожалуйста, заполните это поле.',
+              youSure: 'Вы уверены?',
+            },
+          },
+        },
+      },
+    },
+  });
+export default i18n;

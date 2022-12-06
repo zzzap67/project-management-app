@@ -1,0 +1,105 @@
+.welcome_button {
+  font-size: 30px;
+  font-weight: 500;
+  padding: 17px 30px;
+  border-radius: 23px;
+  color: white;
+  align-self: center;
+  width: 270px;
+  background-color: #b2e944;
+  border: 1px solid #b2e944;
+  box-shadow: 7px 5px 7px 5px rgb(200, 224, 168);
+  cursor: pointer;
+}
+.welcome_button:hover {
+  color: white;
+  background-color: #bfff00cf;
+  border: 1px solid #bfff00cf;
+}
+.link-to-main-page_button,
+.link-to-sign-up_button,
+.link-to-sign-in_button,
+.link-to-sign-out_button,
+.change_language_button,
+.link-to-edit-profile_button,
+.link-to-add-new-board_button {
+  font-size: 17px;
+  padding: 5px 15px;
+  border-radius: 15px;
+  color: white;
+  background-color: #b2e944;
+  border: 1px solid #b2e944;
+  box-shadow: 3px 1px 3px 1px rgb(200, 224, 168);
+  cursor: pointer;
+  margin-block: auto;
+}
+.change_language_button {
+  margin-block: auto;
+  padding: 5px 23px;
+  cursor: pointer;
+}
+.link-to-main-page_button:hover,
+.link-to-sign-up_button:hover,
+.link-to-sign-in_button:hover,
+.link-to-sign-out_button:hover,
+.change_language_button:hover,
+.link-to-edit-profile_button:hover,
+.link-to-add-new-board_button:hover {
+  color: white;
+  background-color: #bfff00cf;
+  border: 1px solid #bfff00cf;
+  box-shadow: 3px 1px 3px 1px rgb(219, 238, 151);
+}
+.create_board__button {
+  display: flex;
+  justify-content: center;
+  font-size: 80px;
+  padding: 30px 166px;
+  border-radius: 15px;
+  width: 390px;
+  color: white;
+  background-color: #b2e94465;
+  border: 1px dashed #9fdf2198;
+  box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
+  cursor: pointer;
+}
+.create_column__button,
+.create_task__button {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 10px 40px;
+  border-radius: 15px;
+  color: white;
+  background-color: #b2e94465;
+  border: 1px dashed #9fdf2198;
+  box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
+  cursor: pointer;
+}
+.create_column__button {
+  width: fit-content;
+  align-self: center;
+  margin-top: 10px;
+}
+
+.create_board__button:hover,
+.create_column__button:hover,
+.create_task__button:hover {
+  background-color: #d2fb5798;
+  border: 1px dashed #c4fb5798;
+  box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
+}
+@media (max-width: 440px) {
+  .create_board__button {
+    font-size: 50px;
+    padding: 30px 121px;
+    width: 270px;
+  }
+  .create_task__button {
+    font-size: 17px;
+  }
+  .create_column__button {
+    font-size: 21px;
+  }
+}

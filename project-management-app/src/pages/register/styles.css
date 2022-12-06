@@ -1,0 +1,26 @@
+.register {
+  position: relative;
+  width: 396px;
+  margin: 0 auto;
+  padding: 70px 0;
+}
+
+.register__form {
+  margin: 40px 0 0;
+}
+
+@media screen and (max-width: 550px) {
+  .register {
+    max-width: 260px;
+    padding: 56px 30px 30px;
+  }
+
+  .register__link {
+    display: block;
+    text-align: center;
+  }
+
+  .register__form {
+    margin: 50px 0 0;
+  }
+}

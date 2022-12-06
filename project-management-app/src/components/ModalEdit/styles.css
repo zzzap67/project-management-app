@@ -1,0 +1,115 @@
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 400px;
+  margin: 20px;
+  border: 2px solid rgb(212, 218, 200);
+  border-radius: 15px;
+  box-shadow: 5px 3px 10px 5px rgb(144, 145, 142);
+}
+.modal_title {
+  font-size: 21px;
+  font-weight: 570;
+  color: #67950d98;
+  align-self: center;
+}
+
+.confirm {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 27px;
+  border-radius: 15px;
+  color: white;
+  background-color: #b2e94465;
+  border: 1px dashed #9fdf2198;
+  box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
+  cursor: pointer;
+}
+.modal_button__wrapper,
+.question_button__wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  gap: 10px;
+}
+.cancel {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 30px;
+  border-radius: 15px;
+  color: white;
+  background-color: #c8ccbfb7;
+  border: 1px solid #c8ccbf7e;
+  box-shadow: 3px 1px 3px 1px rgb(200, 200, 199);
+  cursor: pointer;
+}
+.confirm:hover {
+  background-color: #d2fb5798;
+  border: 1px dashed #c4fb5798;
+  box-shadow: 3px 1px 3px 1px rgb(207, 232, 175);
+}
+.cancel:hover {
+  background-color: #c8ccbf5a;
+  border: 1px solid #c8ccbf6c;
+  box-shadow: 3px 1px 3px 1 px rgba(216, 225, 205, 0.543);
+}
+
+.modal-input {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding-top: 10px;
+}
+
+.modal-input__label {
+  font-size: 15px;
+  color: #68950d87;
+}
+
+.modal-input__field {
+  font-size: 13px;
+  line-height: 1.23;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  background-color: rgba(187, 255, 127, 0.123);
+  text-align: start;
+  color: #86a257;
+}
+
+.modal-input__field::placeholder {
+  font-weight: bold;
+  opacity: 0.5;
+  color: rgba(255, 0, 0, 0.752);
+}
+
+.modal-input__error {
+  font-size: 10px;
+  line-height: 1.2;
+  margin: 0;
+  color: rgba(255, 0, 0, 0.752);
+}

@@ -1,0 +1,102 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 282px;
+  padding: 25px 22px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+.popup__icon {
+  width: 120px;
+  height: 120px;
+  margin-top: 26px;
+}
+
+.popup__text {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 40px 0 25px;
+  padding: 0;
+  text-align: center;
+  color: #000000;
+}
+
+.popup__agree-button {
+background-color: #b2e944;
+  border-radius: 5px;
+  padding: .5rem;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 900;
+  min-width: 80px;
+  border: none;
+  box-shadow: 0px 0px 1px 1px gray;
+}
+
+.popup__close-button {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.5s ease-in-out;
+  border: none;
+  background-color: transparent;
+  background-image: url(../../assets/icons/icon-close-white.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+}
+
+.popup__close-button:hover, .popup__agree-button:hover {
+  cursor: pointer;
+  opacity: 60%;
+}
+
+@media screen and (min-width: 600px) {
+  .popup__container {
+    width: 430px;
+    padding: 34px 36px 37px;
+  }
+
+  .popup__close-button {
+    top: -40px;
+    right: -40px;
+    width: 32px;
+    height: 32px;
+    background-size: 32px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .popup__text {
+    font-size: 24px;
+    margin: 32px 0 23px;
+  }
+}
